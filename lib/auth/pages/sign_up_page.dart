@@ -1,9 +1,13 @@
+import 'package:cheapp_and_tasty/auth/pages/sign_in_page.dart';
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  static const String route = '/sign-up';
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -37,6 +41,14 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppStrings().signUp),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+          ),
+          onPressed: () {
+            context.go('/');
+          },
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -140,8 +152,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   Text(AppStrings().alreadyHaveAccount),
                   TextButton(
-                    onPressed: () {},
                     child: Text(AppStrings().signIn),
+                    onPressed: () {
+                      context.go(SignInPage.route);
+                    },
                   ),
                 ],
               ),

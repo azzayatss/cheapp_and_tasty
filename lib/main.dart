@@ -1,16 +1,36 @@
+import 'package:cheapp_and_tasty/auth/pages/sign_in_page.dart';
 import 'package:cheapp_and_tasty/auth/pages/sign_up_page.dart';
+import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final GoRouter _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const MyHomePage(),
+    ),
+    GoRoute(
+      path: SignInPage.route,
+      builder: (context, state) => const SignInPage(),
+    ),
+    GoRoute(
+      path: SignUpPage.route,
+      builder: (context, state) => const SignUpPage(),
+    ),
+  ],
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         useMaterial3: true,
@@ -19,9 +39,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.dark,
-      // home: const MyHomePage(),
-      // home: const SignInPage(),
-      home: const SignUpPage(),
+      routerConfig: _router,
     );
   }
 }
@@ -40,11 +58,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('app title'),
       ),
-      body: Center(
-        child: Text(
-          'Body',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextButton(
+            child: Text(
+              AppStrings().signIn,
+            ),
+            onPressed: () {
+              context.go(SignInPage.route);
+            },
+          ),
+          TextButton(
+            child: Text(
+              AppStrings().signUp,
+            ),
+            onPressed: () {
+              context.go(SignUpPage.route);
+            },
+          ),
+        ],
       ),
     );
   }
