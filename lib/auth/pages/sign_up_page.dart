@@ -115,7 +115,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       });
                     },
                   ),
-                  Text(AppStrings().termsAndConditionsCheckBoxText),
+                  GestureDetector(
+                    child: Text(
+                      AppStrings().termsAndConditionsCheckBoxText,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        termsAndConditions = !termsAndConditions;
+                      });
+                    },
+                  ),
                 ],
               ),
               Row(
@@ -128,7 +137,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       });
                     },
                   ),
-                  Text(AppStrings().receiveEmails),
+                  GestureDetector(
+                    child: Text(AppStrings().receiveEmails),
+                    onTap: () {
+                      setState(() {
+                        newsSubscription = !newsSubscription;
+                      });
+                    },
+                  ),
                 ],
               ),
               SizedBox(
