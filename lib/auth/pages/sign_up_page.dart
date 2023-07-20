@@ -10,11 +10,28 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+
   String registrationState = '📝';
   final String registrationStateDone = '📑';
+  double? emojiSize = 100;
 
   bool termsAndConditions = true;
   bool newsSubscription = true;
+  bool passwordInvisible = true;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    surnameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +46,50 @@ class _SignUpPageState extends State<SignUpPage> {
               const Spacer(),
               Text(
                 registrationState,
-                style: const TextStyle(fontSize: 100),
+                style: TextStyle(fontSize: emojiSize),
               ),
               SizedBox(
                 height: AppLayouts().defaultPadding,
               ),
-              TextFormField(),
-              TextFormField(),
-              TextFormField(),
-              TextFormField(),
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  hintText: AppStrings().emailFormHint,
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+              TextFormField(
+                controller: passwordController,
+                obscureText: passwordInvisible,
+                decoration: InputDecoration(
+                  hintText: AppStrings().passwordFormHint,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordInvisible
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordInvisible = !passwordInvisible;
+                      });
+                    },
+                  ),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+              ),
+              TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  hintText: AppStrings().nameFormHint,
+                ),
+              ),
+              TextFormField(
+                controller: surnameController,
+                decoration: InputDecoration(
+                  hintText: AppStrings().surnameFormHint,
+                ),
+              ),
               SizedBox(
                 height: AppLayouts().defaultPadding,
               ),
@@ -74,6 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed: () {
                   setState(() {
                     registrationState = registrationStateDone;
+                    emojiSize = 200;
                   });
                 },
                 child: Text(AppStrings().signUp),

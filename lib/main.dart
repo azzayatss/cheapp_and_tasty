@@ -1,4 +1,3 @@
-import 'package:cheapp_and_tasty/auth/pages/sign_in_page.dart';
 import 'package:cheapp_and_tasty/auth/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 

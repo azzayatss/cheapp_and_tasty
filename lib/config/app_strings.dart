@@ -5,4 +5,8 @@ class AppStrings {
   final String signUp = 'Sign Up';
   final String dontHaveAccount = 'Dont have account?';
   final String alreadyHaveAccount = 'Already have account?';
+  final String emailFormHint = 'email: example@example.com';
+  final String passwordFormHint = 'password: at least 6 characters';
+  final String nameFormHint = 'name: Peter';
+  final String surnameFormHint = 'surname: Parker';
 }

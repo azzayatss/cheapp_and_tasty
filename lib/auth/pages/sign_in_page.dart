@@ -12,6 +12,19 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   String lockedState = '🔐';
   final String unLockedState = '🔓';
+  double? emojiSize = 100;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  bool passwordInvisible = true;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +40,38 @@ class _SignInPageState extends State<SignInPage> {
               const Spacer(),
               Text(
                 lockedState,
-                style: const TextStyle(fontSize: 100),
+                style: TextStyle(fontSize: emojiSize),
               ),
               SizedBox(
                 height: AppLayouts().defaultPadding,
               ),
-              TextFormField(),
-              TextFormField(),
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  hintText: AppStrings().emailFormHint,
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+              TextFormField(
+                controller: passwordController,
+                obscureText: passwordInvisible,
+                decoration: InputDecoration(
+                  hintText: AppStrings().passwordFormHint,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordInvisible
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordInvisible = !passwordInvisible;
+                      });
+                    },
+                  ),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+              ),
               SizedBox(
                 height: AppLayouts().defaultPadding,
               ),
@@ -44,6 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: () {
                   setState(() {
                     lockedState = unLockedState;
+                    emojiSize = 200;
                   });
                 },
                 child: Text(AppStrings().signIn),
