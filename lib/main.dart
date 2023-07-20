@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/auth/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,9 +12,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+      ),
       themeMode: ThemeMode.dark,
-      home: const MyHomePage(),
+      // home: const MyHomePage(),
+      home: const SignInPage(),
     );
   }
 }
@@ -41,4 +48,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
