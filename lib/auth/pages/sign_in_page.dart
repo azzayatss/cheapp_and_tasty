@@ -13,13 +13,11 @@ class _SignInPageState extends State<SignInPage> {
   String lockedState = '🔐';
   final String unLockedState = '🔓';
 
-  bool termsAndConditions = true;
-  bool newsSubscription = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppStrings().signInPageTitle,
+        title: Text(AppStrings().signIn),
       ),
       body: SafeArea(
         child: Padding(
@@ -27,61 +25,42 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             children: [
               const Spacer(),
-              Expanded(
-                flex: 3,
-                child: Column(
-                  children: [
-                    Text(
-                      lockedState,
-                      style: const TextStyle(fontSize: 100),
-                    ),
-                    SizedBox(
-                      height: AppLayouts().defaultPadding,
-                    ),
-                    TextFormField(),
-                    TextFormField(),
-                    SizedBox(
-                      height: AppLayouts().defaultPadding,
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: termsAndConditions,
-                          onChanged: (_) {
-                            setState(() {
-                              termsAndConditions = !termsAndConditions;
-                            });
-                          },
-                        ),
-                        AppStrings().termsAndConditionsCheckBoxText,
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: newsSubscription,
-                          onChanged: (_) {
-                            setState(() {
-                              newsSubscription = !newsSubscription;
-                            });
-                          },
-                        ),
-                        AppStrings().receiveEmails,
-                      ],
-                    ),
-                    SizedBox(
-                      height: AppLayouts().defaultPadding,
-                    ),
-                    FilledButton(
-                      onPressed: () {
-                        setState(() {
-                          lockedState = unLockedState;
-                        });
-                      },
-                      child: AppStrings().signIn,
-                    ),
-                  ],
-                ),
+              Text(
+                lockedState,
+                style: const TextStyle(fontSize: 100),
+              ),
+              SizedBox(
+                height: AppLayouts().defaultPadding,
+              ),
+              TextFormField(),
+              TextFormField(),
+              SizedBox(
+                height: AppLayouts().defaultPadding,
+              ),
+              SizedBox(
+                height: AppLayouts().defaultPadding,
+              ),
+              FilledButton(
+                onPressed: () {
+                  setState(() {
+                    lockedState = unLockedState;
+                  });
+                },
+                child: Text(AppStrings().signIn),
+              ),
+              SizedBox(
+                height: AppLayouts().defaultPadding,
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(AppStrings().dontHaveAccount),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(AppStrings().signUp),
+                  ),
+                ],
               ),
             ],
           ),

@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
 class AppStrings {
-  final signInPageTitle = const Text('Sign In');
-  final termsAndConditionsCheckBoxText = const Text('Terms and conditions');
-  final receiveEmails = const Text(
-    'Receive emails from cheApp and tasty team?',
-  );
-  final signIn = const Text('Sign in');
+  final String termsAndConditionsCheckBoxText = 'Terms and conditions';
+  final String receiveEmails = 'Receive emails from cheApp and tasty team?';
+  final String signIn = 'Sign In';
+  final String signUp = 'Sign Up';
+  final String dontHaveAccount = 'Dont have account?';
+  final String alreadyHaveAccount = 'Already have account?';
 }

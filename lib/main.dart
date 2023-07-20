@@ -1,4 +1,5 @@
 import 'package:cheapp_and_tasty/auth/pages/sign_in_page.dart';
+import 'package:cheapp_and_tasty/auth/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       // home: const MyHomePage(),
-      home: const SignInPage(),
+      // home: const SignInPage(),
+      home: const SignUpPage(),
     );
   }
 }
