@@ -11,4 +11,5 @@ class AppStrings {
   static const String nameFormHint = 'name: Peter';
   static const String surnameFormHint = 'surname: Parker';
   static const String signInEmoji = '🔐';
+  static const signUpEmoji = '📝';
 }

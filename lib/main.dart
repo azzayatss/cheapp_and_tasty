@@ -25,7 +25,7 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: SignUpPage.route,
-      builder: (context, state) => const SignUpPage(),
+      builder: (context, state) => SignUpPage(),
     ),
   ],
 );
@@ -38,12 +38,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
+        colorSchemeSeed: Colors.indigoAccent,
         useMaterial3: true,
+        brightness: Brightness.dark,
       ),
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
-      themeMode: ThemeMode.dark,
       routerConfig: _router,
     );
   }
