@@ -3,9 +3,14 @@ import 'package:cheapp_and_tasty/auth/pages/sign_up_page.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 final GoRouter _router = GoRouter(
@@ -16,7 +21,7 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: SignInPage.route,
-      builder: (context, state) => const SignInPage(),
+      builder: (context, state) => SignInPage(),
     ),
     GoRoute(
       path: SignUpPage.route,
@@ -63,16 +68,16 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextButton(
-            child: Text(
-              AppStrings().signIn,
+            child: const Text(
+              AppStrings.signIn,
             ),
             onPressed: () {
               context.go(SignInPage.route);
             },
           ),
           TextButton(
-            child: Text(
-              AppStrings().signUp,
+            child: const Text(
+              AppStrings.signUp,
             ),
             onPressed: () {
               context.go(SignUpPage.route);

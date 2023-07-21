@@ -7,3 +7,14 @@ linter:
     lines_longer_than_80_chars: false
     depend_on_referenced_packages: false
     public_member_api_docs: false
+
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  errors:
+    invalid_annotation_target: ignore

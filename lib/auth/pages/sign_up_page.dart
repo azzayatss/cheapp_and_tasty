@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings().signUp),
+        title: const Text(AppStrings.signUp),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_new,
@@ -52,7 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(AppLayouts().defaultPadding),
+          padding: const EdgeInsets.all(AppLayouts.defaultPadding),
           child: Column(
             children: [
               const Spacer(),
@@ -60,13 +60,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 registrationState,
                 style: TextStyle(fontSize: emojiSize),
               ),
-              SizedBox(
-                height: AppLayouts().defaultPadding,
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
               ),
               TextFormField(
                 controller: emailController,
-                decoration: InputDecoration(
-                  hintText: AppStrings().emailFormHint,
+                decoration: const InputDecoration(
+                  hintText: AppStrings.emailFormHint,
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -74,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: passwordController,
                 obscureText: passwordInvisible,
                 decoration: InputDecoration(
-                  hintText: AppStrings().passwordFormHint,
+                  hintText: AppStrings.passwordFormHint,
                   suffixIcon: IconButton(
                     icon: Icon(
                       passwordInvisible
@@ -92,18 +92,18 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(
-                  hintText: AppStrings().nameFormHint,
+                decoration: const InputDecoration(
+                  hintText: AppStrings.nameFormHint,
                 ),
               ),
               TextFormField(
                 controller: surnameController,
-                decoration: InputDecoration(
-                  hintText: AppStrings().surnameFormHint,
+                decoration: const InputDecoration(
+                  hintText: AppStrings.surnameFormHint,
                 ),
               ),
-              SizedBox(
-                height: AppLayouts().defaultPadding,
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
               ),
               Row(
                 children: [
@@ -116,8 +116,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                   ),
                   GestureDetector(
-                    child: Text(
-                      AppStrings().termsAndConditionsCheckBoxText,
+                    child: const Text(
+                      AppStrings.termsAndConditionsCheckBoxText,
                     ),
                     onTap: () {
                       setState(() {
@@ -138,7 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                   ),
                   GestureDetector(
-                    child: Text(AppStrings().receiveEmails),
+                    child: const Text(AppStrings.receiveEmails),
                     onTap: () {
                       setState(() {
                         newsSubscription = !newsSubscription;
@@ -147,8 +147,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: AppLayouts().defaultPadding,
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
               ),
               FilledButton(
                 onPressed: () {
@@ -157,18 +157,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     emojiSize = 200;
                   });
                 },
-                child: Text(AppStrings().signUp),
+                child: const Text(AppStrings.signUp),
               ),
-              SizedBox(
-                height: AppLayouts().defaultPadding,
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
               ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(AppStrings().alreadyHaveAccount),
+                  const Text(AppStrings.alreadyHaveAccount),
                   TextButton(
-                    child: Text(AppStrings().signIn),
+                    child: const Text(AppStrings.signIn),
                     onPressed: () {
                       context.go(SignInPage.route);
                     },
