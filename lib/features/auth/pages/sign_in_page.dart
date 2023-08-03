@@ -1,9 +1,11 @@
-import 'package:cheapp_and_tasty/auth/pages/sign_up_page.dart';
-import 'package:cheapp_and_tasty/auth/state/auth_state.dart';
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
+import 'package:cheapp_and_tasty/features/app_main_screen/app_main_screen.dart';
+import 'package:cheapp_and_tasty/features/auth/pages/sign_up_page.dart';
+import 'package:cheapp_and_tasty/features/auth/state/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -101,6 +103,30 @@ class SignInPage extends HookWidget {
                                       );
                                 },
                           child: const Text(AppStrings.signIn),
+                        ),
+                        FilledButton(
+                          onPressed: signInProcess.isLoading
+                              ? null
+                              : () async {
+                                  await ref
+                                      .read(signInControllerProvider.notifier)
+                                      .loginWithGoogle();
+
+                                  context.go(AppMainScreen.route);
+                                },
+                          child: const Text('google'),
+                        ),
+                        SignInButton(
+                          Buttons.GoogleDark,
+                          onPressed: () => signInProcess.isLoading
+                              ? null
+                              : () async {
+                                  await ref
+                                      .read(signInControllerProvider.notifier)
+                                      .loginWithGoogle();
+
+                                  context.go(AppMainScreen.route);
+                                },
                         ),
                         if (signInProcess.hasError) ...[
                           const SizedBox(height: AppLayouts.defaultPadding),
