@@ -1,8 +1,8 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
-import 'package:cheapp_and_tasty/features/app_main_screen/app_main_screen.dart';
-import 'package:cheapp_and_tasty/features/auth/pages/sign_up_page.dart';
 import 'package:cheapp_and_tasty/features/auth/state/auth_state.dart';
+import 'package:cheapp_and_tasty/screens/home_screen.dart';
+import 'package:cheapp_and_tasty/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -10,8 +10,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class SignInPage extends HookWidget {
-  const SignInPage({super.key});
+class SignInScreen extends HookWidget {
+  const SignInScreen({super.key});
 
   static const String route = '/sign-in';
 
@@ -112,7 +112,7 @@ class SignInPage extends HookWidget {
                                       .read(signInControllerProvider.notifier)
                                       .loginWithGoogle();
 
-                                  context.go(AppMainScreen.route);
+                                  context.go(HomeScreen.route);
                                 },
                           child: const Text('google'),
                         ),
@@ -125,7 +125,7 @@ class SignInPage extends HookWidget {
                                       .read(signInControllerProvider.notifier)
                                       .loginWithGoogle();
 
-                                  context.go(AppMainScreen.route);
+                                  context.go(HomeScreen.route);
                                 },
                         ),
                         if (signInProcess.hasError) ...[
@@ -149,7 +149,7 @@ class SignInPage extends HookWidget {
                     TextButton(
                       child: const Text(AppStrings.signUp),
                       onPressed: () {
-                        context.go(SignUpPage.route);
+                        context.go(SignUpScreen.route);
                       },
                     ),
                   ],

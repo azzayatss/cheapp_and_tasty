@@ -12,7 +12,6 @@ class AppStrings {
   static const String surnameFormHint = 'surname: Parker';
   static const String signInEmoji = '🔐';
   static const String signUpEmoji = '📝';
-  static const String appBarTitle = 'Flutter Demo';
-  static const String mainScreen = 'Main Screen';
+  static const String appBarTitle = 'Cheapp & tasty';
   static const String logOut = 'Log out';
 }
