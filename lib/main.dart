@@ -21,11 +21,11 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: SignInPage.route,
-      builder: (context, state) => SignInPage(),
+      builder: (context, state) => const SignInPage(),
     ),
     GoRoute(
       path: SignUpPage.route,
-      builder: (context, state) => SignUpPage(),
+      builder: (context, state) => const SignUpPage(),
     ),
   ],
 );

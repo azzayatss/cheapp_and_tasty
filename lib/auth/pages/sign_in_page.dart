@@ -9,15 +9,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class SignInPage extends HookWidget {
-  SignInPage({super.key});
+  const SignInPage({super.key});
 
   static const String route = '/sign-in';
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
     final obscureText = useState(true);
     return LoaderOverlay(
       overlayOpacity: 0.2,
@@ -51,14 +50,19 @@ class SignInPage extends HookWidget {
                 TextFormField(
                   controller: emailController,
                   decoration: const InputDecoration(
+                    filled: true,
                     hintText: AppStrings.emailFormHint,
                   ),
                   keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
                 ),
                 TextFormField(
                   controller: passwordController,
                   obscureText: obscureText.value,
                   decoration: InputDecoration(
+                    filled: true,
                     hintText: AppStrings.passwordFormHint,
                     suffixIcon: IconButton(
                       icon: Icon(

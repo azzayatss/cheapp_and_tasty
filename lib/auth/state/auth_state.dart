@@ -14,8 +14,6 @@ class SignInController extends _$SignInController {
     try {
       //login code from firebase
       await Future<void>.delayed(const Duration(seconds: 3));
-      // throw Exception();
-      print('log:$email + pas:$password');
       state = const AsyncData(null);
     } catch (e, st) {
       state = AsyncError(e, st);
@@ -32,8 +30,6 @@ class SignInController extends _$SignInController {
     try {
       //login code from firebase
       await Future<void>.delayed(const Duration(seconds: 3));
-      // throw Exception();
-      print('$email $password $name $surname');
       state = const AsyncData(null);
     } catch (e, st) {
       state = AsyncError(e, st);
