@@ -1,7 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:cheapp_and_tasty/features/auth/state/auth_state.dart';
-import 'package:cheapp_and_tasty/screens/sign_in_screen.dart';
+import 'package:cheapp_and_tasty/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -25,17 +25,6 @@ class SignUpScreen extends HookWidget {
     return LoaderOverlay(
       overlayOpacity: 0.2,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(AppStrings.signUp),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-            ),
-            onPressed: () {
-              context.go('/');
-            },
-          ),
-        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(AppLayouts.defaultPadding),
@@ -169,7 +158,7 @@ class SignUpScreen extends HookWidget {
                       TextButton(
                         child: const Text(AppStrings.signIn),
                         onPressed: () {
-                          context.go(SignInScreen.route);
+                          context.go(HomeScreen.route);
                         },
                       ),
                     ],

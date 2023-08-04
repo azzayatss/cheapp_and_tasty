@@ -1,6 +1,8 @@
 import 'package:cheapp_and_tasty/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/screens/sign_in_screen.dart';
 import 'package:cheapp_and_tasty/screens/sign_up_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,7 +14,17 @@ GoRouter router(RouterRef ref) {
     routes: [
       GoRoute(
         path: HomeScreen.route,
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) {
+          return StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const SignInScreen();
+              }
+              return const HomeScreen();
+            },
+          );
+        },
       ),
       GoRoute(
         path: SignInScreen.route,
@@ -25,26 +37,3 @@ GoRouter router(RouterRef ref) {
     ],
   );
 }
-
-// class Routes {
-//   static GoRouter router = GoRouter(
-//     routes: [
-//       GoRoute(
-//         path: MyHomePage.route,
-//         builder: (context, state) => const MyHomePage(),
-//       ),
-//       GoRoute(
-//         path: SignInPage.route,
-//         builder: (context, state) => const SignInPage(),
-//       ),
-//       GoRoute(
-//         path: SignUpPage.route,
-//         builder: (context, state) => const SignUpPage(),
-//       ),
-//       GoRoute(
-//         path: AppMainScreen.route,
-//         builder: (context, state) => const AppMainScreen(),
-//       ),
-//     ],
-//   );
-// }
