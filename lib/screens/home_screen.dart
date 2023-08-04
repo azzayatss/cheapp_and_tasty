@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_strings.dart';
-import 'package:cheapp_and_tasty/features/auth/state/auth_state.dart';
+import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

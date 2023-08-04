@@ -1,8 +1,7 @@
+import 'package:cheapp_and_tasty/features/auth/state/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/screens/sign_in_screen.dart';
 import 'package:cheapp_and_tasty/screens/sign_up_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,17 +13,7 @@ GoRouter router(RouterRef ref) {
     routes: [
       GoRoute(
         path: HomeScreen.route,
-        builder: (context, state) {
-          return StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const SignInScreen();
-              }
-              return const HomeScreen();
-            },
-          );
-        },
+        builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         path: SignInScreen.route,
@@ -35,5 +24,12 @@ GoRouter router(RouterRef ref) {
         builder: (context, state) => const SignUpScreen(),
       ),
     ],
+    redirect: (context, state) {
+      final isLoggedIn = ref.watch(isLoggedInProvider);
+      if (isLoggedIn) {
+        return null;
+      }
+      return SignInScreen.route;
+    },
   );
 }
