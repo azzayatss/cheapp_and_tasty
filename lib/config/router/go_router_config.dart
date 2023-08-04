@@ -1,7 +1,6 @@
 import 'package:cheapp_and_tasty/features/auth/state/is_logged_in_controller.dart';
+import 'package:cheapp_and_tasty/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/screens/home_screen.dart';
-import 'package:cheapp_and_tasty/screens/sign_in_screen.dart';
-import 'package:cheapp_and_tasty/screens/sign_up_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,12 +15,8 @@ GoRouter router(RouterRef ref) {
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-        path: SignInScreen.route,
-        builder: (context, state) => const SignInScreen(),
-      ),
-      GoRoute(
-        path: SignUpScreen.route,
-        builder: (context, state) => const SignUpScreen(),
+        path: AuthGateScreen.route,
+        builder: (context, state) => const AuthGateScreen(),
       ),
     ],
     redirect: (context, state) {
@@ -29,7 +24,7 @@ GoRouter router(RouterRef ref) {
       if (isLoggedIn) {
         return null;
       }
-      return SignInScreen.route;
+      return AuthGateScreen.route;
     },
   );
 }

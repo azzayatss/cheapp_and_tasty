@@ -8,10 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class SignUpScreen extends HookWidget {
-  const SignUpScreen({super.key});
-
-  static const String route = '/sign-up';
+class SignUpForm extends HookWidget {
+  const SignUpForm({super.key});
 
   @override
   Widget build(BuildContext context) {
