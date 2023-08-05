@@ -22,147 +22,148 @@ class SignUpForm extends HookWidget {
     final newsSubscription = useState(true);
     return LoaderOverlay(
       overlayOpacity: 0.2,
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: AppLayouts.spacer / 2,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppLayouts.defaultPadding),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: AppLayouts.spacer / 2,
+                ),
+                const Text(
+                  AppStrings.signUpEmoji,
+                  style: TextStyle(fontSize: AppLayouts.emojiSize),
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
+                ),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    hintText: AppStrings.emailFormHint,
                   ),
-                  const Text(
-                    AppStrings.signUpEmoji,
-                    style: TextStyle(fontSize: AppLayouts.emojiSize),
-                  ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      hintText: AppStrings.emailFormHint,
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: obscureText.value,
-                    decoration: InputDecoration(
-                      filled: true,
-                      hintText: AppStrings.passwordFormHint,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          obscureText.value
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                        ),
-                        onPressed: () => obscureText.value = !obscureText.value,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
+                ),
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: obscureText.value,
+                  decoration: InputDecoration(
+                    filled: true,
+                    hintText: AppStrings.passwordFormHint,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        obscureText.value
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
                       ),
-                    ),
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  TextFormField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      hintText: AppStrings.nameFormHint,
+                      onPressed: () => obscureText.value = !obscureText.value,
                     ),
                   ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  TextFormField(
-                    controller: surnameController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      hintText: AppStrings.surnameFormHint,
+                  keyboardType: TextInputType.visiblePassword,
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
+                ),
+
+                ///todo azzayats: for now i dont need this fields, probably
+                /// they will be uncommented later
+                // TextFormField(
+                //   controller: nameController,
+                //   decoration: const InputDecoration(
+                //     filled: true,
+                //     hintText: AppStrings.nameFormHint,
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: AppLayouts.defaultPadding,
+                // ),
+                // TextFormField(
+                //   controller: surnameController,
+                //   decoration: const InputDecoration(
+                //     filled: true,
+                //     hintText: AppStrings.surnameFormHint,
+                //   ),
+                // ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: termsAndConditions.value,
+                      onChanged: (_) =>
+                          termsAndConditions.value = !termsAndConditions.value,
                     ),
-                  ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: termsAndConditions.value,
-                        onChanged: (_) => termsAndConditions.value =
-                            !termsAndConditions.value,
+                    GestureDetector(
+                      child: const Text(
+                        AppStrings.termsAndConditionsCheckBoxText,
                       ),
-                      GestureDetector(
-                        child: const Text(
-                          AppStrings.termsAndConditionsCheckBoxText,
-                        ),
-                        onTap: () => termsAndConditions.value =
-                            !termsAndConditions.value,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: newsSubscription.value,
-                        onChanged: (_) =>
-                            newsSubscription.value = !newsSubscription.value,
-                      ),
-                      GestureDetector(
-                        child: const Text(AppStrings.receiveEmails),
-                        onTap: () =>
-                            newsSubscription.value = !newsSubscription.value,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  Consumer(
-                    builder: (context, ref, child) {
-                      final signUpProcess = ref.watch(signInControllerProvider);
-                      signUpProcess.isLoading
-                          ? context.loaderOverlay.show()
-                          : context.loaderOverlay.hide();
-                      return FilledButton(
-                        onPressed: signUpProcess.isLoading
-                            ? null
-                            : () {
-                                ref
-                                    .read(signInControllerProvider.notifier)
-                                    .signUp(
-                                      emailController.text,
-                                      passwordController.text,
-                                      nameController.text,
-                                      surnameController.text,
-                                    );
-                              },
-                        child: const Text(AppStrings.signUp),
-                      );
-                    },
-                  ),
-                  const SizedBox(
-                    height: AppLayouts.defaultPadding,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Text(AppStrings.alreadyHaveAccount),
-                      TextButton(
-                        child: const Text(AppStrings.signIn),
-                        onPressed: () {
-                          context.go(HomeScreen.route);
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                      onTap: () =>
+                          termsAndConditions.value = !termsAndConditions.value,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: newsSubscription.value,
+                      onChanged: (_) =>
+                          newsSubscription.value = !newsSubscription.value,
+                    ),
+                    GestureDetector(
+                      child: const Text(AppStrings.receiveEmails),
+                      onTap: () =>
+                          newsSubscription.value = !newsSubscription.value,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
+                ),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final signUpProcess = ref.watch(signInControllerProvider);
+                    signUpProcess.isLoading
+                        ? context.loaderOverlay.show()
+                        : context.loaderOverlay.hide();
+                    return FilledButton(
+                      onPressed: signUpProcess.isLoading
+                          ? null
+                          : () {
+                              ref
+                                  .read(signInControllerProvider.notifier)
+                                  .signUp(
+                                    emailController.text,
+                                    passwordController.text,
+                                    nameController.text,
+                                    surnameController.text,
+                                  );
+                            },
+                      child: const Text(AppStrings.signUp),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(AppStrings.alreadyHaveAccount),
+                    TextButton(
+                      child: const Text(AppStrings.signIn),
+                      onPressed: () {
+                        context.go(HomeScreen.route);
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
