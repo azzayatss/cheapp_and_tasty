@@ -1,9 +1,9 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
+import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -25,7 +25,7 @@ class SignInForm extends HookConsumerWidget {
             child: Column(
               children: [
                 const SizedBox(
-                  height: AppLayouts.spacer,
+                  height: AppLayouts.spacer / 2,
                 ),
                 const Text(
                   AppStrings.signInEmoji,
@@ -63,10 +63,7 @@ class SignInForm extends HookConsumerWidget {
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
+                  height: AppLayouts.defaultPadding * 2,
                 ),
                 FilledButton(
                   onPressed: signInProcess.isLoading
@@ -79,36 +76,10 @@ class SignInForm extends HookConsumerWidget {
                         },
                   child: const Text(AppStrings.signIn),
                 ),
-                FilledButton(
-                  onPressed: signInProcess.isLoading
-                      ? null
-                      : () async {
-                          await ref
-                              .read(signInControllerProvider.notifier)
-                              .loginWithGoogle();
-                        },
-                  child: const Text('google'),
-                ),
-                SignInButton(
-                  Buttons.GoogleDark,
-                  onPressed: () => signInProcess.isLoading
-                      ? null
-                      : () async {
-                          await ref
-                              .read(signInControllerProvider.notifier)
-                              .loginWithGoogle();
-                        },
-                ),
-                if (signInProcess.hasError) ...[
-                  const SizedBox(height: AppLayouts.defaultPadding),
-                  const Text('Something went wrong')
-                ],
                 const SizedBox(
-                  height: AppLayouts.defaultPadding,
+                  height: AppLayouts.defaultPadding * 2,
                 ),
-                const SizedBox(
-                  height: AppLayouts.spacer,
-                ),
+                const GoogleSignInCard(),
               ],
             ),
           ),

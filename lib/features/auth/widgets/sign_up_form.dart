@@ -1,18 +1,18 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
-import 'package:cheapp_and_tasty/screens/home_screen.dart';
+import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class SignUpForm extends HookWidget {
+class SignUpForm extends HookConsumerWidget {
   const SignUpForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final signUpProcess = ref.watch(signInControllerProvider);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final nameController = useTextEditingController();
@@ -66,9 +66,6 @@ class SignUpForm extends HookWidget {
                   ),
                   keyboardType: TextInputType.visiblePassword,
                 ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
 
                 ///todo azzayats: for now i dont need this fields, probably
                 /// they will be uncommented later
@@ -89,9 +86,7 @@ class SignUpForm extends HookWidget {
                 //     hintText: AppStrings.surnameFormHint,
                 //   ),
                 // ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
+
                 Row(
                   children: [
                     Checkbox(
@@ -125,44 +120,24 @@ class SignUpForm extends HookWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                Consumer(
-                  builder: (context, ref, child) {
-                    final signUpProcess = ref.watch(signInControllerProvider);
-                    signUpProcess.isLoading
-                        ? context.loaderOverlay.show()
-                        : context.loaderOverlay.hide();
-                    return FilledButton(
-                      onPressed: signUpProcess.isLoading
-                          ? null
-                          : () {
-                              ref
-                                  .read(signInControllerProvider.notifier)
-                                  .signUp(
-                                    emailController.text,
-                                    passwordController.text,
-                                    nameController.text,
-                                    surnameController.text,
-                                  );
-                            },
-                      child: const Text(AppStrings.signUp),
-                    );
-                  },
+                FilledButton(
+                  onPressed: signUpProcess.isLoading
+                      ? null
+                      : () {
+                          ref.read(signInControllerProvider.notifier).signUp(
+                                emailController.text,
+                                passwordController.text,
+                                nameController.text,
+                                surnameController.text,
+                              );
+                        },
+                  child: const Text(AppStrings.signUp),
                 ),
+
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Text(AppStrings.alreadyHaveAccount),
-                    TextButton(
-                      child: const Text(AppStrings.signIn),
-                      onPressed: () {
-                        context.go(HomeScreen.route);
-                      },
-                    ),
-                  ],
-                ),
+                const GoogleSignInCard(),
               ],
             ),
           ),
