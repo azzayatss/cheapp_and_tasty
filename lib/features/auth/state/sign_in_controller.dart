@@ -25,16 +25,14 @@ class SignInController extends _$SignInController {
   Future<void> signUp(
     String email,
     String password,
-    String name,
-    String surname,
   ) async {
-    state = const AsyncLoading();
     try {
-      //login code from firebase
-      await Future<void>.delayed(const Duration(seconds: 3));
-      state = const AsyncData(null);
-    } catch (e, st) {
-      state = AsyncError(e, st);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
     }
   }
 

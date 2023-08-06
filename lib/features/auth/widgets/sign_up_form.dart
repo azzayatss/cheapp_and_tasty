@@ -127,8 +127,6 @@ class SignUpForm extends HookConsumerWidget {
                           ref.read(signInControllerProvider.notifier).signUp(
                                 emailController.text,
                                 passwordController.text,
-                                nameController.text,
-                                surnameController.text,
                               );
                         },
                   child: const Text(AppStrings.signUp),
