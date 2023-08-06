@@ -11,7 +11,7 @@ class SignInController extends _$SignInController {
     return null;
   }
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signInWithEmail(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,

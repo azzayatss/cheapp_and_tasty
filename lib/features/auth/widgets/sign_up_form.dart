@@ -15,8 +15,6 @@ class SignUpForm extends HookConsumerWidget {
     final signUpProcess = ref.watch(signInControllerProvider);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final nameController = useTextEditingController();
-    final surnameController = useTextEditingController();
     final obscureText = useState(true);
     final termsAndConditions = useState(true);
     final newsSubscription = useState(true);

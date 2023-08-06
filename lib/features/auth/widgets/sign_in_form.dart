@@ -69,7 +69,9 @@ class SignInForm extends HookConsumerWidget {
                   onPressed: signInProcess.isLoading
                       ? null
                       : () {
-                          ref.read(signInControllerProvider.notifier).signIn(
+                          ref
+                              .read(signInControllerProvider.notifier)
+                              .signInWithEmail(
                                 emailController.text,
                                 passwordController.text,
                               );
