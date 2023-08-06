@@ -1,8 +1,8 @@
-enum AuthResult {
-  //анульовано
-  aborted,
-  //успіх
-  success,
-  //невдача
-  failure,
-}
+// enum AuthResult {
+//   //анульовано
+//   aborted,
+//   //успіх
+//   success,
+//   //невдача
+//   failure,
+// }

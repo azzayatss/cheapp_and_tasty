@@ -1,4 +1,3 @@
-import 'package:cheapp_and_tasty/features/auth/models/auth_result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -41,11 +40,15 @@ class SignInController extends _$SignInController {
 
   //function for logging out from all entities
   Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
+    try {
+      await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+    }
   }
 
-  Future<AuthResult> loginWithGoogle() async {
+  Future<void> loginWithGoogle() async {
     final googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -54,22 +57,18 @@ class SignInController extends _$SignInController {
 
     //this command will show sign in dialog to the user
     final signInAccount = await googleSignIn.signIn();
-    if (signInAccount == null) {
-      return AuthResult.aborted;
-    }
-    final googleAuth = await signInAccount.authentication;
+    final googleAuth = await signInAccount?.authentication;
     final oauthCredentials = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
     );
 
     try {
       await FirebaseAuth.instance.signInWithCredential(
         oauthCredentials,
       );
-      return AuthResult.success;
-    } catch (e) {
-      return AuthResult.failure;
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
     }
   }
 }
