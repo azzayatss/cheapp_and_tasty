@@ -6,7 +6,6 @@ import 'package:cheapp_and_tasty/features/auth/widgets/reset_password_dialog.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 
 class SignInForm extends HookWidget {
   const SignInForm({super.key});
@@ -16,85 +15,80 @@ class SignInForm extends HookWidget {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final obscureText = useState(true);
-    return LoaderOverlay(
-      overlayOpacity: 0.2,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: AppLayouts.spacer / 2,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(AppLayouts.defaultPadding),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: AppLayouts.spacer / 2,
+              ),
+              const Text(
+                AppStrings.signInEmoji,
+                style: TextStyle(fontSize: AppLayouts.emojiSize),
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              TextFormField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  hintText: AppStrings.emailFormHint,
                 ),
-                const Text(
-                  AppStrings.signInEmoji,
-                  style: TextStyle(fontSize: AppLayouts.emojiSize),
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                TextFormField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    hintText: AppStrings.emailFormHint,
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: obscureText.value,
-                  decoration: InputDecoration(
-                    filled: true,
-                    hintText: AppStrings.passwordFormHint,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscureText.value
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
-                      ),
-                      onPressed: () => obscureText.value = !obscureText.value,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              TextFormField(
+                controller: passwordController,
+                obscureText: obscureText.value,
+                decoration: InputDecoration(
+                  hintText: AppStrings.passwordFormHint,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      obscureText.value
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
                     ),
-                  ),
-                  keyboardType: TextInputType.visiblePassword,
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    child: const Text(AppStrings.forgotPassword),
-                    onPressed: () => _dialogBuilder(context),
+                    onPressed: () => obscureText.value = !obscureText.value,
                   ),
                 ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  child: const Text(AppStrings.forgotPassword),
+                  onPressed: () => _dialogBuilder(context),
                 ),
-                Consumer(
-                  builder: (context, ref, child) {
-                    return FilledButton(
-                      child: const Text(AppStrings.signIn),
-                      onPressed: () => ref
-                          .read(signInControllerProvider.notifier)
-                          .signInWithEmail(
-                            emailController.text,
-                            passwordController.text,
-                            context,
-                          ),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding * 2,
-                ),
-                const GoogleSignInCard(),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              Consumer(
+                builder: (context, ref, child) {
+                  return FilledButton(
+                    child: const Text(AppStrings.signIn),
+                    onPressed: () => ref
+                        .read(signInControllerProvider.notifier)
+                        .signInWithEmail(
+                          emailController.text,
+                          passwordController.text,
+                          context,
+                        ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding * 2,
+              ),
+              const GoogleSignInCard(),
+            ],
           ),
         ),
       ),

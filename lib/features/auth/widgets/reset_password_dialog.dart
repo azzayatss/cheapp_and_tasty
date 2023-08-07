@@ -40,7 +40,6 @@ class ResetPasswordDialog extends HookWidget {
           TextFormField(
             controller: emailController,
             decoration: const InputDecoration(
-              filled: true,
               hintText: AppStrings.emailFormHint,
             ),
             keyboardType: TextInputType.emailAddress,

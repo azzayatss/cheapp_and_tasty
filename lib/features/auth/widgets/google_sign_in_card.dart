@@ -12,7 +12,6 @@ class GoogleSignInCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(signInControllerProvider.notifier);
     return Card(
-      shadowColor: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
         child: Column(

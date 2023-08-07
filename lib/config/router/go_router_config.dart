@@ -11,6 +11,7 @@ GoRouter router(RouterRef ref) {
   return GoRouter(
     routes: [
       GoRoute(
+        // '/'
         path: HomeScreen.route,
         builder: (context, state) => const HomeScreen(),
       ),
