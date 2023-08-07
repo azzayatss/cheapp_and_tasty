@@ -64,27 +64,6 @@ class SignUpForm extends HookConsumerWidget {
                   ),
                   keyboardType: TextInputType.visiblePassword,
                 ),
-
-                ///todo azzayats: for now i dont need this fields, probably
-                /// they will be uncommented later
-                // TextFormField(
-                //   controller: nameController,
-                //   decoration: const InputDecoration(
-                //     filled: true,
-                //     hintText: AppStrings.nameFormHint,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: AppLayouts.defaultPadding,
-                // ),
-                // TextFormField(
-                //   controller: surnameController,
-                //   decoration: const InputDecoration(
-                //     filled: true,
-                //     hintText: AppStrings.surnameFormHint,
-                //   ),
-                // ),
-
                 Row(
                   children: [
                     Checkbox(
@@ -129,7 +108,6 @@ class SignUpForm extends HookConsumerWidget {
                         },
                   child: const Text(AppStrings.signUp),
                 ),
-
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),

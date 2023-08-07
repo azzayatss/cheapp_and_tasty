@@ -36,7 +36,7 @@ class SignInController extends _$SignInController {
     }
   }
 
-  //function for logging out from all entities
+  ///function for logging out from all entities
   Future<void> logOut() async {
     try {
       await FirebaseAuth.instance.signOut();
@@ -53,7 +53,7 @@ class SignInController extends _$SignInController {
       ],
     );
 
-    //this command will show sign in dialog to the user
+    ///this command will show sign in dialog to the user
     final signInAccount = await googleSignIn.signIn();
     final googleAuth = await signInAccount?.authentication;
     final oauthCredentials = GoogleAuthProvider.credential(
