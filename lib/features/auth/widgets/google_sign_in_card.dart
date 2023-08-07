@@ -1,4 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -17,7 +18,7 @@ class GoogleSignInCard extends ConsumerWidget {
         child: Column(
           children: [
             const Text(
-              'You can easily Log in even without registration by Google Account: ',
+              AppStrings.googleLogInHint,
             ),
             const SizedBox(
               height: AppLayouts.defaultPadding,

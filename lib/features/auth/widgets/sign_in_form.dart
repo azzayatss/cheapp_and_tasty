@@ -2,6 +2,7 @@ import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/app_strings.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
+import 'package:cheapp_and_tasty/features/auth/widgets/reset_password_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -62,7 +63,17 @@ class SignInForm extends HookWidget {
                   keyboardType: TextInputType.visiblePassword,
                 ),
                 const SizedBox(
-                  height: AppLayouts.defaultPadding * 2,
+                  height: AppLayouts.defaultPadding,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    child: const Text(AppStrings.forgotPassword),
+                    onPressed: () => _dialogBuilder(context),
+                  ),
+                ),
+                const SizedBox(
+                  height: AppLayouts.defaultPadding,
                 ),
                 Consumer(
                   builder: (context, ref, child) {
@@ -91,6 +102,17 @@ class SignInForm extends HookWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _dialogBuilder(
+    BuildContext context,
+  ) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return const ResetPasswordDialog();
+      },
     );
   }
 }

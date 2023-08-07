@@ -13,6 +13,14 @@ class SignInController extends _$SignInController {
     return null;
   }
 
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      dev.log(e.code);
+    }
+  }
+
   Future<void> signInWithEmail(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(

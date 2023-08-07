@@ -12,4 +12,14 @@ class AppStrings {
   static const String signUpEmoji = '📝';
   static const String appBarTitle = 'Cheapp & tasty';
   static const String logOut = 'Log out';
+  static const String forgotPassword = 'Forgot password?';
+  static const String forgotPasswordDialogContent1 =
+      'Please enter user email to reset the password.';
+  static const String forgotPasswordDialogContent2 =
+      'If the user with this email exists you will receive recovery email.';
+  static const String forgotPasswordDialogContent3 =
+      'After receiving the reinstatement letter, please log in to the app with your new credentials.';
+  static const String resetPassword = 'Got it, reset password!';
+  static const String googleLogInHint =
+      'You can easily Log in even without registration by Google Account: ';
 }
