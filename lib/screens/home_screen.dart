@@ -16,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
       body: Center(
         child: TextButton(
           onPressed: () async {
-            await ref.read(signInControllerProvider.notifier).logOut();
+            await ref.read(signInControllerProvider.notifier).logOut(context);
           },
           child: const Text(AppStrings.logOut),
         ),

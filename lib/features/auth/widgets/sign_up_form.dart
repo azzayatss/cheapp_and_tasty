@@ -108,6 +108,7 @@ class SignUpForm extends HookWidget {
                                   .signUp(
                                     emailController.text,
                                     passwordController.text,
+                                    context,
                                   );
                             },
                       child: const Text(AppStrings.signUp),

@@ -26,7 +26,7 @@ class GoogleSignInCard extends ConsumerWidget {
             SignInButton(
               Buttons.GoogleDark,
               onPressed: () async {
-                await provider.loginWithGoogle();
+                await provider.loginWithGoogle(context);
               },
             ),
           ],

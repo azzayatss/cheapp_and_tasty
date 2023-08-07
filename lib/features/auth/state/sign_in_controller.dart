@@ -1,6 +1,6 @@
-import 'dart:developer' as dev;
-
+import 'package:cheapp_and_tasty/features/auth/services/show_alert_for_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,28 +13,33 @@ class SignInController extends _$SignInController {
     return null;
   }
 
-  Future<void> resetPassword(String email) async {
+  Future<void> resetPassword(String email, BuildContext context) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      dev.log(e.code);
+      await showAlertForUser(context, e.code, e.message);
     }
   }
 
-  Future<void> signInWithEmail(String email, String password) async {
+  Future<void> signInWithEmail(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      dev.log(e.code);
+      await showAlertForUser(context, e.code, e.message);
     }
   }
 
   Future<void> signUp(
     String email,
     String password,
+    BuildContext context,
   ) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -42,21 +47,21 @@ class SignInController extends _$SignInController {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      dev.log(e.code);
+      await showAlertForUser(context, e.code, e.message);
     }
   }
 
   ///function for logging out from all entities
-  Future<void> logOut() async {
+  Future<void> logOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn().signOut();
     } on FirebaseAuthException catch (e) {
-      dev.log(e.code);
+      await showAlertForUser(context, e.code, e.message);
     }
   }
 
-  Future<void> loginWithGoogle() async {
+  Future<void> loginWithGoogle(BuildContext context) async {
     final googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -76,7 +81,7 @@ class SignInController extends _$SignInController {
         oauthCredentials,
       );
     } on FirebaseAuthException catch (e) {
-      dev.log(e.code);
+      if (context.mounted) await showAlertForUser(context, e.code, e.message);
     }
   }
 }

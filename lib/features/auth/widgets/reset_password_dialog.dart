@@ -55,7 +55,7 @@ class ResetPasswordDialog extends HookWidget {
               onPressed: () async {
                 await ref
                     .read(signInControllerProvider.notifier)
-                    .resetPassword(emailController.text);
+                    .resetPassword(emailController.text, context);
 
                 //Don't use 'BuildContext's across async gaps.
                 if (context.mounted) context.pop();

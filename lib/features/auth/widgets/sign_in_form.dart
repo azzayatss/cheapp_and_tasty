@@ -77,19 +77,15 @@ class SignInForm extends HookWidget {
                 ),
                 Consumer(
                   builder: (context, ref, child) {
-                    final signInProcess = ref.watch(signInControllerProvider);
                     return FilledButton(
-                      onPressed: signInProcess.isLoading
-                          ? null
-                          : () {
-                              ref
-                                  .read(signInControllerProvider.notifier)
-                                  .signInWithEmail(
-                                    emailController.text,
-                                    passwordController.text,
-                                  );
-                            },
                       child: const Text(AppStrings.signIn),
+                      onPressed: () => ref
+                          .read(signInControllerProvider.notifier)
+                          .signInWithEmail(
+                            emailController.text,
+                            passwordController.text,
+                            context,
+                          ),
                     );
                   },
                 ),
