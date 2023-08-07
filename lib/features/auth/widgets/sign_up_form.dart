@@ -7,12 +7,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class SignUpForm extends HookConsumerWidget {
+class SignUpForm extends HookWidget {
   const SignUpForm({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final signUpProcess = ref.watch(signInControllerProvider);
+  Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final obscureText = useState(true);
@@ -97,16 +96,23 @@ class SignUpForm extends HookConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                FilledButton(
-                  onPressed: signUpProcess.isLoading
-                      ? null
-                      : () {
-                          ref.read(signInControllerProvider.notifier).signUp(
-                                emailController.text,
-                                passwordController.text,
-                              );
-                        },
-                  child: const Text(AppStrings.signUp),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final signUpProcess = ref.watch(signInControllerProvider);
+                    return FilledButton(
+                      onPressed: signUpProcess.isLoading
+                          ? null
+                          : () {
+                              ref
+                                  .read(signInControllerProvider.notifier)
+                                  .signUp(
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+                            },
+                      child: const Text(AppStrings.signUp),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: AppLayouts.defaultPadding,

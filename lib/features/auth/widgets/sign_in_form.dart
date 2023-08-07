@@ -7,12 +7,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class SignInForm extends HookConsumerWidget {
+class SignInForm extends HookWidget {
   const SignInForm({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final signInProcess = ref.watch(signInControllerProvider);
+  Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final obscureText = useState(true);
@@ -65,18 +64,23 @@ class SignInForm extends HookConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding * 2,
                 ),
-                FilledButton(
-                  onPressed: signInProcess.isLoading
-                      ? null
-                      : () {
-                          ref
-                              .read(signInControllerProvider.notifier)
-                              .signInWithEmail(
-                                emailController.text,
-                                passwordController.text,
-                              );
-                        },
-                  child: const Text(AppStrings.signIn),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final signInProcess = ref.watch(signInControllerProvider);
+                    return FilledButton(
+                      onPressed: signInProcess.isLoading
+                          ? null
+                          : () {
+                              ref
+                                  .read(signInControllerProvider.notifier)
+                                  .signInWithEmail(
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+                            },
+                      child: const Text(AppStrings.signIn),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: AppLayouts.defaultPadding * 2,
