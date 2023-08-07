@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,7 +20,7 @@ class SignInController extends _$SignInController {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      dev.log(e.code);
     }
   }
 
@@ -32,7 +34,7 @@ class SignInController extends _$SignInController {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      dev.log(e.code);
     }
   }
 
@@ -42,7 +44,7 @@ class SignInController extends _$SignInController {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn().signOut();
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      dev.log(e.code);
     }
   }
 
@@ -66,7 +68,7 @@ class SignInController extends _$SignInController {
         oauthCredentials,
       );
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      dev.log(e.code);
     }
   }
 }
