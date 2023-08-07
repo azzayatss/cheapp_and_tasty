@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "503153079428",
+    "project_id": "cheapp-and-tasty",
+    "storage_bucket": "cheapp-and-tasty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503153079428:android:688810b7c91eb6aade7ed1",
+        "android_client_info": {
+          "package_name": "com.example.cheapp_and_tasty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503153079428-f8mjce1icfom9kqun4nivr5oq4ee1soo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxUB2zKCIo0BZQXTRNdzEL6NRFhzBFfVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503153079428-f8mjce1icfom9kqun4nivr5oq4ee1soo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "503153079428-26ufspnjbq4dv79bc05bbi8org9ot86c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cheappAndTasty"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
