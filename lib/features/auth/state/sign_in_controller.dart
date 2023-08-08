@@ -8,10 +8,11 @@ part 'sign_in_controller.g.dart';
 @riverpod
 class SignInController extends _$SignInController {
   @override
-  FutureOr<void> build() {
-    return null;
+  FutureOr<User?> build() {
+    return FirebaseAuth.instance.currentUser;
   }
 
+  //TODO azzayats: винести це в окремий провайдер (булка якщо саксес і тд).
   Future<void> resetPassword(String email, BuildContext context) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
@@ -28,10 +29,12 @@ class SignInController extends _$SignInController {
     state = const AsyncValue.loading();
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      state = AsyncValue.data(result.user);
     } on FirebaseAuthException catch (e) {
       state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
@@ -43,10 +46,12 @@ class SignInController extends _$SignInController {
     BuildContext context,
   ) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      state = AsyncValue.data(result.user);
     } on FirebaseAuthException catch (e) {
       state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
@@ -56,7 +61,7 @@ class SignInController extends _$SignInController {
   Future<void> logOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();
-      await GoogleSignIn().signOut();
+      state = const AsyncValue.data(null);
     } on FirebaseAuthException catch (e) {
       state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
@@ -78,9 +83,11 @@ class SignInController extends _$SignInController {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithCredential(
+      final result = await FirebaseAuth.instance.signInWithCredential(
         oauthCredentials,
       );
+
+      state = AsyncValue.data(result.user);
     } on FirebaseAuthException catch (e) {
       state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
