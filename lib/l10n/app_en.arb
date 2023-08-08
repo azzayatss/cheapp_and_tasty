@@ -1,0 +1,20 @@
+{
+  "appBarTitle": "Cheapp & tasty ! ",
+  "emailFormHint": "example@example.com",
+  "forgotPassword": "Forgot password?",
+  "forgotPasswordDialogContent1": "Please enter user email to reset the password.",
+  "forgotPasswordDialogContent2": "If the user with this email exists you will receive recovery email.",
+  "forgotPasswordDialogContent3": "After receiving the reinstatement letter, please log in to the app with your new credentials.",
+  "googleLogInHint": "You can easily Log in even without registration by Google Account: ",
+  "logOut": "Log out",
+  "nameFormHint": "Peter",
+  "passwordFormHint": "123456",
+  "receiveEmails": "Receive emails from cheApp and tasty team?",
+  "resetPassword": "Got it, reset password!",
+  "signIn": "Sign In",
+  "signInEmoji": "🔐",
+  "signUp": "Sign Up",
+  "signUpEmoji": "📝",
+  "surnameFormHint": "Parker",
+  "termsAndConditionsCheckBoxText": "Terms and conditions"
+}

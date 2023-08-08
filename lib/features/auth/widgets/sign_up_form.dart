@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/config/app_strings.dart';
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:flutter/material.dart';
@@ -25,17 +25,17 @@ class SignUpForm extends HookWidget {
               const SizedBox(
                 height: AppLayouts.spacer / 2,
               ),
-              const Text(
-                AppStrings.signUpEmoji,
-                style: TextStyle(fontSize: AppLayouts.emojiSize),
+              Text(
+                context.tr.signUpEmoji,
+                style: const TextStyle(fontSize: AppLayouts.emojiSize),
               ),
               const SizedBox(
                 height: AppLayouts.defaultPadding,
               ),
               TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: AppStrings.emailFormHint,
+                decoration: InputDecoration(
+                  hintText: context.tr.emailFormHint,
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -46,7 +46,7 @@ class SignUpForm extends HookWidget {
                 controller: passwordController,
                 obscureText: obscureText.value,
                 decoration: InputDecoration(
-                  hintText: AppStrings.passwordFormHint,
+                  hintText: context.tr.passwordFormHint,
                   suffixIcon: IconButton(
                     icon: Icon(
                       obscureText.value
@@ -66,8 +66,8 @@ class SignUpForm extends HookWidget {
                         termsAndConditions.value = !termsAndConditions.value,
                   ),
                   GestureDetector(
-                    child: const Text(
-                      AppStrings.termsAndConditionsCheckBoxText,
+                    child: Text(
+                      context.tr.termsAndConditionsCheckBoxText,
                     ),
                     onTap: () =>
                         termsAndConditions.value = !termsAndConditions.value,
@@ -82,7 +82,9 @@ class SignUpForm extends HookWidget {
                         newsSubscription.value = !newsSubscription.value,
                   ),
                   GestureDetector(
-                    child: const Text(AppStrings.receiveEmails),
+                    child: Text(
+                      context.tr.receiveEmails,
+                    ),
                     onTap: () =>
                         newsSubscription.value = !newsSubscription.value,
                   ),
@@ -104,7 +106,7 @@ class SignUpForm extends HookWidget {
                                   context,
                                 );
                           },
-                    child: const Text(AppStrings.signUp),
+                    child: Text(context.tr.signUp),
                   );
                 },
               ),

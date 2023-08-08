@@ -1,4 +1,3 @@
-import 'package:cheapp_and_tasty/features/auth/services/show_alert_for_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -17,7 +16,7 @@ class SignInController extends _$SignInController {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      await showAlertForUser(context, e.code, e.message);
+      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
   }
 
@@ -26,13 +25,15 @@ class SignInController extends _$SignInController {
     String password,
     BuildContext context,
   ) async {
+    state = const AsyncValue.loading();
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      await showAlertForUser(context, e.code, e.message);
+      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
   }
 
@@ -47,7 +48,7 @@ class SignInController extends _$SignInController {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      await showAlertForUser(context, e.code, e.message);
+      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
   }
 
@@ -57,7 +58,7 @@ class SignInController extends _$SignInController {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn().signOut();
     } on FirebaseAuthException catch (e) {
-      await showAlertForUser(context, e.code, e.message);
+      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
   }
 
@@ -81,7 +82,7 @@ class SignInController extends _$SignInController {
         oauthCredentials,
       );
     } on FirebaseAuthException catch (e) {
-      if (context.mounted) await showAlertForUser(context, e.code, e.message);
+      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }
   }
 }

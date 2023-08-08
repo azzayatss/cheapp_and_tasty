@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/config/app_strings.dart';
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/reset_password_dialog.dart';
@@ -24,17 +24,17 @@ class SignInForm extends HookWidget {
               const SizedBox(
                 height: AppLayouts.spacer / 2,
               ),
-              const Text(
-                AppStrings.signInEmoji,
-                style: TextStyle(fontSize: AppLayouts.emojiSize),
+              Text(
+                context.tr.signInEmoji,
+                style: const TextStyle(fontSize: AppLayouts.emojiSize),
               ),
               const SizedBox(
                 height: AppLayouts.defaultPadding,
               ),
               TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: AppStrings.emailFormHint,
+                decoration: InputDecoration(
+                  hintText: context.tr.emailFormHint,
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -45,7 +45,7 @@ class SignInForm extends HookWidget {
                 controller: passwordController,
                 obscureText: obscureText.value,
                 decoration: InputDecoration(
-                  hintText: AppStrings.passwordFormHint,
+                  hintText: context.tr.passwordFormHint,
                   suffixIcon: IconButton(
                     icon: Icon(
                       obscureText.value
@@ -63,7 +63,7 @@ class SignInForm extends HookWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  child: const Text(AppStrings.forgotPassword),
+                  child: Text(context.tr.forgotPassword),
                   onPressed: () => _dialogBuilder(context),
                 ),
               ),
@@ -73,7 +73,7 @@ class SignInForm extends HookWidget {
               Consumer(
                 builder: (context, ref, child) {
                   return FilledButton(
-                    child: const Text(AppStrings.signIn),
+                    child: Text(context.tr.signIn),
                     onPressed: () => ref
                         .read(signInControllerProvider.notifier)
                         .signInWithEmail(

@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/config/app_strings.dart';
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,32 +15,32 @@ class ResetPasswordDialog extends HookWidget {
   Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     return AlertDialog(
-      title: const Text(AppStrings.forgotPassword),
+      title: Text(context.tr.forgotPassword),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            AppStrings.forgotPasswordDialogContent1,
+          Text(
+            context.tr.forgotPasswordDialogContent1,
           ),
           const SizedBox(
             height: AppLayouts.defaultPadding,
           ),
-          const Text(
-            AppStrings.forgotPasswordDialogContent2,
+          Text(
+            context.tr.forgotPasswordDialogContent2,
           ),
           const SizedBox(
             height: AppLayouts.defaultPadding,
           ),
-          const Text(
-            AppStrings.forgotPasswordDialogContent3,
+          Text(
+            context.tr.forgotPasswordDialogContent3,
           ),
           const SizedBox(
             height: AppLayouts.defaultPadding,
           ),
           TextFormField(
             controller: emailController,
-            decoration: const InputDecoration(
-              hintText: AppStrings.emailFormHint,
+            decoration: InputDecoration(
+              hintText: context.tr.emailFormHint,
             ),
             keyboardType: TextInputType.emailAddress,
           ),
@@ -50,7 +50,7 @@ class ResetPasswordDialog extends HookWidget {
         Consumer(
           builder: (context, ref, child) {
             return TextButton(
-              child: const Text(AppStrings.resetPassword),
+              child: Text(context.tr.resetPassword),
               onPressed: () async {
                 await ref
                     .read(signInControllerProvider.notifier)
