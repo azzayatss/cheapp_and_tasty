@@ -1,4 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -11,13 +12,12 @@ class GoogleSignInCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(signInControllerProvider.notifier);
     return Card(
-      shadowColor: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
         child: Column(
           children: [
-            const Text(
-              'You can easily Log in even without registration by Google Account: ',
+            Text(
+              context.tr.googleLogInHint,
             ),
             const SizedBox(
               height: AppLayouts.defaultPadding,
@@ -25,7 +25,7 @@ class GoogleSignInCard extends ConsumerWidget {
             SignInButton(
               Buttons.GoogleDark,
               onPressed: () async {
-                await provider.loginWithGoogle();
+                await provider.loginWithGoogle(context);
               },
             ),
           ],

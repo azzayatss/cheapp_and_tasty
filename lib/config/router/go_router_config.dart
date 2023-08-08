@@ -11,6 +11,7 @@ GoRouter router(RouterRef ref) {
   return GoRouter(
     routes: [
       GoRoute(
+        // '/'
         path: HomeScreen.route,
         builder: (context, state) => const HomeScreen(),
       ),
@@ -20,11 +21,31 @@ GoRouter router(RouterRef ref) {
       ),
     ],
     redirect: (context, state) {
+      //result from .authStateChanges(); which is returning
+      //null - if user is not logged in, or User? data if so.
+      //based on this we are watching this stream and returning bool here,
+      //to can work with it. if true.... if false ...
       final isLoggedIn = ref.watch(isLoggedInProvider);
-      if (isLoggedIn) {
-        return null;
+
+      // addittional check to see is user going to go to the login page.
+      // explanation below
+      final goingToLogin = state.location.contains(AuthGateScreen.route);
+
+      // if user is not logged in, and he trying to go to settings screen via
+      //deeplink - this is incorrect. Thats why we checking additionaly where user
+      // going to go.
+      if (!isLoggedIn && !goingToLogin) {
+        return AuthGateScreen.route;
       }
-      return AuthGateScreen.route;
+
+      //if user is not logged in and he trying to go to login page
+      // - it's ok.
+      if (isLoggedIn && goingToLogin) {
+        return HomeScreen.route;
+      }
+
+      // in other cases we dont need redirection.
+      return null;
     },
   );
 }
