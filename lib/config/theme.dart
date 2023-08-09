@@ -9,6 +9,13 @@ class AppTheme {
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedIconTheme: IconThemeData(
+          color: Colors.indigoAccent,
+        ),
+        type: BottomNavigationBarType.fixed,
+        enableFeedback: true,
+      ),
     );
   }
 }

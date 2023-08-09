@@ -1,19 +1,64 @@
 import 'package:cheapp_and_tasty/features/auth/state/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/screens/home_screen.dart';
+import 'package:cheapp_and_tasty/screens/list_screen.dart';
+import 'package:cheapp_and_tasty/screens/main_screen.dart';
+import 'package:cheapp_and_tasty/screens/map_screen.dart';
+import 'package:cheapp_and_tasty/screens/settings_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'go_router_config.g.dart';
 
+final GlobalKey<NavigatorState> _shellNavigator =
+    GlobalKey(debugLabel: 'shell');
+
 @riverpod
 GoRouter router(RouterRef ref) {
   return GoRouter(
+    // initialLocation: MainScreen.route,
     routes: [
       GoRoute(
         // '/'
-        path: HomeScreen.route,
-        builder: (context, state) => const HomeScreen(),
+        path: MainScreen.route,
+        redirect: (context, state) => HomeScreen.route,
+      ),
+      ShellRoute(
+        navigatorKey: _shellNavigator,
+        builder: (context, state, child) => MainScreen(
+          key: state.pageKey,
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: HomeScreen.route,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: HomeScreen(),
+            ),
+          ),
+          // same as in 1 sub-route
+          GoRoute(
+            path: MapScreen.route,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: MapScreen(),
+            ),
+          ),
+          // same as in 1 sub-route
+          GoRoute(
+            path: ListScreen.route,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ListScreen(),
+            ),
+          ),
+          // same as in 1 sub-route
+          GoRoute(
+            path: SettingsScreen.route,
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: SettingsScreen(),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: AuthGateScreen.route,
@@ -41,7 +86,7 @@ GoRouter router(RouterRef ref) {
       //if user is not logged in and he trying to go to login page
       // - it's ok.
       if (isLoggedIn && goingToLogin) {
-        return HomeScreen.route;
+        return MainScreen.route;
       }
 
       // in other cases we dont need redirection.
