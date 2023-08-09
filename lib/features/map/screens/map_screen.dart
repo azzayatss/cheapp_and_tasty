@@ -1,4 +1,3 @@
-import 'package:cheapp_and_tasty/features/add_new_location/widgets/add_new_location_button.dart';
 import 'package:flutter/material.dart';
 
 class MapScreen extends StatelessWidget {
@@ -8,16 +7,8 @@ class MapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Spacer(),
-        Text('Map Screen'),
-        Spacer(),
-        Align(
-          alignment: Alignment.centerRight,
-          child: AddNewLocationButton(),
-        ),
-      ],
+    return const Center(
+      child: Text('Map Screen'),
     );
   }
 }

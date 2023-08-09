@@ -1,7 +1,7 @@
 import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
-import 'package:cheapp_and_tasty/features/location_list/screens/location_list_screen.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
 import 'package:cheapp_and_tasty/features/settings/screens/settings_screen.dart';
 import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
