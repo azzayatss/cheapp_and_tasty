@@ -1,10 +1,10 @@
-import 'package:cheapp_and_tasty/features/auth/state/is_logged_in_controller.dart';
-import 'package:cheapp_and_tasty/screens/auth_gate_screen.dart';
-import 'package:cheapp_and_tasty/screens/home_screen.dart';
-import 'package:cheapp_and_tasty/screens/list_screen.dart';
-import 'package:cheapp_and_tasty/screens/main_screen.dart';
-import 'package:cheapp_and_tasty/screens/map_screen.dart';
-import 'package:cheapp_and_tasty/screens/settings_screen.dart';
+import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controller.dart';
+import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
+import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
+import 'package:cheapp_and_tasty/features/location_list/screens/location_list_screen.dart';
+import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
+import 'package:cheapp_and_tasty/features/settings/screens/settings_screen.dart';
+import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,16 +17,15 @@ final GlobalKey<NavigatorState> _shellNavigator =
 @riverpod
 GoRouter router(RouterRef ref) {
   return GoRouter(
-    // initialLocation: MainScreen.route,
     routes: [
       GoRoute(
         // '/'
-        path: MainScreen.route,
+        path: MainScaffoldScreen.route,
         redirect: (context, state) => HomeScreen.route,
       ),
       ShellRoute(
         navigatorKey: _shellNavigator,
-        builder: (context, state, child) => MainScreen(
+        builder: (context, state, child) => MainScaffoldScreen(
           key: state.pageKey,
           child: child,
         ),
@@ -46,9 +45,9 @@ GoRouter router(RouterRef ref) {
           ),
           // same as in 1 sub-route
           GoRoute(
-            path: ListScreen.route,
+            path: LocationListScreen.route,
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: ListScreen(),
+              child: LocationListScreen(),
             ),
           ),
           // same as in 1 sub-route
@@ -86,7 +85,7 @@ GoRouter router(RouterRef ref) {
       //if user is not logged in and he trying to go to login page
       // - it's ok.
       if (isLoggedIn && goingToLogin) {
-        return MainScreen.route;
+        return MainScaffoldScreen.route;
       }
 
       // in other cases we dont need redirection.

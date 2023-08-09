@@ -1,11 +1,11 @@
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/auth/state/sign_in_controller.dart';
+import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
 import 'package:cheapp_and_tasty/features/bottom_navigation/widgets/bottom_navigation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MainScreen extends ConsumerWidget {
-  const MainScreen({required this.child, super.key});
+class MainScaffoldScreen extends ConsumerWidget {
+  const MainScaffoldScreen({required this.child, super.key});
   static const String route = '/';
 
   final Widget child;
