@@ -1,10 +1,11 @@
 import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
+import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
 import 'package:cheapp_and_tasty/features/settings/screens/settings_screen.dart';
-import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -62,6 +63,13 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: AuthGateScreen.route,
         builder: (context, state) => const AuthGateScreen(),
+      ),
+      GoRoute(
+        path: LocationFullScreen.route,
+        name: LocationFullScreen.routeName,
+        builder: (context, state) => LocationFullScreen(
+          id: state.pathParameters['id'],
+        ),
       ),
     ],
     redirect: (context, state) {

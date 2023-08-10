@@ -21,6 +21,7 @@ LocationEntity _$LocationEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LocationEntity {
   String get locationName => throw _privateConstructorUsedError;
+  String get locationId => throw _privateConstructorUsedError;
   String get locationDescription => throw _privateConstructorUsedError;
   double get locationLatitude => throw _privateConstructorUsedError;
   double get locationLongitude => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $LocationEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {String locationName,
+      String locationId,
       String locationDescription,
       double locationLatitude,
       double locationLongitude,
@@ -76,6 +78,7 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
   @override
   $Res call({
     Object? locationName = null,
+    Object? locationId = null,
     Object? locationDescription = null,
     Object? locationLatitude = null,
     Object? locationLongitude = null,
@@ -93,6 +96,10 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
       locationName: null == locationName
           ? _value.locationName
           : locationName // ignore: cast_nullable_to_non_nullable
+              as String,
+      locationId: null == locationId
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
               as String,
       locationDescription: null == locationDescription
           ? _value.locationDescription
@@ -156,6 +163,7 @@ abstract class _$$_LocationEntityCopyWith<$Res>
   @useResult
   $Res call(
       {String locationName,
+      String locationId,
       String locationDescription,
       double locationLatitude,
       double locationLongitude,
@@ -182,6 +190,7 @@ class __$$_LocationEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? locationName = null,
+    Object? locationId = null,
     Object? locationDescription = null,
     Object? locationLatitude = null,
     Object? locationLongitude = null,
@@ -199,6 +208,10 @@ class __$$_LocationEntityCopyWithImpl<$Res>
       locationName: null == locationName
           ? _value.locationName
           : locationName // ignore: cast_nullable_to_non_nullable
+              as String,
+      locationId: null == locationId
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
               as String,
       locationDescription: null == locationDescription
           ? _value.locationDescription
@@ -257,6 +270,7 @@ class __$$_LocationEntityCopyWithImpl<$Res>
 class _$_LocationEntity implements _LocationEntity {
   const _$_LocationEntity(
       {required this.locationName,
+      required this.locationId,
       required this.locationDescription,
       required this.locationLatitude,
       required this.locationLongitude,
@@ -275,6 +289,8 @@ class _$_LocationEntity implements _LocationEntity {
 
   @override
   final String locationName;
+  @override
+  final String locationId;
   @override
   final String locationDescription;
   @override
@@ -302,7 +318,7 @@ class _$_LocationEntity implements _LocationEntity {
 
   @override
   String toString() {
-    return 'LocationEntity(locationName: $locationName, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments)';
+    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments)';
   }
 
   @override
@@ -312,14 +328,15 @@ class _$_LocationEntity implements _LocationEntity {
             other is _$_LocationEntity &&
             (identical(other.locationName, locationName) ||
                 other.locationName == locationName) &&
+            (identical(other.locationId, locationId) ||
+                other.locationId == locationId) &&
             (identical(other.locationDescription, locationDescription) ||
                 other.locationDescription == locationDescription) &&
             (identical(other.locationLatitude, locationLatitude) ||
                 other.locationLatitude == locationLatitude) &&
             (identical(other.locationLongitude, locationLongitude) ||
                 other.locationLongitude == locationLongitude) &&
-            (identical(
-                    other.locationWorkingSchedule, locationWorkingSchedule) ||
+            (identical(other.locationWorkingSchedule, locationWorkingSchedule) ||
                 other.locationWorkingSchedule == locationWorkingSchedule) &&
             (identical(other.locationReviews, locationReviews) ||
                 other.locationReviews == locationReviews) &&
@@ -351,6 +368,7 @@ class _$_LocationEntity implements _LocationEntity {
   int get hashCode => Object.hash(
       runtimeType,
       locationName,
+      locationId,
       locationDescription,
       locationLatitude,
       locationLongitude,
@@ -381,6 +399,7 @@ class _$_LocationEntity implements _LocationEntity {
 abstract class _LocationEntity implements LocationEntity {
   const factory _LocationEntity(
       {required final String locationName,
+      required final String locationId,
       required final String locationDescription,
       required final double locationLatitude,
       required final double locationLongitude,
@@ -399,6 +418,8 @@ abstract class _LocationEntity implements LocationEntity {
 
   @override
   String get locationName;
+  @override
+  String get locationId;
   @override
   String get locationDescription;
   @override
