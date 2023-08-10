@@ -50,6 +50,15 @@ GoRouter router(RouterRef ref) {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: LocationListScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: LocationFullScreen.route,
+                name: LocationFullScreen.routeName,
+                builder: (context, state) => LocationFullScreen(
+                  id: state.pathParameters['id'],
+                ),
+              ),
+            ],
           ),
           // same as in 1 sub-route
           GoRoute(
@@ -63,13 +72,6 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: AuthGateScreen.route,
         builder: (context, state) => const AuthGateScreen(),
-      ),
-      GoRoute(
-        path: LocationFullScreen.route,
-        name: LocationFullScreen.routeName,
-        builder: (context, state) => LocationFullScreen(
-          id: state.pathParameters['id'],
-        ),
       ),
     ],
     redirect: (context, state) {

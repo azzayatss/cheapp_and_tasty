@@ -1,14 +1,12 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LocationFullScreen extends ConsumerWidget {
   const LocationFullScreen({super.key, this.id});
   final String? id;
-  static const route = '/location-full-page/:id';
+  static const route = 'location-full-page/:id';
   static const routeName = 'locationfullpage';
 
   @override
@@ -17,14 +15,7 @@ class LocationFullScreen extends ConsumerWidget {
         .watch(globalLocationsListControllerProvider)
         .firstWhere((element) => element.locationId == id);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            context.go(LocationListScreen.route);
-          },
-          icon: const Icon(Icons.arrow_back_ios_new),
-        ),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
         child: Card(
