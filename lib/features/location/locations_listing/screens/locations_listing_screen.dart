@@ -60,6 +60,7 @@ class LocationListScreen extends ConsumerWidget {
                 locationId: '222222',
                 locationName: 'test name2',
                 locationDescription: 'test description',
+                locationAdress: 'проспект Свободи 5',
                 locationLatitude: 10,
                 locationLongitude: 10,
                 locationWorkingSchedule: 'пн-пт: 10:00-17:00; сб-нд: вихідні',

@@ -25,6 +25,7 @@ mixin _$LocationEntity {
   String get locationDescription => throw _privateConstructorUsedError;
   double get locationLatitude => throw _privateConstructorUsedError;
   double get locationLongitude => throw _privateConstructorUsedError;
+  String get locationAdress => throw _privateConstructorUsedError;
   String get locationWorkingSchedule => throw _privateConstructorUsedError;
   String get locationReviews => throw _privateConstructorUsedError;
   double get locationRate => throw _privateConstructorUsedError;
@@ -53,6 +54,7 @@ abstract class $LocationEntityCopyWith<$Res> {
       String locationDescription,
       double locationLatitude,
       double locationLongitude,
+      String locationAdress,
       String locationWorkingSchedule,
       String locationReviews,
       double locationRate,
@@ -82,6 +84,7 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
     Object? locationDescription = null,
     Object? locationLatitude = null,
     Object? locationLongitude = null,
+    Object? locationAdress = null,
     Object? locationWorkingSchedule = null,
     Object? locationReviews = null,
     Object? locationRate = null,
@@ -113,6 +116,10 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
           ? _value.locationLongitude
           : locationLongitude // ignore: cast_nullable_to_non_nullable
               as double,
+      locationAdress: null == locationAdress
+          ? _value.locationAdress
+          : locationAdress // ignore: cast_nullable_to_non_nullable
+              as String,
       locationWorkingSchedule: null == locationWorkingSchedule
           ? _value.locationWorkingSchedule
           : locationWorkingSchedule // ignore: cast_nullable_to_non_nullable
@@ -167,6 +174,7 @@ abstract class _$$_LocationEntityCopyWith<$Res>
       String locationDescription,
       double locationLatitude,
       double locationLongitude,
+      String locationAdress,
       String locationWorkingSchedule,
       String locationReviews,
       double locationRate,
@@ -194,6 +202,7 @@ class __$$_LocationEntityCopyWithImpl<$Res>
     Object? locationDescription = null,
     Object? locationLatitude = null,
     Object? locationLongitude = null,
+    Object? locationAdress = null,
     Object? locationWorkingSchedule = null,
     Object? locationReviews = null,
     Object? locationRate = null,
@@ -225,6 +234,10 @@ class __$$_LocationEntityCopyWithImpl<$Res>
           ? _value.locationLongitude
           : locationLongitude // ignore: cast_nullable_to_non_nullable
               as double,
+      locationAdress: null == locationAdress
+          ? _value.locationAdress
+          : locationAdress // ignore: cast_nullable_to_non_nullable
+              as String,
       locationWorkingSchedule: null == locationWorkingSchedule
           ? _value.locationWorkingSchedule
           : locationWorkingSchedule // ignore: cast_nullable_to_non_nullable
@@ -274,6 +287,7 @@ class _$_LocationEntity implements _LocationEntity {
       required this.locationDescription,
       required this.locationLatitude,
       required this.locationLongitude,
+      required this.locationAdress,
       required this.locationWorkingSchedule,
       required this.locationReviews,
       required this.locationRate,
@@ -298,6 +312,8 @@ class _$_LocationEntity implements _LocationEntity {
   @override
   final double locationLongitude;
   @override
+  final String locationAdress;
+  @override
   final String locationWorkingSchedule;
   @override
   final String locationReviews;
@@ -318,7 +334,7 @@ class _$_LocationEntity implements _LocationEntity {
 
   @override
   String toString() {
-    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments)';
+    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments)';
   }
 
   @override
@@ -336,6 +352,8 @@ class _$_LocationEntity implements _LocationEntity {
                 other.locationLatitude == locationLatitude) &&
             (identical(other.locationLongitude, locationLongitude) ||
                 other.locationLongitude == locationLongitude) &&
+            (identical(other.locationAdress, locationAdress) ||
+                other.locationAdress == locationAdress) &&
             (identical(other.locationWorkingSchedule, locationWorkingSchedule) ||
                 other.locationWorkingSchedule == locationWorkingSchedule) &&
             (identical(other.locationReviews, locationReviews) ||
@@ -372,6 +390,7 @@ class _$_LocationEntity implements _LocationEntity {
       locationDescription,
       locationLatitude,
       locationLongitude,
+      locationAdress,
       locationWorkingSchedule,
       locationReviews,
       locationRate,
@@ -403,6 +422,7 @@ abstract class _LocationEntity implements LocationEntity {
       required final String locationDescription,
       required final double locationLatitude,
       required final double locationLongitude,
+      required final String locationAdress,
       required final String locationWorkingSchedule,
       required final String locationReviews,
       required final double locationRate,
@@ -426,6 +446,8 @@ abstract class _LocationEntity implements LocationEntity {
   double get locationLatitude;
   @override
   double get locationLongitude;
+  @override
+  String get locationAdress;
   @override
   String get locationWorkingSchedule;
   @override

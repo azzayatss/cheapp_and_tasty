@@ -10,8 +10,10 @@ class GlobalLocationsListController extends _$GlobalLocationsListController {
     final globalLocationsList = <LocationEntity>[
       LocationEntity(
         locationId: '1111',
-        locationName: 'test name1',
-        locationDescription: 'test description',
+        locationName: 'Мамина світлиця',
+        locationDescription:
+            'їдальня в приміщенні колишнього клубу "Айвенго", з повноцінними обідами',
+        locationAdress: 'вул.Чорновола 25',
         locationLatitude: 10,
         locationLongitude: 10,
         locationWorkingSchedule: 'пн-пт: 10:00-17:00; сб-нд: вихідні',

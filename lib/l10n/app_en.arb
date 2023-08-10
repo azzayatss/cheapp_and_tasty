@@ -1,5 +1,8 @@
 {
+  "aboutLocation": "About location:",
   "appBarTitle": "Cheapp & tasty ! ",
+  "cardPaymentsLabel": "Card payments?",
+  "deliveryLabel": "Delivery?",
   "emailFormHint": "example@example.com",
   "forgotPassword": "Forgot password?",
   "forgotPasswordDialogContent1": "Please enter user email to reset the password.",
@@ -7,11 +10,13 @@
   "forgotPasswordDialogContent3": "After receiving the reinstatement letter, please log in to the app with your new credentials.",
   "googleLogInHint": "You can easily Log in even without registration by Google Account: ",
   "logOut": "Log out",
+  "menuLabel": "Menu:",
   "nameFormHint": "Peter",
   "navigationBarLabel0": "Home",
   "navigationBarLabel1": "Map",
   "navigationBarLabel2": "List",
   "navigationBarLabel3": "Settings",
+  "parkingLabel": "Own parking?",
   "passwordFormHint": "123456",
   "receiveEmails": "Receive emails from cheApp and tasty team?",
   "resetPassword": "Got it, reset password!",
@@ -20,5 +25,7 @@
   "signUp": "Sign Up",
   "signUpEmoji": "📝",
   "surnameFormHint": "Parker",
+  "systemBack": "use your system swipe/button to go back",
+  "takeAwayLabel": "Take away?",
   "termsAndConditionsCheckBoxText": "Terms and conditions"
 }
