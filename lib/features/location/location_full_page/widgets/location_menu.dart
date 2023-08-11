@@ -1,6 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/menu_images_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -26,11 +27,12 @@ class LocationMenu extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              context.tr.menuLabel,
+              '${location.locationId}  ${context.tr.menuLabel}',
               style: context.textTheme.headlineLarge,
             ),
             const Divider(),
-            Text(location.locationId)
+            // Text(location.locationId)
+            const MenuImageCarousel(),
           ],
         ),
       ),

@@ -15,17 +15,19 @@ class LocationFullScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-        child: Column(
-          children: [
-            const BackHint(),
-            AboutLocationWidget(id: id),
-            const SizedBox(
-              height: AppLayouts.defaultPadding,
-            ),
-            LocationMenu(
-              id: id,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const BackHint(),
+              AboutLocationWidget(id: id),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              LocationMenu(
+                id: id,
+              ),
+            ],
+          ),
         ),
       ),
     );
