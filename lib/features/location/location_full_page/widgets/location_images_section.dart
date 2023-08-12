@@ -1,23 +1,22 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/menu_images_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LocationMenu extends ConsumerWidget {
-  const LocationMenu({
+class LocationImagesSection extends StatelessWidget {
+  const LocationImagesSection({
     required this.id,
+    required this.sectionTitle,
+    required this.isMenuSection,
     super.key,
   });
 
   final String id;
+  final String sectionTitle;
+  final bool isMenuSection;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final location = ref
-        .watch(globalLocationsListControllerProvider)
-        .firstWhere((element) => element.locationId == id);
+  Widget build(BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
@@ -27,12 +26,13 @@ class LocationMenu extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '${location.locationId}  ${context.tr.menuLabel}',
+              sectionTitle,
               style: context.textTheme.headlineLarge,
             ),
             const Divider(),
             MenuImageCarousel(
               id: id,
+              isMenuSection: isMenuSection,
             ),
           ],
         ),

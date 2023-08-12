@@ -1,6 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/about_location_widget.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_section.dart';
 import 'package:flutter/material.dart';
 
 class LocationFullScreen extends StatelessWidget {
@@ -22,8 +23,18 @@ class LocationFullScreen extends StatelessWidget {
               const SizedBox(
                 height: AppLayouts.defaultPadding,
               ),
-              LocationMenu(
+              LocationImagesSection(
+                sectionTitle: context.tr.menuLabel,
                 id: id,
+                isMenuSection: true,
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              LocationImagesSection(
+                sectionTitle: 'Фото локації:',
+                id: id,
+                isMenuSection: false,
               ),
             ],
           ),

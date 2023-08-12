@@ -64,6 +64,7 @@ GoRouter router(RouterRef ref) {
                     name: FullScreenSlider.routeName,
                     builder: (context, state) => FullScreenSlider(
                       id: state.pathParameters['id'],
+                      isMenuSection: state.pathParameters['isMenuSection'],
                     ),
                   ),
                 ],
