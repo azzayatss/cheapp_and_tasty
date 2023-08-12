@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 class MapScreen extends StatelessWidget {
@@ -7,8 +8,15 @@ class MapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Map Screen'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(context.tr.navigationBarLabel1),
+        ),
+        body: const Center(
+          child: Text('Map Screen'),
+        ),
+      ),
     );
   }
 }

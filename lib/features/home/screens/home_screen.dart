@@ -1,4 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,30 +13,37 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locationsNumber =
         ref.watch(globalLocationsListControllerProvider).length;
-    return Column(
-      children: [
-        Row(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(context.tr.navigationBarLabel0),
+        ),
+        body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-              child: Card(
-                child: Padding(
+            Row(
+              children: [
+                Padding(
                   padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-                  child: Column(
-                    children: [
-                      const Text('Кількість локацій:'),
-                      Text('$locationsNumber'),
-                    ],
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppLayouts.defaultPadding),
+                      child: Column(
+                        children: [
+                          const Text('Кількість локацій:'),
+                          Text('$locationsNumber'),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            const Card(
-              child: Column(),
-            ),
+                const Card(
+                  child: Column(),
+                ),
+              ],
+            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }

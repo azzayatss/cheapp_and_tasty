@@ -27,5 +27,6 @@
   "surnameFormHint": "Паркер",
   "systemBack": "свайпніть для повернення назад",
   "takeAwayLabel": "Взяти з собою?",
-  "termsAndConditionsCheckBoxText": "Умови та положення"
+  "termsAndConditionsCheckBoxText": "Умови та положення",
+  "thereAreNoPhotosYet": "Поки немає фото :("
 }

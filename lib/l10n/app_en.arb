@@ -27,5 +27,6 @@
   "surnameFormHint": "Parker",
   "systemBack": "use your system swipe/button to go back",
   "takeAwayLabel": "Take away?",
-  "termsAndConditionsCheckBoxText": "Terms and conditions"
+  "termsAndConditionsCheckBoxText": "Terms and conditions",
+  "thereAreNoPhotosYet": "There are no photos yet :("
 }
