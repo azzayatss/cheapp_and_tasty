@@ -11,7 +11,7 @@ class LocationMenu extends ConsumerWidget {
     super.key,
   });
 
-  final String? id;
+  final String id;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,8 +31,9 @@ class LocationMenu extends ConsumerWidget {
               style: context.textTheme.headlineLarge,
             ),
             const Divider(),
-            // Text(location.locationId)
-            const MenuImageCarousel(),
+            MenuImageCarousel(
+              id: id,
+            ),
           ],
         ),
       ),

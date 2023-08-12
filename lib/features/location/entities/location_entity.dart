@@ -21,6 +21,7 @@ class LocationEntity with _$LocationEntity {
     required bool doesLocationHaveTakeAway,
     required bool doesLocationHaveOwnParking,
     required bool doesLocationHaveCardPayments,
+    required List<String> locationMenuImages,
   }) = _LocationEntity;
 
   factory LocationEntity.fromJson(Map<String, dynamic> json) =>

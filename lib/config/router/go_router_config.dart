@@ -2,6 +2,7 @@ import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controll
 import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/full_screen_slider.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
@@ -55,8 +56,17 @@ GoRouter router(RouterRef ref) {
                 path: LocationFullScreen.route,
                 name: LocationFullScreen.routeName,
                 builder: (context, state) => LocationFullScreen(
-                  id: state.pathParameters['id'],
+                  id: state.pathParameters['id']!,
                 ),
+                routes: [
+                  GoRoute(
+                    path: FullScreenSlider.route,
+                    name: FullScreenSlider.routeName,
+                    builder: (context, state) => FullScreenSlider(
+                      id: state.pathParameters['id'],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

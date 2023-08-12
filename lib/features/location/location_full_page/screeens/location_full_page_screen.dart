@@ -5,8 +5,8 @@ import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/lo
 import 'package:flutter/material.dart';
 
 class LocationFullScreen extends StatelessWidget {
-  const LocationFullScreen({super.key, this.id});
-  final String? id;
+  const LocationFullScreen({required this.id, super.key});
+  final String id;
   static const route = 'location-full-page/:id';
   static const routeName = 'locationfullpage';
 
