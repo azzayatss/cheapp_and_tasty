@@ -9,6 +9,7 @@
   "forgotPasswordDialogContent2": "If the user with this email exists you will receive recovery email.",
   "forgotPasswordDialogContent3": "After receiving the reinstatement letter, please log in to the app with your new credentials.",
   "googleLogInHint": "You can easily Log in even without registration by Google Account: ",
+  "locationPhoto": "Location photo:",
   "logOut": "Log out",
   "menuLabel": "Menu:",
   "nameFormHint": "Peter",

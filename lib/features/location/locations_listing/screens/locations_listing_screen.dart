@@ -2,6 +2,7 @@ import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -42,8 +43,8 @@ class LocationListScreen extends ConsumerWidget {
                     child: GestureDetector(
                       onTap: () {
                         context.goNamed(
-                          'locationfullpage',
-                          pathParameters: {'id': item.locationId},
+                          LocationFullScreen.routeName,
+                          pathParameters: {'locationId': item.locationId},
                         );
                       },
                       child: Card(
@@ -75,10 +76,10 @@ class LocationListScreen extends ConsumerWidget {
                     locationRate: 5,
                     personWhoAddedLocation: 'andrii zajats',
                     dateTimeWhenLocationAdded: DateTime.now(),
-                    doesLocationHaveDelivery: true,
-                    doesLocationHaveTakeAway: true,
-                    doesLocationHaveOwnParking: true,
-                    doesLocationHaveCardPayments: true,
+                    doesLocationHaveDelivery: false,
+                    doesLocationHaveTakeAway: false,
+                    doesLocationHaveOwnParking: false,
+                    doesLocationHaveCardPayments: false,
                     locationMenuImages: <String>[
                       // 'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
                       // 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',

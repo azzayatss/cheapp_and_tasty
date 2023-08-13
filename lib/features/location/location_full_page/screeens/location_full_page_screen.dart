@@ -1,13 +1,13 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/about_location_widget.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_section.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_images.dart';
 import 'package:flutter/material.dart';
 
 class LocationFullScreen extends StatelessWidget {
   const LocationFullScreen({required this.id, super.key});
   final String id;
-  static const route = 'location-full-page/:id';
+  static const route = 'location-full-page/:locationId';
   static const routeName = 'locationfullpage';
 
   @override
@@ -23,18 +23,14 @@ class LocationFullScreen extends StatelessWidget {
               const SizedBox(
                 height: AppLayouts.defaultPadding,
               ),
-              LocationImagesSection(
-                sectionTitle: context.tr.menuLabel,
+              LocationMenuImages(
                 id: id,
-                isMenuSection: true,
               ),
               const SizedBox(
                 height: AppLayouts.defaultPadding,
               ),
-              LocationImagesSection(
-                sectionTitle: 'Фото локації:',
+              LocationImages(
                 id: id,
-                isMenuSection: false,
               ),
             ],
           ),

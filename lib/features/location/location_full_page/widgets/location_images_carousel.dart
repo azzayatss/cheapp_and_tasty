@@ -1,13 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_full_screen_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MenuImageCarousel extends ConsumerWidget {
-  const MenuImageCarousel({
+class LocationImagesCarousel extends ConsumerWidget {
+  const LocationImagesCarousel({
     required this.id,
     super.key,
   });
@@ -29,7 +29,7 @@ class MenuImageCarousel extends ConsumerWidget {
       itemBuilder: (context, index, realIdx) {
         final first = index * 2;
         final second = first + 1;
-        return location.locationMenuImages.isEmpty
+        return location.locationImages.isEmpty
             ? Center(
                 child: Text(
                   context.tr.thereAreNoPhotosYet,
@@ -42,17 +42,17 @@ class MenuImageCarousel extends ConsumerWidget {
                     child: GestureDetector(
                       onTap: () {
                         context.goNamed(
-                          LocationMenuFullScreenSlider.routeName,
+                          LocationImagesFullScreenSlider.routeName,
                           pathParameters: {
                             'locationId': id,
-                            'id': id,
+                            'idImages': id,
                           },
                         );
                       },
                       child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         child: Image.network(
-                          location.locationMenuImages[idx],
+                          location.locationImages[idx],
                           fit: BoxFit.cover,
                         ),
                       ),

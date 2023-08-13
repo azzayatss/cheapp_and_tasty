@@ -164,6 +164,9 @@ class AboutLocationWidget extends ConsumerWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: AppLayouts.defaultPadding,
+            ),
           ],
         ),
       ),
