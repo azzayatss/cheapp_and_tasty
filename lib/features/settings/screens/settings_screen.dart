@@ -60,7 +60,6 @@ class SettingsScreen extends ConsumerWidget {
                           ref
                               .read(switchButtonControllerProvider.notifier)
                               .changeValue(switchValue);
-                          print(switchValue);
                         },
                       ),
                     ],

@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/config/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,10 @@ class LocationNameAndRatingRow extends StatelessWidget {
         ),
         Row(
           children: [
-            const Icon(Icons.star),
+            const Icon(
+              Icons.star,
+              color: AppColors.starIconColor,
+            ),
             Text(
               '(${location.locationRate})',
               style: context.textTheme.titleLarge,

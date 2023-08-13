@@ -4,6 +4,7 @@ import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_full_screen_slider.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/screens/add_new_location_screen.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
@@ -48,11 +49,16 @@ GoRouter router(RouterRef ref) {
           ),
           // same as in 1 sub-route
           GoRoute(
-            path: LocationListScreen.route,
+            path: LocationsListScreen.route,
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: LocationListScreen(),
+              child: LocationsListScreen(),
             ),
             routes: [
+              GoRoute(
+                path: AddNewLocationScreen.route,
+                name: AddNewLocationScreen.routeName,
+                builder: (context, state) => const AddNewLocationScreen(),
+              ),
               GoRoute(
                 path: LocationFullScreen.route,
                 name: LocationFullScreen.routeName,

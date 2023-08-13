@@ -54,7 +54,7 @@ class _BottomNavigationWidgetState
     return switch (index) {
       0 => context.go(HomeScreen.route),
       1 => context.go(MapScreen.route),
-      2 => context.go(LocationListScreen.route),
+      2 => context.go(LocationsListScreen.route),
       3 => context.go(SettingsScreen.route),
       _ => ''
     };
