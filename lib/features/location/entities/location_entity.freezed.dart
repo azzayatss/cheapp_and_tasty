@@ -37,6 +37,7 @@ mixin _$LocationEntity {
   bool get doesLocationHaveCardPayments => throw _privateConstructorUsedError;
   List<String> get locationMenuImages => throw _privateConstructorUsedError;
   List<String> get locationImages => throw _privateConstructorUsedError;
+  String get locationCoverPhoto => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,7 +68,8 @@ abstract class $LocationEntityCopyWith<$Res> {
       bool doesLocationHaveOwnParking,
       bool doesLocationHaveCardPayments,
       List<String> locationMenuImages,
-      List<String> locationImages});
+      List<String> locationImages,
+      String locationCoverPhoto});
 }
 
 /// @nodoc
@@ -100,6 +102,7 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
     Object? doesLocationHaveCardPayments = null,
     Object? locationMenuImages = null,
     Object? locationImages = null,
+    Object? locationCoverPhoto = null,
   }) {
     return _then(_value.copyWith(
       locationName: null == locationName
@@ -170,6 +173,10 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
           ? _value.locationImages
           : locationImages // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      locationCoverPhoto: null == locationCoverPhoto
+          ? _value.locationCoverPhoto
+          : locationCoverPhoto // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -199,7 +206,8 @@ abstract class _$$_LocationEntityCopyWith<$Res>
       bool doesLocationHaveOwnParking,
       bool doesLocationHaveCardPayments,
       List<String> locationMenuImages,
-      List<String> locationImages});
+      List<String> locationImages,
+      String locationCoverPhoto});
 }
 
 /// @nodoc
@@ -230,6 +238,7 @@ class __$$_LocationEntityCopyWithImpl<$Res>
     Object? doesLocationHaveCardPayments = null,
     Object? locationMenuImages = null,
     Object? locationImages = null,
+    Object? locationCoverPhoto = null,
   }) {
     return _then(_$_LocationEntity(
       locationName: null == locationName
@@ -300,6 +309,10 @@ class __$$_LocationEntityCopyWithImpl<$Res>
           ? _value._locationImages
           : locationImages // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      locationCoverPhoto: null == locationCoverPhoto
+          ? _value.locationCoverPhoto
+          : locationCoverPhoto // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -324,7 +337,8 @@ class _$_LocationEntity implements _LocationEntity {
       required this.doesLocationHaveOwnParking,
       required this.doesLocationHaveCardPayments,
       required final List<String> locationMenuImages,
-      required final List<String> locationImages})
+      required final List<String> locationImages,
+      required this.locationCoverPhoto})
       : _locationMenuImages = locationMenuImages,
         _locationImages = locationImages;
 
@@ -379,8 +393,11 @@ class _$_LocationEntity implements _LocationEntity {
   }
 
   @override
+  final String locationCoverPhoto;
+
+  @override
   String toString() {
-    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments, locationMenuImages: $locationMenuImages, locationImages: $locationImages)';
+    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments, locationMenuImages: $locationMenuImages, locationImages: $locationImages, locationCoverPhoto: $locationCoverPhoto)';
   }
 
   @override
@@ -408,8 +425,7 @@ class _$_LocationEntity implements _LocationEntity {
                 other.locationRate == locationRate) &&
             (identical(other.personWhoAddedLocation, personWhoAddedLocation) ||
                 other.personWhoAddedLocation == personWhoAddedLocation) &&
-            (identical(other.dateTimeWhenLocationAdded,
-                    dateTimeWhenLocationAdded) ||
+            (identical(other.dateTimeWhenLocationAdded, dateTimeWhenLocationAdded) ||
                 other.dateTimeWhenLocationAdded == dateTimeWhenLocationAdded) &&
             (identical(other.doesLocationHaveDelivery, doesLocationHaveDelivery) ||
                 other.doesLocationHaveDelivery == doesLocationHaveDelivery) &&
@@ -426,7 +442,9 @@ class _$_LocationEntity implements _LocationEntity {
             const DeepCollectionEquality()
                 .equals(other._locationMenuImages, _locationMenuImages) &&
             const DeepCollectionEquality()
-                .equals(other._locationImages, _locationImages));
+                .equals(other._locationImages, _locationImages) &&
+            (identical(other.locationCoverPhoto, locationCoverPhoto) ||
+                other.locationCoverPhoto == locationCoverPhoto));
   }
 
   @JsonKey(ignore: true)
@@ -449,7 +467,8 @@ class _$_LocationEntity implements _LocationEntity {
       doesLocationHaveOwnParking,
       doesLocationHaveCardPayments,
       const DeepCollectionEquality().hash(_locationMenuImages),
-      const DeepCollectionEquality().hash(_locationImages));
+      const DeepCollectionEquality().hash(_locationImages),
+      locationCoverPhoto);
 
   @JsonKey(ignore: true)
   @override
@@ -483,7 +502,8 @@ abstract class _LocationEntity implements LocationEntity {
       required final bool doesLocationHaveOwnParking,
       required final bool doesLocationHaveCardPayments,
       required final List<String> locationMenuImages,
-      required final List<String> locationImages}) = _$_LocationEntity;
+      required final List<String> locationImages,
+      required final String locationCoverPhoto}) = _$_LocationEntity;
 
   factory _LocationEntity.fromJson(Map<String, dynamic> json) =
       _$_LocationEntity.fromJson;
@@ -522,6 +542,8 @@ abstract class _LocationEntity implements LocationEntity {
   List<String> get locationMenuImages;
   @override
   List<String> get locationImages;
+  @override
+  String get locationCoverPhoto;
   @override
   @JsonKey(ignore: true)
   _$$_LocationEntityCopyWith<_$_LocationEntity> get copyWith =>

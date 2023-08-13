@@ -3,6 +3,7 @@ import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/widgets/location_listing_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -47,12 +48,7 @@ class LocationListScreen extends ConsumerWidget {
                           pathParameters: {'locationId': item.locationId},
                         );
                       },
-                      child: Card(
-                        child: ListTile(
-                          title: Text(item.locationName),
-                          subtitle: Text(item.locationDescription),
-                        ),
-                      ),
+                      child: LocationListingCard(item: item),
                     ),
                   );
                 },
@@ -96,6 +92,8 @@ class LocationListScreen extends ConsumerWidget {
                       'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
                       'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
                     ],
+                    locationCoverPhoto:
+                        'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
                   );
                   ref
                       .read(globalLocationsListControllerProvider.notifier)

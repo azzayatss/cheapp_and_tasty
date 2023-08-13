@@ -1,6 +1,9 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,6 +25,13 @@ class AboutLocationWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
+            Image.network(
+              location.locationCoverPhoto,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(
+              height: AppLayouts.defaultPadding,
+            ),
             Text(
               context.tr.aboutLocation,
               style: context.textTheme.headlineLarge,
@@ -30,24 +40,7 @@ class AboutLocationWidget extends ConsumerWidget {
             const SizedBox(
               height: AppLayouts.defaultPadding,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  location.locationName,
-                  style: context.textTheme.titleLarge,
-                ),
-                Row(
-                  children: [
-                    const Icon(Icons.star),
-                    Text(
-                      '(${location.locationRate})',
-                      style: context.textTheme.titleLarge,
-                    ),
-                  ],
-                )
-              ],
-            ),
+            LocationNameAndRatingRow(location: location),
             const SizedBox(
               height: AppLayouts.defaultPadding,
             ),
@@ -58,31 +51,11 @@ class AboutLocationWidget extends ConsumerWidget {
             const SizedBox(
               height: AppLayouts.defaultPadding,
             ),
-            Row(
-              children: [
-                const Icon(Icons.location_on_outlined),
-                const SizedBox(
-                  width: AppLayouts.defaultPadding / 2,
-                ),
-                Text(
-                  location.locationAdress,
-                ),
-              ],
-            ),
+            LocationAdressWithIconRow(location: location),
             const SizedBox(
               height: AppLayouts.defaultPadding,
             ),
-            Row(
-              children: [
-                const Icon(Icons.schedule),
-                const SizedBox(
-                  width: AppLayouts.defaultPadding / 2,
-                ),
-                Text(
-                  location.locationWorkingSchedule,
-                ),
-              ],
-            ),
+            LocationScheduleWithIconRow(location: location),
             const SizedBox(
               height: AppLayouts.defaultPadding,
             ),
