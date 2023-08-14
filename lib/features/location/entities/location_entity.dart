@@ -23,6 +23,7 @@ class LocationEntity with _$LocationEntity {
     required bool doesLocationHaveCardPayments,
     required List<String> locationMenuImages,
     required List<String> locationImages,
+    required List<String> additionalServicesChips,
     required String locationCoverPhoto,
   }) = _LocationEntity;
 

@@ -1,8 +1,11 @@
 {
   "aboutLocation": "Про локацію:",
+  "accessibilityLabel": "Доступність",
   "addNewLocationTitle": "Створення нового закладу:",
   "appBarTitle": "Хочу їсти !",
   "cardPaymentsLabel": "Оплата карткою?",
+  "chargingLabel": "Зарядка",
+  "coffeeLabel": "Кава",
   "deliveryLabel": "Власна доставка?",
   "emailFormHint": "example@example.com",
   "forgotPassword": "Забули пароль?",
@@ -30,5 +33,8 @@
   "systemBack": "свайпніть для повернення назад",
   "takeAwayLabel": "Взяти з собою?",
   "termsAndConditionsCheckBoxText": "Умови та положення",
-  "thereAreNoPhotosYet": "Поки немає фото :("
+  "terraceLabel": "Тераса",
+  "thereAreNoPhotosYet": "Поки немає фото :(",
+  "wcLabel": "WC",
+  "wifiLabel": "Wi-Fi"
 }

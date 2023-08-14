@@ -1,6 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_colors.dart';
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/chip_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,6 +13,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final list = ref.watch(chipControllerProvider);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -122,208 +124,36 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
                         Wrap(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(
-                                      Icons.local_parking,
-                                      size: 16,
+                          spacing: AppLayouts.defaultPadding / 3,
+                          children: AdditionalServicesChips.values
+                              .map(
+                                (value) => GestureDetector(
+                                  onTap: () {
+                                    ref
+                                        .read(chipControllerProvider.notifier)
+                                        .addRemoveToList(value.name);
+                                  },
+                                  child: Chip(
+                                    backgroundColor: list.contains(value.name)
+                                        ? Colors.green
+                                        : null,
+                                    label: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          value.icon,
+                                          size: 16,
+                                        ),
+                                        const SizedBox(
+                                          width: AppLayouts.defaultPadding / 2,
+                                        ),
+                                        Text(value.chipLabel(context)),
+                                      ],
                                     ),
-                                    const SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text(context.tr.parkingLabel),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.wifi,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text('Wi-Fi'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(
-                                      Icons.delivery_dining_outlined,
-                                      size: 16,
-                                    ),
-                                    const SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text(context.tr.deliveryLabel),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.nature_outlined,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text('Тераса'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(
-                                      Icons.takeout_dining_outlined,
-                                      size: 16,
-                                    ),
-                                    const SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text(context.tr.takeAwayLabel),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.coffee_outlined,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text('Кава'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.wc,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text('WC'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(
-                                      Icons.credit_card,
-                                      size: 16,
-                                    ),
-                                    const SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text(context.tr.cardPaymentsLabel),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.wheelchair_pickup,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text('Доступність'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: AppLayouts.defaultPadding / 5,
-                              ),
-                              child: Chip(
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.electrical_services_rounded,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: AppLayouts.defaultPadding / 2,
-                                    ),
-                                    Text('Зарядка'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                              )
+                              .toList(),
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
                         Column(
@@ -390,6 +220,66 @@ class AddNewLocationScreen extends HookConsumerWidget {
     );
   }
 }
+
+enum AdditionalServicesChips {
+  parking(
+    icon: Icons.local_parking_outlined,
+  ),
+  wifi(
+    icon: Icons.wifi,
+  ),
+  delivery(
+    icon: Icons.delivery_dining_outlined,
+  ),
+  terrace(
+    icon: Icons.nature_outlined,
+  ),
+  teakeAway(
+    icon: Icons.takeout_dining_outlined,
+  ),
+  coffee(
+    icon: Icons.coffee_outlined,
+  ),
+  wc(
+    icon: Icons.wc,
+  ),
+  cardPayments(
+    icon: Icons.credit_card,
+  ),
+  accessibility(
+    icon: Icons.accessible,
+  ),
+  charging(
+    icon: Icons.charging_station_outlined,
+  );
+
+  const AdditionalServicesChips({
+    required this.icon,
+  });
+
+  final IconData icon;
+
+  String chipLabel(BuildContext context) => switch (this) {
+        AdditionalServicesChips.parking => context.tr.parkingLabel,
+        AdditionalServicesChips.wifi => context.tr.wifiLabel,
+        AdditionalServicesChips.delivery => context.tr.deliveryLabel,
+        AdditionalServicesChips.terrace => context.tr.terraceLabel,
+        AdditionalServicesChips.teakeAway => context.tr.takeAwayLabel,
+        AdditionalServicesChips.coffee => context.tr.coffeeLabel,
+        AdditionalServicesChips.wc => context.tr.wcLabel,
+        AdditionalServicesChips.cardPayments => context.tr.cardPaymentsLabel,
+        AdditionalServicesChips.accessibility => context.tr.accessibilityLabel,
+        AdditionalServicesChips.charging => context.tr.chargingLabel,
+      };
+}
+
+//  void _onTap(int index)
+//    => switch(index){
+//        0 => context.go('location0'),
+//        1 => context.go('location1'),
+//        2 => context.go('location2'),
+//        _ => ''
+//     };
 
 // final newLocation = LocationEntity(
 //   locationId: '222222',

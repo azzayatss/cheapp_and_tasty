@@ -1,8 +1,11 @@
 {
   "aboutLocation": "About location:",
+  "accessibilityLabel": "Accessibility",
   "addNewLocationTitle": "Creating a new location:",
   "appBarTitle": "Cheapp & tasty ! ",
   "cardPaymentsLabel": "Card payments?",
+  "chargingLabel": "Charging",
+  "coffeeLabel": "Coffee",
   "deliveryLabel": "Delivery?",
   "emailFormHint": "example@example.com",
   "forgotPassword": "Forgot password?",
@@ -30,5 +33,8 @@
   "systemBack": "use your system swipe/button to go back",
   "takeAwayLabel": "Take away?",
   "termsAndConditionsCheckBoxText": "Terms and conditions",
-  "thereAreNoPhotosYet": "There are no photos yet :("
+  "terraceLabel": "Terrace",
+  "thereAreNoPhotosYet": "There are no photos yet :(",
+  "wcLabel": "WC",
+  "wifiLabel": "Wi-Fi"
 }
