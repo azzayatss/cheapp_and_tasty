@@ -2,8 +2,10 @@ import 'package:cheapp_and_tasty/config/app_colors.dart';
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/chip_controller.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddNewLocationScreen extends HookConsumerWidget {
@@ -33,8 +35,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       children: [
                         Text(
                           //todo azzayats: підключити завантаження з девайсу, продумати аплоад в бд, продумати прийом з бд.
-                          //todo azzayats: добавити всі стрінги в переклади
-                          'Головне фото локації:',
+                          context.tr.coverPhotoLabel,
                           style: context.textTheme.bodyLarge,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
@@ -42,50 +43,48 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           child: TextButton.icon(
                             onPressed: () {},
                             icon: const Icon(Icons.image_outlined),
-                            label: const Text('Завантажити фото'),
+                            label: Text(context.tr.uploadPhotoLabel),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: 'Пузата Хата',
-                        labelText: 'Назва локації',
+                      decoration: InputDecoration(
+                        hintText: context.tr.locationNameHint,
+                        labelText: context.tr.locationNameLabel,
                       ),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
-                      decoration: const InputDecoration(
-                        hintText:
-                            'Їдальня університету ім. Івана Франка, вхід через корпус №2, одразу після входу по сходах вниз.',
-                        labelText: 'Опис локації',
+                      decoration: InputDecoration(
+                        hintText: context.tr.locationDescriptionHint,
+                        labelText: context.tr.locationDescriptionLabel,
                       ),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: 'м.Львів, вул.Червоної Калини 72',
-                        labelText: 'Адреса локації',
+                      decoration: InputDecoration(
+                        hintText: context.tr.locationAdressHint,
+                        labelText: context.tr.locationAdressLabel,
                       ),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: 'пн-пт: 10:00-17:00; сб-нд: вихідні',
-                        labelText: 'Графік роботи',
+                      decoration: InputDecoration(
+                        hintText: context.tr.locationScheduleHint,
+                        labelText: context.tr.locationScheduleLabel,
                       ),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
-                      decoration: const InputDecoration(
-                        hintText:
-                            'Поділіться своїми враженнями про цю локацію, допоможіть іншим обрати його для відвідування.',
-                        labelText: 'Перший відгук',
+                      decoration: InputDecoration(
+                        hintText: context.tr.locationReviewHint,
+                        labelText: context.tr.locationReviewLabel,
                       ),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
@@ -93,7 +92,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Вкажіть початковий рейтинг:',
+                          context.tr.locationRateLabel,
                           style: context.textTheme.bodyLarge,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
@@ -118,8 +117,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          //todo azzayats: скоротити код(оптимізувати), подумати як передавати, подумати як приймати і відображати.
-                          'Інші послуги:',
+                          context.tr.otherServicesLabel,
                           style: context.textTheme.bodyLarge,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
@@ -161,7 +159,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           children: [
                             Text(
                               //todo azzayats: підключити завантаження з девайсу, продумати аплоад в бд, продумати прийом з бд.
-                              'Добавте кілька фото меню:',
+                              context.tr.addMenuPhotosLabel,
                               style: context.textTheme.bodyLarge,
                             ),
                             const SizedBox(height: AppLayouts.defaultPadding),
@@ -169,7 +167,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               child: TextButton.icon(
                                 onPressed: () {},
                                 icon: const Icon(Icons.image_outlined),
-                                label: const Text('Завантажити фото'),
+                                label: Text(context.tr.uploadPhotoLabel),
                               ),
                             ),
                           ],
@@ -180,7 +178,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           children: [
                             Text(
                               //todo azzayats: підключити завантаження з девайсу, продумати аплоад в бд, продумати прийом з бд.
-                              'Добавте кілька фото закладу:',
+                              context.tr.addLocationPhotosLabel,
                               style: context.textTheme.bodyLarge,
                             ),
                             const SizedBox(height: AppLayouts.defaultPadding),
@@ -188,7 +186,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               child: TextButton.icon(
                                 onPressed: () {},
                                 icon: const Icon(Icons.image_outlined),
-                                label: const Text('Завантажити фото'),
+                                label: Text(context.tr.uploadPhotoLabel),
                               ),
                             ),
                           ],
@@ -199,12 +197,41 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             OutlinedButton(
-                              onPressed: () {},
-                              child: const Text('Відмінити'),
+                              onPressed: () {
+                                showDialog<AlertDialog>(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text(context.tr.areYouSure),
+                                      content: Text(
+                                        context.tr.areYouSureDescription,
+                                      ),
+                                      actions: [
+                                        FilledButton(
+                                          onPressed: () => context.pop(),
+                                          child: Text(
+                                            context.tr.continiueCreating,
+                                          ),
+                                        ),
+                                        OutlinedButton(
+                                          onPressed: () {
+                                            context
+                                              ..pop()
+                                              ..go(LocationsListScreen.route);
+                                          },
+                                          child:
+                                              Text(context.tr.cancelCreating),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Text(context.tr.cancel),
                             ),
                             FilledButton(
                               onPressed: () {},
-                              child: const Text('Зберегти'),
+                              child: Text(context.tr.save),
                             ),
                           ],
                         )
