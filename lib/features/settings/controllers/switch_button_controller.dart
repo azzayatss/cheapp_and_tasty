@@ -4,11 +4,9 @@ part 'switch_button_controller.g.dart';
 
 @riverpod
 class SwitchButtonController extends _$SwitchButtonController {
-  bool value = true;
   @override
   bool build() {
-    const value = true;
-    return value;
+    return state = true;
   }
 
   void changeValue(bool switchValue) {
