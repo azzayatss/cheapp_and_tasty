@@ -1,6 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
@@ -85,13 +86,43 @@ class AboutLocationWidget extends ConsumerWidget {
               ],
             ),
             const Divider(),
+            const SizedBox(
+              height: AppLayouts.defaultPadding,
+            ),
+            if (location.additionalServicesChips.isEmpty)
+              Text(
+                context.tr.emptyAdditionalServicesWarning,
+              )
+            else
+              Wrap(
+                spacing: AppLayouts.defaultPadding / 3,
+                children: AdditionalServicesChips.values
+                    .map(
+                      (value) => Chip(
+                        backgroundColor: location.additionalServicesChips
+                                .contains(value.name)
+                            ? Colors.green
+                            : null,
+                        label: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              value.icon,
+                              size: 16,
+                            ),
+                            const SizedBox(
+                              width: AppLayouts.defaultPadding / 2,
+                            ),
+                            Text(value.chipLabel(context)),
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
           ],
         ),
       ),
     );
-  }
-
-  Icon getIcon(bool iconValue) {
-    return iconValue ? const Icon(Icons.check) : const Icon(Icons.block);
   }
 }

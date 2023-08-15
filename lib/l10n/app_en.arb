@@ -16,6 +16,7 @@
   "coverPhotoLabel": "Location main photo:",
   "deliveryLabel": "Delivery?",
   "emailFormHint": "example@example.com",
+  "emptyAdditionalServicesWarning": "When creating a location, none of the additional services were selected in the application, if you want to add any service, please suggest an edit.",
   "forgotPassword": "Forgot password?",
   "forgotPasswordDialogContent1": "Please enter user email to reset the password.",
   "forgotPasswordDialogContent2": "If the user with this email exists you will receive recovery email.",

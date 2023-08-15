@@ -16,6 +16,7 @@
   "coverPhotoLabel": "Головне фото локації:",
   "deliveryLabel": "Власна доставка?",
   "emailFormHint": "example@example.com",
+  "emptyAdditionalServicesWarning": "При створені локації в додатку не було обрано жодної з додаткових послуг, якщо ви бажаєте добаити якусь послугу, будь ласка запропонуйте правку.",
   "forgotPassword": "Забули пароль?",
   "forgotPasswordDialogContent1": "Будь ласка, введіть email користувача, щоб скинути пароль.",
   "forgotPasswordDialogContent2": "Якщо користувач з такою адресою існує, ви отримаєте лист відновлення.",
