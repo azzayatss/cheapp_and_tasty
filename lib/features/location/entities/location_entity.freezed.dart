@@ -31,10 +31,6 @@ mixin _$LocationEntity {
   double get locationRate => throw _privateConstructorUsedError;
   String get personWhoAddedLocation => throw _privateConstructorUsedError;
   DateTime get dateTimeWhenLocationAdded => throw _privateConstructorUsedError;
-  bool get doesLocationHaveDelivery => throw _privateConstructorUsedError;
-  bool get doesLocationHaveTakeAway => throw _privateConstructorUsedError;
-  bool get doesLocationHaveOwnParking => throw _privateConstructorUsedError;
-  bool get doesLocationHaveCardPayments => throw _privateConstructorUsedError;
   List<String> get locationMenuImages => throw _privateConstructorUsedError;
   List<String> get locationImages => throw _privateConstructorUsedError;
   List<String> get additionalServicesChips =>
@@ -65,10 +61,6 @@ abstract class $LocationEntityCopyWith<$Res> {
       double locationRate,
       String personWhoAddedLocation,
       DateTime dateTimeWhenLocationAdded,
-      bool doesLocationHaveDelivery,
-      bool doesLocationHaveTakeAway,
-      bool doesLocationHaveOwnParking,
-      bool doesLocationHaveCardPayments,
       List<String> locationMenuImages,
       List<String> locationImages,
       List<String> additionalServicesChips,
@@ -99,10 +91,6 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
     Object? locationRate = null,
     Object? personWhoAddedLocation = null,
     Object? dateTimeWhenLocationAdded = null,
-    Object? doesLocationHaveDelivery = null,
-    Object? doesLocationHaveTakeAway = null,
-    Object? doesLocationHaveOwnParking = null,
-    Object? doesLocationHaveCardPayments = null,
     Object? locationMenuImages = null,
     Object? locationImages = null,
     Object? additionalServicesChips = null,
@@ -153,22 +141,6 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
           ? _value.dateTimeWhenLocationAdded
           : dateTimeWhenLocationAdded // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      doesLocationHaveDelivery: null == doesLocationHaveDelivery
-          ? _value.doesLocationHaveDelivery
-          : doesLocationHaveDelivery // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doesLocationHaveTakeAway: null == doesLocationHaveTakeAway
-          ? _value.doesLocationHaveTakeAway
-          : doesLocationHaveTakeAway // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doesLocationHaveOwnParking: null == doesLocationHaveOwnParking
-          ? _value.doesLocationHaveOwnParking
-          : doesLocationHaveOwnParking // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doesLocationHaveCardPayments: null == doesLocationHaveCardPayments
-          ? _value.doesLocationHaveCardPayments
-          : doesLocationHaveCardPayments // ignore: cast_nullable_to_non_nullable
-              as bool,
       locationMenuImages: null == locationMenuImages
           ? _value.locationMenuImages
           : locationMenuImages // ignore: cast_nullable_to_non_nullable
@@ -209,10 +181,6 @@ abstract class _$$_LocationEntityCopyWith<$Res>
       double locationRate,
       String personWhoAddedLocation,
       DateTime dateTimeWhenLocationAdded,
-      bool doesLocationHaveDelivery,
-      bool doesLocationHaveTakeAway,
-      bool doesLocationHaveOwnParking,
-      bool doesLocationHaveCardPayments,
       List<String> locationMenuImages,
       List<String> locationImages,
       List<String> additionalServicesChips,
@@ -241,10 +209,6 @@ class __$$_LocationEntityCopyWithImpl<$Res>
     Object? locationRate = null,
     Object? personWhoAddedLocation = null,
     Object? dateTimeWhenLocationAdded = null,
-    Object? doesLocationHaveDelivery = null,
-    Object? doesLocationHaveTakeAway = null,
-    Object? doesLocationHaveOwnParking = null,
-    Object? doesLocationHaveCardPayments = null,
     Object? locationMenuImages = null,
     Object? locationImages = null,
     Object? additionalServicesChips = null,
@@ -295,22 +259,6 @@ class __$$_LocationEntityCopyWithImpl<$Res>
           ? _value.dateTimeWhenLocationAdded
           : dateTimeWhenLocationAdded // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      doesLocationHaveDelivery: null == doesLocationHaveDelivery
-          ? _value.doesLocationHaveDelivery
-          : doesLocationHaveDelivery // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doesLocationHaveTakeAway: null == doesLocationHaveTakeAway
-          ? _value.doesLocationHaveTakeAway
-          : doesLocationHaveTakeAway // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doesLocationHaveOwnParking: null == doesLocationHaveOwnParking
-          ? _value.doesLocationHaveOwnParking
-          : doesLocationHaveOwnParking // ignore: cast_nullable_to_non_nullable
-              as bool,
-      doesLocationHaveCardPayments: null == doesLocationHaveCardPayments
-          ? _value.doesLocationHaveCardPayments
-          : doesLocationHaveCardPayments // ignore: cast_nullable_to_non_nullable
-              as bool,
       locationMenuImages: null == locationMenuImages
           ? _value._locationMenuImages
           : locationMenuImages // ignore: cast_nullable_to_non_nullable
@@ -346,10 +294,6 @@ class _$_LocationEntity implements _LocationEntity {
       required this.locationRate,
       required this.personWhoAddedLocation,
       required this.dateTimeWhenLocationAdded,
-      required this.doesLocationHaveDelivery,
-      required this.doesLocationHaveTakeAway,
-      required this.doesLocationHaveOwnParking,
-      required this.doesLocationHaveCardPayments,
       required final List<String> locationMenuImages,
       required final List<String> locationImages,
       required final List<String> additionalServicesChips,
@@ -383,14 +327,6 @@ class _$_LocationEntity implements _LocationEntity {
   final String personWhoAddedLocation;
   @override
   final DateTime dateTimeWhenLocationAdded;
-  @override
-  final bool doesLocationHaveDelivery;
-  @override
-  final bool doesLocationHaveTakeAway;
-  @override
-  final bool doesLocationHaveOwnParking;
-  @override
-  final bool doesLocationHaveCardPayments;
   final List<String> _locationMenuImages;
   @override
   List<String> get locationMenuImages {
@@ -422,7 +358,7 @@ class _$_LocationEntity implements _LocationEntity {
 
   @override
   String toString() {
-    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, doesLocationHaveDelivery: $doesLocationHaveDelivery, doesLocationHaveTakeAway: $doesLocationHaveTakeAway, doesLocationHaveOwnParking: $doesLocationHaveOwnParking, doesLocationHaveCardPayments: $doesLocationHaveCardPayments, locationMenuImages: $locationMenuImages, locationImages: $locationImages, additionalServicesChips: $additionalServicesChips, locationCoverPhoto: $locationCoverPhoto)';
+    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, locationReviews: $locationReviews, locationRate: $locationRate, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, locationMenuImages: $locationMenuImages, locationImages: $locationImages, additionalServicesChips: $additionalServicesChips, locationCoverPhoto: $locationCoverPhoto)';
   }
 
   @override
@@ -442,7 +378,8 @@ class _$_LocationEntity implements _LocationEntity {
                 other.locationLongitude == locationLongitude) &&
             (identical(other.locationAdress, locationAdress) ||
                 other.locationAdress == locationAdress) &&
-            (identical(other.locationWorkingSchedule, locationWorkingSchedule) ||
+            (identical(
+                    other.locationWorkingSchedule, locationWorkingSchedule) ||
                 other.locationWorkingSchedule == locationWorkingSchedule) &&
             (identical(other.locationReviews, locationReviews) ||
                 other.locationReviews == locationReviews) &&
@@ -450,20 +387,9 @@ class _$_LocationEntity implements _LocationEntity {
                 other.locationRate == locationRate) &&
             (identical(other.personWhoAddedLocation, personWhoAddedLocation) ||
                 other.personWhoAddedLocation == personWhoAddedLocation) &&
-            (identical(other.dateTimeWhenLocationAdded, dateTimeWhenLocationAdded) ||
+            (identical(other.dateTimeWhenLocationAdded,
+                    dateTimeWhenLocationAdded) ||
                 other.dateTimeWhenLocationAdded == dateTimeWhenLocationAdded) &&
-            (identical(other.doesLocationHaveDelivery, doesLocationHaveDelivery) ||
-                other.doesLocationHaveDelivery == doesLocationHaveDelivery) &&
-            (identical(
-                    other.doesLocationHaveTakeAway, doesLocationHaveTakeAway) ||
-                other.doesLocationHaveTakeAway == doesLocationHaveTakeAway) &&
-            (identical(other.doesLocationHaveOwnParking, doesLocationHaveOwnParking) ||
-                other.doesLocationHaveOwnParking ==
-                    doesLocationHaveOwnParking) &&
-            (identical(other.doesLocationHaveCardPayments,
-                    doesLocationHaveCardPayments) ||
-                other.doesLocationHaveCardPayments ==
-                    doesLocationHaveCardPayments) &&
             const DeepCollectionEquality()
                 .equals(other._locationMenuImages, _locationMenuImages) &&
             const DeepCollectionEquality()
@@ -476,28 +402,23 @@ class _$_LocationEntity implements _LocationEntity {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        locationName,
-        locationId,
-        locationDescription,
-        locationLatitude,
-        locationLongitude,
-        locationAdress,
-        locationWorkingSchedule,
-        locationReviews,
-        locationRate,
-        personWhoAddedLocation,
-        dateTimeWhenLocationAdded,
-        doesLocationHaveDelivery,
-        doesLocationHaveTakeAway,
-        doesLocationHaveOwnParking,
-        doesLocationHaveCardPayments,
-        const DeepCollectionEquality().hash(_locationMenuImages),
-        const DeepCollectionEquality().hash(_locationImages),
-        const DeepCollectionEquality().hash(_additionalServicesChips),
-        locationCoverPhoto
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      locationName,
+      locationId,
+      locationDescription,
+      locationLatitude,
+      locationLongitude,
+      locationAdress,
+      locationWorkingSchedule,
+      locationReviews,
+      locationRate,
+      personWhoAddedLocation,
+      dateTimeWhenLocationAdded,
+      const DeepCollectionEquality().hash(_locationMenuImages),
+      const DeepCollectionEquality().hash(_locationImages),
+      const DeepCollectionEquality().hash(_additionalServicesChips),
+      locationCoverPhoto);
 
   @JsonKey(ignore: true)
   @override
@@ -526,10 +447,6 @@ abstract class _LocationEntity implements LocationEntity {
       required final double locationRate,
       required final String personWhoAddedLocation,
       required final DateTime dateTimeWhenLocationAdded,
-      required final bool doesLocationHaveDelivery,
-      required final bool doesLocationHaveTakeAway,
-      required final bool doesLocationHaveOwnParking,
-      required final bool doesLocationHaveCardPayments,
       required final List<String> locationMenuImages,
       required final List<String> locationImages,
       required final List<String> additionalServicesChips,
@@ -560,14 +477,6 @@ abstract class _LocationEntity implements LocationEntity {
   String get personWhoAddedLocation;
   @override
   DateTime get dateTimeWhenLocationAdded;
-  @override
-  bool get doesLocationHaveDelivery;
-  @override
-  bool get doesLocationHaveTakeAway;
-  @override
-  bool get doesLocationHaveOwnParking;
-  @override
-  bool get doesLocationHaveCardPayments;
   @override
   List<String> get locationMenuImages;
   @override

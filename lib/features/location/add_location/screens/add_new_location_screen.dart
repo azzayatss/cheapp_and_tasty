@@ -1,12 +1,19 @@
 import 'package:cheapp_and_tasty/config/app_colors.dart';
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/chip_controller.dart';
+import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
+import 'package:cheapp_and_tasty/features/location/add_location/controllers/chip_controller.dart';
+import 'package:cheapp_and_tasty/features/location/add_location/controllers/rating_controller.dart';
+import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
+import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 class AddNewLocationScreen extends HookConsumerWidget {
   const AddNewLocationScreen({super.key});
@@ -15,6 +22,12 @@ class AddNewLocationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locationNameController = useTextEditingController();
+    final locationDescriptionController = useTextEditingController();
+    final locationAdressController = useTextEditingController();
+    final locationScheduleController = useTextEditingController();
+    final locationReviewController = useTextEditingController();
+    final currentUser = ref.read(signInControllerProvider);
     final list = ref.watch(chipControllerProvider);
     return SafeArea(
       child: Scaffold(
@@ -50,6 +63,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
+                      controller: locationNameController,
                       decoration: InputDecoration(
                         hintText: context.tr.locationNameHint,
                         labelText: context.tr.locationNameLabel,
@@ -57,6 +71,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
+                      controller: locationDescriptionController,
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
@@ -66,6 +81,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
+                      controller: locationAdressController,
                       decoration: InputDecoration(
                         hintText: context.tr.locationAdressHint,
                         labelText: context.tr.locationAdressLabel,
@@ -73,6 +89,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
+                      controller: locationScheduleController,
                       decoration: InputDecoration(
                         hintText: context.tr.locationScheduleHint,
                         labelText: context.tr.locationScheduleLabel,
@@ -80,6 +97,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
+                      controller: locationReviewController,
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
@@ -98,7 +116,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         const SizedBox(height: AppLayouts.defaultPadding),
                         Align(
                           child: RatingBar.builder(
-                            initialRating: 3,
+                            initialRating: ref.watch(ratingControllerProvider),
                             minRating: 1,
                             allowHalfRating: true,
                             itemPadding:
@@ -107,7 +125,11 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               Icons.star,
                               color: AppColors.starIconColor,
                             ),
-                            onRatingUpdate: print,
+                            onRatingUpdate: (rating) {
+                              ref
+                                  .read(ratingControllerProvider.notifier)
+                                  .newRate(rating: rating);
+                            },
                           ),
                         ),
                       ],
@@ -230,11 +252,61 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               child: Text(context.tr.cancel),
                             ),
                             FilledButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                final newLocation = LocationEntity(
+                                  locationName: locationNameController.text,
+                                  locationId: const Uuid().v4(),
+                                  locationDescription:
+                                      locationDescriptionController.text,
+                                  //todo azzayats -> replace hardcoded values with add on map feature in future
+                                  locationLatitude: 0,
+                                  locationLongitude: 0,
+                                  locationAdress: locationAdressController.text,
+                                  locationWorkingSchedule:
+                                      locationScheduleController.text,
+                                  locationReviews:
+                                      locationReviewController.text,
+                                  locationRate:
+                                      ref.watch(ratingControllerProvider),
+                                  personWhoAddedLocation:
+                                      currentUser.value?.email ?? '',
+                                  dateTimeWhenLocationAdded: DateTime.now(),
+                                  //todo azzayats -> replace hardcoded values with image picker
+                                  locationMenuImages: [
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                  ],
+                                  //todo azzayats -> replace hardcoded values with image picker
+                                  locationImages: [
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                  ],
+                                  additionalServicesChips:
+                                      ref.watch(chipControllerProvider),
+                                  //todo azzayats -> replace hardcoded values with image picker
+                                  locationCoverPhoto:
+                                      'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+                                );
+
+                                ref
+                                    .read(
+                                      globalLocationsListControllerProvider
+                                          .notifier,
+                                    )
+                                    .add(newLocation);
+
+                                context.pop();
+                              },
                               child: Text(context.tr.save),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ],
@@ -246,58 +318,6 @@ class AddNewLocationScreen extends HookConsumerWidget {
       ),
     );
   }
-}
-
-enum AdditionalServicesChips {
-  parking(
-    icon: Icons.local_parking_outlined,
-  ),
-  wifi(
-    icon: Icons.wifi,
-  ),
-  delivery(
-    icon: Icons.delivery_dining_outlined,
-  ),
-  terrace(
-    icon: Icons.nature_outlined,
-  ),
-  teakeAway(
-    icon: Icons.takeout_dining_outlined,
-  ),
-  coffee(
-    icon: Icons.coffee_outlined,
-  ),
-  wc(
-    icon: Icons.wc,
-  ),
-  cardPayments(
-    icon: Icons.credit_card,
-  ),
-  accessibility(
-    icon: Icons.accessible,
-  ),
-  charging(
-    icon: Icons.charging_station_outlined,
-  );
-
-  const AdditionalServicesChips({
-    required this.icon,
-  });
-
-  final IconData icon;
-
-  String chipLabel(BuildContext context) => switch (this) {
-        AdditionalServicesChips.parking => context.tr.parkingLabel,
-        AdditionalServicesChips.wifi => context.tr.wifiLabel,
-        AdditionalServicesChips.delivery => context.tr.deliveryLabel,
-        AdditionalServicesChips.terrace => context.tr.terraceLabel,
-        AdditionalServicesChips.teakeAway => context.tr.takeAwayLabel,
-        AdditionalServicesChips.coffee => context.tr.coffeeLabel,
-        AdditionalServicesChips.wc => context.tr.wcLabel,
-        AdditionalServicesChips.cardPayments => context.tr.cardPaymentsLabel,
-        AdditionalServicesChips.accessibility => context.tr.accessibilityLabel,
-        AdditionalServicesChips.charging => context.tr.chargingLabel,
-      };
 }
 
 //  void _onTap(int index)

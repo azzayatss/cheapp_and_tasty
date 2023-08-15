@@ -6,7 +6,7 @@ part 'switch_button_controller.g.dart';
 class SwitchButtonController extends _$SwitchButtonController {
   @override
   bool build() {
-    return state = true;
+    return true;
   }
 
   void changeValue(bool switchValue) {

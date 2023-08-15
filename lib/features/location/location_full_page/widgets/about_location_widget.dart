@@ -85,61 +85,6 @@ class AboutLocationWidget extends ConsumerWidget {
               ],
             ),
             const Divider(),
-            const SizedBox(
-              height: AppLayouts.defaultPadding,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(context.tr.deliveryLabel),
-                    const SizedBox(
-                      height: AppLayouts.defaultPadding / 2,
-                    ),
-                    getIcon(location.doesLocationHaveDelivery),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(context.tr.takeAwayLabel),
-                    const SizedBox(
-                      height: AppLayouts.defaultPadding / 2,
-                    ),
-                    getIcon(location.doesLocationHaveTakeAway),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: AppLayouts.defaultPadding,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text(context.tr.parkingLabel),
-                    const SizedBox(
-                      height: AppLayouts.defaultPadding / 2,
-                    ),
-                    getIcon(location.doesLocationHaveOwnParking),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(context.tr.cardPaymentsLabel),
-                    const SizedBox(
-                      height: AppLayouts.defaultPadding / 2,
-                    ),
-                    getIcon(location.doesLocationHaveCardPayments),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: AppLayouts.defaultPadding,
-            ),
           ],
         ),
       ),
