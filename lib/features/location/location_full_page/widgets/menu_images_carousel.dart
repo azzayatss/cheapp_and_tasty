@@ -16,7 +16,7 @@ class MenuImageCarousel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final location = ref
-        .read(globalLocationsListControllerProvider)
+        .watch(globalLocationsListControllerProvider)
         .firstWhere((element) => element.locationId == id);
 
     return CarouselSlider.builder(

@@ -13,8 +13,8 @@ class MapScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.tr.navigationBarLabel1),
         ),
-        body: const Center(
-          child: Text('Map Screen'),
+        body: Center(
+          child: Text(context.tr.navigationBarLabel1),
         ),
       ),
     );

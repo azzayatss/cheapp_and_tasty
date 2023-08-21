@@ -1,5 +1,5 @@
-import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum AdditionalServicesChips {
   parking(
@@ -39,16 +39,16 @@ enum AdditionalServicesChips {
 
   final IconData icon;
 
-  String chipLabel(BuildContext context) => switch (this) {
-        AdditionalServicesChips.parking => context.tr.parkingLabel,
-        AdditionalServicesChips.wifi => context.tr.wifiLabel,
-        AdditionalServicesChips.delivery => context.tr.deliveryLabel,
-        AdditionalServicesChips.terrace => context.tr.terraceLabel,
-        AdditionalServicesChips.teakeAway => context.tr.takeAwayLabel,
-        AdditionalServicesChips.coffee => context.tr.coffeeLabel,
-        AdditionalServicesChips.wc => context.tr.wcLabel,
-        AdditionalServicesChips.cardPayments => context.tr.cardPaymentsLabel,
-        AdditionalServicesChips.accessibility => context.tr.accessibilityLabel,
-        AdditionalServicesChips.charging => context.tr.chargingLabel,
+  String chipLabel(AppLocalizations tr) => switch (this) {
+        AdditionalServicesChips.parking => tr.parkingLabel,
+        AdditionalServicesChips.wifi => tr.wifiLabel,
+        AdditionalServicesChips.delivery => tr.deliveryLabel,
+        AdditionalServicesChips.terrace => tr.terraceLabel,
+        AdditionalServicesChips.teakeAway => tr.takeAwayLabel,
+        AdditionalServicesChips.coffee => tr.coffeeLabel,
+        AdditionalServicesChips.wc => tr.wcLabel,
+        AdditionalServicesChips.cardPayments => tr.cardPaymentsLabel,
+        AdditionalServicesChips.accessibility => tr.accessibilityLabel,
+        AdditionalServicesChips.charging => tr.chargingLabel,
       };
 }

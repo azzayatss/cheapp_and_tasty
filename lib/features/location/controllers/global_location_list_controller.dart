@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/config/fake_data/fake_data_constants.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,36 +10,34 @@ class GlobalLocationsListController extends _$GlobalLocationsListController {
   List<LocationEntity> build() {
     final globalLocationsList = <LocationEntity>[
       LocationEntity(
-        locationId: '1111',
-        locationName: 'Мамина світлиця',
-        locationDescription:
-            'їдальня в приміщенні колишнього клубу "Айвенго", з повноцінними обідами',
-        locationAdress: 'вул.Чорновола 25',
-        locationLatitude: 10,
-        locationLongitude: 10,
-        locationWorkingSchedule: 'пн-пт: 10:00-17:00; сб-нд: вихідні',
-        locationReviews: 'test review',
-        locationRate: 5,
-        personWhoAddedLocation: 'andrii zajats',
+        locationId: FakeData.locationId,
+        locationName: FakeData.locationName,
+        locationDescription: FakeData.locationDescription,
+        locationAdress: FakeData.locationAdress,
+        locationLatitude: FakeData.locationLatitude,
+        locationLongitude: FakeData.locationLongitude,
+        locationWorkingSchedule: FakeData.locationWorkingSchedule,
+        locationReviews: FakeData.locationReviews,
+        locationRate: FakeData.locationRate,
+        personWhoAddedLocation: FakeData.personWhoAddedLocation,
         dateTimeWhenLocationAdded: DateTime.now(),
         locationMenuImages: <String>[
-          'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-          'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-          'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-          'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-          'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
         ],
         locationImages: <String>[
-          'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-          'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-          'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-          'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-          'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
+          FakeData.locationImagesExample,
         ],
-        locationCoverPhoto:
-            'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+        locationCoverPhoto: FakeData.locationImagesExample,
         additionalServicesChips: [],
       ),
     ];

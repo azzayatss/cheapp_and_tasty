@@ -29,7 +29,7 @@ class HomeScreen extends ConsumerWidget {
                       padding: const EdgeInsets.all(AppLayouts.defaultPadding),
                       child: Column(
                         children: [
-                          const Text('Кількість локацій:'),
+                          Text(context.tr.locationsNumber),
                           Text('$locationsNumber'),
                         ],
                       ),

@@ -1,5 +1,6 @@
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/bottom_navigation/controllers/bottom_navigation_controller.dart';
+import 'package:cheapp_and_tasty/features/bottom_navigation/controllers/bottom_navigation_index_controller.dart';
+import 'package:cheapp_and_tasty/features/bottom_navigation/enums/menu_items.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
@@ -20,43 +21,47 @@ class _BottomNavigationWidgetState
     extends ConsumerState<BottomNavigationWidget> {
   @override
   Widget build(BuildContext context) {
-    final menuIndex = ref.watch(bottomNavBarControllerProvider);
+    final menuItem = ref.watch(bottomNavigationIndexControllerProvider);
     return BottomNavigationBar(
-      currentIndex: menuIndex,
+      currentIndex: menuItem.index,
       onTap: _onTap,
-      items: [
-        BottomNavigationBarItem(
-          activeIcon: const Icon(Icons.home),
-          icon: const Icon(Icons.home_outlined),
-          label: context.tr.navigationBarLabel0,
-        ),
-        BottomNavigationBarItem(
-          activeIcon: const Icon(Icons.map),
-          icon: const Icon(Icons.map_outlined),
-          label: context.tr.navigationBarLabel1,
-        ),
-        BottomNavigationBarItem(
-          activeIcon: const Icon(Icons.list),
-          icon: const Icon(Icons.list_outlined),
-          label: context.tr.navigationBarLabel2,
-        ),
-        BottomNavigationBarItem(
-          activeIcon: const Icon(Icons.settings),
-          icon: const Icon(Icons.settings_outlined),
-          label: context.tr.navigationBarLabel3,
-        ),
-      ],
+      items: MenuItems.values
+          .map(
+            (value) => BottomNavigationBarItem(
+              activeIcon: value.activeIcon,
+              icon: value.icon,
+              label: _text(context: context, menuItems: value),
+            ),
+          )
+          .toList(),
     );
   }
 
   void _onTap(int index) {
-    ref.read(bottomNavBarControllerProvider.notifier).setIndex(index);
-    return switch (index) {
-      0 => context.go(HomeScreen.route),
-      1 => context.go(MapScreen.route),
-      2 => context.go(LocationsListScreen.route),
-      3 => context.go(SettingsScreen.route),
-      _ => ''
+    ref
+        .read(bottomNavigationIndexControllerProvider.notifier)
+        .setIndex(MenuItems.values[index]);
+
+    context.go(
+      switch (index) {
+        0 => HomeScreen.route,
+        1 => MapScreen.route,
+        2 => LocationsListScreen.route,
+        3 => SettingsScreen.route,
+        _ => ''
+      },
+    );
+  }
+
+  String _text({
+    required MenuItems menuItems,
+    required BuildContext context,
+  }) {
+    return switch (menuItems) {
+      MenuItems.home => context.tr.navigationBarLabel0,
+      MenuItems.map => context.tr.navigationBarLabel1,
+      MenuItems.list => context.tr.navigationBarLabel2,
+      MenuItems.settings => context.tr.navigationBarLabel3,
     };
   }
 }

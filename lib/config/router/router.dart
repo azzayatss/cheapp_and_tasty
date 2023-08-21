@@ -1,19 +1,20 @@
 import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
+import 'package:cheapp_and_tasty/features/location/add_location/screens/add_new_location_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_full_screen_slider.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_full_screen_slider.dart';
-import 'package:cheapp_and_tasty/features/location/add_location/screens/add_new_location_screen.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
+import 'package:cheapp_and_tasty/features/settings/screens/app_theme_mode_screen.dart';
 import 'package:cheapp_and_tasty/features/settings/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'go_router_config.g.dart';
+part 'router.g.dart';
 
 final GlobalKey<NavigatorState> _shellNavigator =
     GlobalKey(debugLabel: 'shell');
@@ -90,6 +91,13 @@ GoRouter router(RouterRef ref) {
             pageBuilder: (context, state) => const NoTransitionPage(
               child: SettingsScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: AppThemeModeScreen.route,
+                name: AppThemeModeScreen.routeName,
+                builder: (context, state) => const AppThemeModeScreen(),
+              ),
+            ],
           ),
         ],
       ),
@@ -97,13 +105,6 @@ GoRouter router(RouterRef ref) {
         path: AuthGateScreen.route,
         builder: (context, state) => const AuthGateScreen(),
       ),
-      // GoRoute(
-      //   path: MenuFullScreenSlider.route,
-      //   name: MenuFullScreenSlider.routeName,
-      //   builder: (context, state) => MenuFullScreenSlider(
-      //     id: state.pathParameters['id']!,
-      //   ),
-      // ),
     ],
     redirect: (context, state) {
       //result from .authStateChanges(); which is returning

@@ -1,3 +1,5 @@
+//todo azzayatss: add a new feature "suggest edits"
+
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/controllers/global_location_list_controller.dart';
@@ -113,7 +115,7 @@ class AboutLocationWidget extends ConsumerWidget {
                             const SizedBox(
                               width: AppLayouts.defaultPadding / 2,
                             ),
-                            Text(value.chipLabel(context)),
+                            Text(value.chipLabel(context.tr)),
                           ],
                         ),
                       ),

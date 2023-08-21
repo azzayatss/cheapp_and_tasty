@@ -11,18 +11,6 @@ class MainScaffoldScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () async =>
-      //           ref.read(signInControllerProvider.notifier).logOut(context),
-      //       icon: const Icon(Icons.logout),
-      //     )
-      //   ],
-      //   title: Text(
-      //     context.tr.appBarTitle,
-      //   ),
-      // ),
       body: child,
       bottomNavigationBar: const BottomNavigationWidget(),
     );
