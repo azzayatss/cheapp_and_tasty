@@ -1,5 +1,6 @@
-import 'package:cheapp_and_tasty/config/router/go_router_config.dart';
-import 'package:cheapp_and_tasty/config/theme.dart';
+import 'package:cheapp_and_tasty/config/router/router.dart';
+import 'package:cheapp_and_tasty/config/theme/controllers/theme_mode_controller.dart';
+import 'package:cheapp_and_tasty/config/theme/theme.dart';
 import 'package:cheapp_and_tasty/l10n/all_locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,6 +21,8 @@ class MyApp extends ConsumerWidget {
       ],
       supportedLocales: AllLocales.all,
       theme: AppTheme().themeData,
+      darkTheme: AppTheme().themeDataDark,
+      themeMode: ref.watch(themeModeControllerProvider),
       routerConfig: ref.watch(routerProvider),
     );
   }

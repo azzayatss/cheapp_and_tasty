@@ -1,4 +1,4 @@
-import 'package:cheapp_and_tasty/features/auth/state/auth_state.dart';
+import 'package:cheapp_and_tasty/features/auth/controllers/auth_state_controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

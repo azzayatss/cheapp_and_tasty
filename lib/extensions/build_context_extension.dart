@@ -5,4 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 extension BuildContextX on BuildContext {
   /// Extension for quickly accessing generated localization getters
   AppLocalizations get tr => AppLocalizations.of(this)!;
+
+  /// Extension for quickly accessing app [TextTheme]
+  TextTheme get textTheme => Theme.of(this).textTheme;
 }
