@@ -18,6 +18,8 @@ class LocationFullScreen extends StatelessWidget {
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
         child: SingleChildScrollView(
           child: Column(
+            
+            mainAxisSize: MainAxisSize.min,
             children: [
               AboutLocationWidget(id: id),
               const SizedBox(

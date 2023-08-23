@@ -64,15 +64,20 @@ class AboutLocationWidget extends ConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
+                // Text(
+                //   location.locationReviews,
+                // ),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.reviews_outlined),
                     const SizedBox(
                       width: AppLayouts.defaultPadding / 2,
                     ),
-                    //todo azzayatss: row has overflow, needs ti be fixed.
-                    Text(
-                      location.locationReviews,
+                    Expanded(
+                      child: Text(
+                        location.locationReviews,
+                      ),
                     ),
                   ],
                 ),
