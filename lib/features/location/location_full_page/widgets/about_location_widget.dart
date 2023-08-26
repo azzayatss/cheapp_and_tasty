@@ -109,13 +109,23 @@ class AboutLocationWidget extends ConsumerWidget {
                           (value) => Chip(
                             backgroundColor: location.additionalServicesChips
                                     .contains(value.name)
-                                ? Colors.green
+                                ? context.colorScheme.primary
+                                : null,
+                            labelStyle: location.additionalServicesChips
+                                    .contains(value.name)
+                                ? TextStyle(
+                                    color: context.colorScheme.onPrimary,
+                                  )
                                 : null,
                             label: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Icon(
                                   value.icon,
+                                  color: location.additionalServicesChips
+                                          .contains(value.name)
+                                      ? context.colorScheme.onPrimary
+                                      : null,
                                   size: 16,
                                 ),
                                 const SizedBox(

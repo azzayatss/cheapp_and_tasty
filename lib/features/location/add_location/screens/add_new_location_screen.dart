@@ -462,10 +462,12 @@ class AddServiceChipWidget extends HookWidget {
               },
               child: Chip(
                 backgroundColor: selectedState.state.contains(value.name)
-                    ? context.colorScheme.primaryContainer
+                    ? context.colorScheme.primary
                     : null,
                 labelStyle: selectedState.state.contains(value.name)
-                    ? TextStyle(color: context.colorScheme.onPrimaryContainer)
+                    ? TextStyle(
+                        color: context.colorScheme.onPrimary,
+                      )
                     : null,
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -473,7 +475,7 @@ class AddServiceChipWidget extends HookWidget {
                     Icon(
                       value.icon,
                       color: selectedState.state.contains(value.name)
-                          ? context.colorScheme.onPrimaryContainer
+                          ? context.colorScheme.onPrimary
                           : null,
                       size: 16,
                     ),
