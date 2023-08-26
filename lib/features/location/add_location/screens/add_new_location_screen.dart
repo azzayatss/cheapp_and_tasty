@@ -36,8 +36,11 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final selectedServices = useRef(<String>[]);
     final initialRate = useState<double>(3);
     final menuUrlList = useState<List<String>>([]);
+    final menuPhotos = useState<List<File?>>([]);
     final locationPhotosUrlList = useState<List<String>>([]);
+    final locationPhotos = useState<List<File?>>([]);
     final coverPhotoUrl = useState<String>('');
+    final coverPhoto = useState<File?>(null);
 
     return SafeArea(
       child: Scaffold(
@@ -61,31 +64,42 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           style: context.textTheme.bodyLarge,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
-                        Align(
-                          child: TextButton.icon(
-                            onPressed: () async {
-                              final xPhoto = await picker.pickImage(
-                                source: ImageSource.gallery,
-                                requestFullMetadata: false,
-                              );
-                              final photo = File(xPhoto!.path);
-                              final storageRef = FirebaseStorage.instance
-                                  .ref()
-                                  .child('cover_photos/');
-                              final ref = storageRef.child(const Uuid().v4());
-                              try {
-                                await ref.putFile(photo);
-                                final downloadUrl = await ref.getDownloadURL();
-                                dev.log(downloadUrl);
-                                coverPhotoUrl.value = downloadUrl;
-                              } on FirebaseException catch (e) {
-                                dev.log(e.message.toString());
-                              }
-                            },
-                            icon: const Icon(Icons.image_outlined),
-                            label: Text(context.tr.uploadPhotoLabel),
+                        if (coverPhoto.value == null)
+                          Align(
+                            child: TextButton.icon(
+                              onPressed: () async {
+                                final xPhoto = await picker.pickImage(
+                                  source: ImageSource.gallery,
+                                  requestFullMetadata: false,
+                                );
+                                final photo = File(xPhoto!.path);
+                                coverPhoto.value = photo;
+                                final storageRef = FirebaseStorage.instance
+                                    .ref()
+                                    .child('cover_photos/');
+                                final ref = storageRef.child(const Uuid().v4());
+                                try {
+                                  await ref.putFile(photo);
+                                  final downloadUrl =
+                                      await ref.getDownloadURL();
+                                  dev.log(downloadUrl);
+                                  coverPhotoUrl.value = downloadUrl;
+                                } on FirebaseException catch (e) {
+                                  dev.log(e.message.toString());
+                                }
+                              },
+                              icon: const Icon(Icons.image_outlined),
+                              label: Text(context.tr.uploadPhotoLabel),
+                            ),
+                          )
+                        else
+                          Center(
+                            child: Image.file(
+                              coverPhoto.value!,
+                              width: 300,
+                              height: 300,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
@@ -180,50 +194,75 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               style: context.textTheme.bodyLarge,
                             ),
                             const SizedBox(height: AppLayouts.defaultPadding),
-                            Align(
-                              //todo azzayats: для всіх імедж пікерів добавити відображення фоток в рядок, або індикатор шо фотки грузяться??
-                              child: TextButton.icon(
-                                onPressed: () async {
-                                  final xPhotosList =
-                                      await picker.pickMultiImage(
-                                    requestFullMetadata: false,
-                                  );
-                                  final photosList = xPhotosList
-                                      .map((e) => File(e.path))
-                                      .toList();
+                            if (menuPhotos.value.isEmpty)
+                              Align(
+                                child: TextButton.icon(
+                                  onPressed: () async {
+                                    final xPhotosList =
+                                        await picker.pickMultiImage(
+                                      requestFullMetadata: false,
+                                    );
+                                    final photosList = xPhotosList
+                                        .map((e) => File(e.path))
+                                        .toList();
 
-                                  // ref
-                                  //     .read(
-                                  //       menuImagesControllerProvider.notifier,
-                                  //     )
-                                  //     .addList(photosList);
+                                    menuPhotos.value = photosList;
 
-                                  final storageRef = FirebaseStorage.instance
-                                      .ref()
-                                      .child('menu_photos/');
+                                    // ref
+                                    //     .read(
+                                    //       menuImagesControllerProvider.notifier,
+                                    //     )
+                                    //     .addList(photosList);
 
-                                  for (var i = 0; i < photosList.length; i++) {
-                                    final ref =
-                                        storageRef.child(const Uuid().v4());
-                                    final file = photosList[i];
-                                    try {
-                                      await ref.putFile(file);
-                                      final downloadUrl =
-                                          await ref.getDownloadURL();
-                                      dev.log(downloadUrl);
-                                      menuUrlList.value.add(downloadUrl);
-                                      dev.log(
-                                        menuUrlList.value.length.toString(),
-                                      );
-                                    } on FirebaseException catch (e) {
-                                      dev.log(e.message.toString());
+                                    final storageRef = FirebaseStorage.instance
+                                        .ref()
+                                        .child('menu_photos/');
+
+                                    for (var i = 0;
+                                        i < photosList.length;
+                                        i++) {
+                                      final ref =
+                                          storageRef.child(const Uuid().v4());
+                                      final file = photosList[i];
+
+                                      try {
+                                        await ref.putFile(file);
+
+                                        final downloadUrl =
+                                            await ref.getDownloadURL();
+
+                                        dev.log(downloadUrl);
+                                        menuUrlList.value.add(downloadUrl);
+                                        dev.log(
+                                          menuUrlList.value.length.toString(),
+                                        );
+                                      } on FirebaseException catch (e) {
+                                        dev.log(e.message.toString());
+                                      }
                                     }
-                                  }
-                                },
-                                icon: const Icon(Icons.image_outlined),
-                                label: Text(context.tr.uploadPhotoLabel),
-                              ),
-                            ),
+                                  },
+                                  icon: const Icon(Icons.image_outlined),
+                                  label: Text(context.tr.uploadPhotoLabel),
+                                ),
+                              )
+                            else
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: menuPhotos.value.map((e) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(
+                                        AppLayouts.defaultPadding / 3,
+                                      ),
+                                      child: Image.file(
+                                        e!,
+                                        width: 150,
+                                        height: 150,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
                           ],
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
@@ -235,50 +274,73 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               style: context.textTheme.bodyLarge,
                             ),
                             const SizedBox(height: AppLayouts.defaultPadding),
-                            Align(
-                              child: TextButton.icon(
-                                onPressed: () async {
-                                  final xPhotosList =
-                                      await picker.pickMultiImage(
-                                    requestFullMetadata: false,
-                                  );
-                                  final photosList = xPhotosList
-                                      .map((e) => File(e.path))
-                                      .toList();
+                            if (locationPhotos.value.isEmpty)
+                              Align(
+                                child: TextButton.icon(
+                                  onPressed: () async {
+                                    final xPhotosList =
+                                        await picker.pickMultiImage(
+                                      requestFullMetadata: false,
+                                    );
+                                    final photosList = xPhotosList
+                                        .map((e) => File(e.path))
+                                        .toList();
 
-                                  // ref
-                                  //     .read(
-                                  //       menuImagesControllerProvider.notifier,
-                                  //     )
-                                  //     .addList(photosList);
+                                    locationPhotos.value = photosList;
 
-                                  final storageRef = FirebaseStorage.instance
-                                      .ref()
-                                      .child('location_photos/');
+                                    // ref
+                                    //     .read(
+                                    //       menuImagesControllerProvider.notifier,
+                                    //     )
+                                    //     .addList(photosList);
 
-                                  for (var i = 0; i < photosList.length; i++) {
-                                    final ref =
-                                        storageRef.child(const Uuid().v4());
-                                    final file = photosList[i];
-                                    try {
-                                      await ref.putFile(file);
-                                      final downloadUrl =
-                                          await ref.getDownloadURL();
-                                      dev.log(downloadUrl);
-                                      locationPhotosUrlList.value
-                                          .add(downloadUrl);
-                                      dev.log(
-                                        menuUrlList.value.length.toString(),
-                                      );
-                                    } on FirebaseException catch (e) {
-                                      dev.log(e.message.toString());
+                                    final storageRef = FirebaseStorage.instance
+                                        .ref()
+                                        .child('location_photos/');
+
+                                    for (var i = 0;
+                                        i < photosList.length;
+                                        i++) {
+                                      final ref =
+                                          storageRef.child(const Uuid().v4());
+                                      final file = photosList[i];
+                                      try {
+                                        await ref.putFile(file);
+                                        final downloadUrl =
+                                            await ref.getDownloadURL();
+                                        dev.log(downloadUrl);
+                                        locationPhotosUrlList.value
+                                            .add(downloadUrl);
+                                        dev.log(
+                                          menuUrlList.value.length.toString(),
+                                        );
+                                      } on FirebaseException catch (e) {
+                                        dev.log(e.message.toString());
+                                      }
                                     }
-                                  }
-                                },
-                                icon: const Icon(Icons.image_outlined),
-                                label: Text(context.tr.uploadPhotoLabel),
-                              ),
-                            ),
+                                  },
+                                  icon: const Icon(Icons.image_outlined),
+                                  label: Text(context.tr.uploadPhotoLabel),
+                                ),
+                              )
+                            else
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: locationPhotos.value.map((e) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(
+                                        AppLayouts.defaultPadding / 3,
+                                      ),
+                                      child: Image.file(
+                                        e!,
+                                        width: 150,
+                                        height: 150,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
                           ],
                         ),
                         const Divider(),

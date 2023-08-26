@@ -2,11 +2,11 @@
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -64,9 +64,6 @@ class AboutLocationWidget extends ConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                // Text(
-                //   location.locationReviews,
-                // ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -104,7 +101,7 @@ class AboutLocationWidget extends ConsumerWidget {
                     context.tr.emptyAdditionalServicesWarning,
                   )
                 else
-                  //todo azzayatss: fix the displaying of the chips whis was chozen in location creation.
+                  //todo azzayatss: fix the displaying of the chips which was chozen in location creation.
                   Wrap(
                     spacing: AppLayouts.defaultPadding / 3,
                     children: AdditionalServicesChips.values

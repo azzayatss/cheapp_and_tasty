@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,6 +14,7 @@ class LocationImagesCarousel extends ConsumerWidget {
   final String id;
 
   @override
+  //todo azzayats: fix the bug with displaying pictures if their number is less than 3
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(locationListControllerProvider);
 

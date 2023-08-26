@@ -13,6 +13,8 @@ class LocationImagesFullScreenSlider extends ConsumerWidget {
   final String id;
 
   @override
+  //todo azzayatss: after clicking on any item in small images carousel big image slider always
+  //todo opens from 0 index -> which image was clicked this image should be opened in full size
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(locationListControllerProvider);
 
