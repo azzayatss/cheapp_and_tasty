@@ -7,9 +7,9 @@ import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
 // import 'package:cheapp_and_tasty/features/location/add_location/controllers/menu_images_controller.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/location/repositories/locations_repository.dart';
+import 'package:cheapp_and_tasty/features/location/widgets/additional_services_chips.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -182,7 +182,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           style: context.textTheme.bodyLarge,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
-                        AddServiceChipWidget(
+                        AdditionalServicesChipsWidget(
                           onChanged: (value) => selectedServices.value = value,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
@@ -425,70 +425,6 @@ class AddNewLocationScreen extends HookConsumerWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-//todo azzayatss: move this class to the separate file
-class AddServiceChipWidget extends HookWidget {
-  const AddServiceChipWidget({
-    required this.onChanged,
-    super.key,
-  });
-
-  final ValueChanged<List<String>> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final selectedState = useReducer<List<String>, String>(
-      (state, value) {
-        if (state.contains(value)) {
-          return [...state..remove(value)];
-        } else {
-          return [...state..add(value)];
-        }
-      },
-      initialState: [],
-      initialAction: '',
-    );
-    return Wrap(
-      spacing: AppLayouts.defaultPadding / 3,
-      children: AdditionalServicesChips.values
-          .map(
-            (value) => GestureDetector(
-              onTap: () {
-                selectedState.dispatch(value.name);
-                onChanged(selectedState.state);
-              },
-              child: Chip(
-                backgroundColor: selectedState.state.contains(value.name)
-                    ? context.colorScheme.primary
-                    : null,
-                labelStyle: selectedState.state.contains(value.name)
-                    ? TextStyle(
-                        color: context.colorScheme.onPrimary,
-                      )
-                    : null,
-                label: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      value.icon,
-                      color: selectedState.state.contains(value.name)
-                          ? context.colorScheme.onPrimary
-                          : null,
-                      size: 16,
-                    ),
-                    const SizedBox(
-                      width: AppLayouts.defaultPadding / 2,
-                    ),
-                    Text(value.chipLabel(context.tr)),
-                  ],
-                ),
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 }

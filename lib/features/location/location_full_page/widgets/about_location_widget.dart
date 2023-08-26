@@ -101,7 +101,6 @@ class AboutLocationWidget extends ConsumerWidget {
                     context.tr.emptyAdditionalServicesWarning,
                   )
                 else
-                  //todo azzayatss: fix the displaying of the chips which was chozen in location creation.
                   Wrap(
                     spacing: AppLayouts.defaultPadding / 3,
                     children: AdditionalServicesChips.values
