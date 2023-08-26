@@ -461,14 +461,19 @@ class AddServiceChipWidget extends HookWidget {
               },
               child: Chip(
                 backgroundColor: selectedState.state.contains(value.name)
-                    //todo azzayatss: replace background color with colored border + colored text
-                    ? Colors.green
+                    ? context.colorScheme.primaryContainer
+                    : null,
+                labelStyle: selectedState.state.contains(value.name)
+                    ? TextStyle(color: context.colorScheme.onPrimaryContainer)
                     : null,
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       value.icon,
+                      color: selectedState.state.contains(value.name)
+                          ? context.colorScheme.onPrimaryContainer
+                          : null,
                       size: 16,
                     ),
                     const SizedBox(
