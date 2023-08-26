@@ -54,7 +54,8 @@ class MapScreen extends StatelessWidget {
                   onPressed: () async {
                     final picker = ImagePicker();
                     final xPhotosList = await picker.pickMultiImage(
-                        );
+                      requestFullMetadata: false,
+                    );
                     final photosList =
                         xPhotosList.map((e) => File(e.path)).toList();
                     ref
@@ -62,6 +63,14 @@ class MapScreen extends StatelessWidget {
                         .addList(photosList);
                   },
                   child: const Text('pick'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    ref
+                        .read(menuImagesControllerProvider.notifier)
+                        .addToStorage();
+                  },
+                  child: const Text('upload to storage'),
                 ),
               ],
             );

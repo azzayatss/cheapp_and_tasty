@@ -1,17 +1,22 @@
+import 'dart:developer' as dev;
+import 'dart:io';
+
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/config/fake_data/fake_data_constants.dart';
 import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
+// import 'package:cheapp_and_tasty/features/location/add_location/controllers/menu_images_controller.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/location/repositories/locations_repository.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class AddNewLocationScreen extends HookConsumerWidget {
@@ -21,6 +26,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final picker = ImagePicker();
     final currentUser = ref.read(signInControllerProvider);
     final locationNameController = useTextEditingController();
     final locationDescriptionController = useTextEditingController();
@@ -29,6 +35,9 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final locationReviewController = useTextEditingController();
     final selectedServices = useRef(<String>[]);
     final initialRate = useState<double>(3);
+    final menuUrlList = useState<List<String>>([]);
+    final locationPhotosUrlList = useState<List<String>>([]);
+    final coverPhotoUrl = useState<String>('');
 
     return SafeArea(
       child: Scaffold(
@@ -48,14 +57,31 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          //todo azzayats: підключити завантаження з девайсу, продумати аплоад в бд, продумати прийом з бд.
                           context.tr.coverPhotoLabel,
                           style: context.textTheme.bodyLarge,
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
                         Align(
                           child: TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () async {
+                              final xPhoto = await picker.pickImage(
+                                source: ImageSource.gallery,
+                                requestFullMetadata: false,
+                              );
+                              final photo = File(xPhoto!.path);
+                              final storageRef = FirebaseStorage.instance
+                                  .ref()
+                                  .child('cover_photos/');
+                              final ref = storageRef.child(const Uuid().v4());
+                              try {
+                                await ref.putFile(photo);
+                                final downloadUrl = await ref.getDownloadURL();
+                                dev.log(downloadUrl);
+                                coverPhotoUrl.value = downloadUrl;
+                              } on FirebaseException catch (e) {
+                                dev.log(e.message.toString());
+                              }
+                            },
                             icon: const Icon(Icons.image_outlined),
                             label: Text(context.tr.uploadPhotoLabel),
                           ),
@@ -150,14 +176,50 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              //todo azzayats: підключити завантаження з девайсу, продумати аплоад в бд, продумати прийом з бд.
                               context.tr.addMenuPhotosLabel,
                               style: context.textTheme.bodyLarge,
                             ),
                             const SizedBox(height: AppLayouts.defaultPadding),
                             Align(
+                              //todo azzayats: для всіх імедж пікерів добавити відображення фоток в рядок, або індикатор шо фотки грузяться??
                               child: TextButton.icon(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  final xPhotosList =
+                                      await picker.pickMultiImage(
+                                    requestFullMetadata: false,
+                                  );
+                                  final photosList = xPhotosList
+                                      .map((e) => File(e.path))
+                                      .toList();
+
+                                  // ref
+                                  //     .read(
+                                  //       menuImagesControllerProvider.notifier,
+                                  //     )
+                                  //     .addList(photosList);
+
+                                  final storageRef = FirebaseStorage.instance
+                                      .ref()
+                                      .child('menu_photos/');
+
+                                  for (var i = 0; i < photosList.length; i++) {
+                                    final ref =
+                                        storageRef.child(const Uuid().v4());
+                                    final file = photosList[i];
+                                    try {
+                                      await ref.putFile(file);
+                                      final downloadUrl =
+                                          await ref.getDownloadURL();
+                                      dev.log(downloadUrl);
+                                      menuUrlList.value.add(downloadUrl);
+                                      dev.log(
+                                        menuUrlList.value.length.toString(),
+                                      );
+                                    } on FirebaseException catch (e) {
+                                      dev.log(e.message.toString());
+                                    }
+                                  }
+                                },
                                 icon: const Icon(Icons.image_outlined),
                                 label: Text(context.tr.uploadPhotoLabel),
                               ),
@@ -169,14 +231,50 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              //todo azzayats: підключити завантаження з девайсу, продумати аплоад в бд, продумати прийом з бд.
                               context.tr.addLocationPhotosLabel,
                               style: context.textTheme.bodyLarge,
                             ),
                             const SizedBox(height: AppLayouts.defaultPadding),
                             Align(
                               child: TextButton.icon(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  final xPhotosList =
+                                      await picker.pickMultiImage(
+                                    requestFullMetadata: false,
+                                  );
+                                  final photosList = xPhotosList
+                                      .map((e) => File(e.path))
+                                      .toList();
+
+                                  // ref
+                                  //     .read(
+                                  //       menuImagesControllerProvider.notifier,
+                                  //     )
+                                  //     .addList(photosList);
+
+                                  final storageRef = FirebaseStorage.instance
+                                      .ref()
+                                      .child('location_photos/');
+
+                                  for (var i = 0; i < photosList.length; i++) {
+                                    final ref =
+                                        storageRef.child(const Uuid().v4());
+                                    final file = photosList[i];
+                                    try {
+                                      await ref.putFile(file);
+                                      final downloadUrl =
+                                          await ref.getDownloadURL();
+                                      dev.log(downloadUrl);
+                                      locationPhotosUrlList.value
+                                          .add(downloadUrl);
+                                      dev.log(
+                                        menuUrlList.value.length.toString(),
+                                      );
+                                    } on FirebaseException catch (e) {
+                                      dev.log(e.message.toString());
+                                    }
+                                  }
+                                },
                                 icon: const Icon(Icons.image_outlined),
                                 label: Text(context.tr.uploadPhotoLabel),
                               ),
@@ -240,26 +338,10 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                   personWhoAddedLocation:
                                       currentUser.value?.email ?? '',
                                   dateTimeWhenLocationAdded: DateTime.now(),
-                                  //todo azzayats -> replace hardcoded values with image picker
-                                  locationMenuImages: [
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                  ],
-                                  //todo azzayats -> replace hardcoded values with image picker
-                                  locationImages: [
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                    FakeData.locationImagesExample,
-                                  ],
+                                  locationMenuImages: menuUrlList.value,
+                                  locationImages: locationPhotosUrlList.value,
                                   additionalServicesChips: [],
-                                  //todo azzayats -> replace hardcoded values with image picker
-                                  locationCoverPhoto:
-                                      FakeData.locationImagesExample,
+                                  locationCoverPhoto: coverPhotoUrl.value,
                                 );
 
                                 LocationRepository()
