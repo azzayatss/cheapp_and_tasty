@@ -402,7 +402,8 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                   dateTimeWhenLocationAdded: DateTime.now(),
                                   locationMenuImages: menuUrlList.value,
                                   locationImages: locationPhotosUrlList.value,
-                                  additionalServicesChips: [],
+                                  additionalServicesChips:
+                                      selectedServices.value,
                                   locationCoverPhoto: coverPhotoUrl.value,
                                 );
 
