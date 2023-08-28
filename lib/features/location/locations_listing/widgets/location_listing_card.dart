@@ -22,12 +22,20 @@ class LocationListingCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              item.locationCoverPhoto,
-              height: 300,
-              width: 400,
-              fit: BoxFit.fitWidth,
-            ),
+            if (item.locationCoverPhoto != '')
+              Image.network(
+                item.locationCoverPhoto,
+                height: 300,
+                width: 400,
+                fit: BoxFit.fitWidth,
+              )
+            else
+              const Center(
+                child: Icon(
+                  Icons.image_not_supported_outlined,
+                  size: 200,
+                ),
+              ),
             const SizedBox(
               height: AppLayouts.defaultPadding,
             ),

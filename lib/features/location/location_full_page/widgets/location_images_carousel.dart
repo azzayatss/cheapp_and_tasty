@@ -20,35 +20,40 @@ class LocationImagesSmallSlider extends ConsumerWidget {
       data: (data) {
         final location = data.firstWhere((element) => element.locationId == id);
 
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: location.locationImages.map((e) {
-              return Padding(
-                padding: const EdgeInsets.all(
-                  AppLayouts.defaultPadding / 3,
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    context.goNamed(
-                      LocationMenuFullScreenSlider.routeName,
-                      pathParameters: {
-                        'locationId': id,
-                        'id': id,
-                      },
+        return location.locationImages.isEmpty
+            ? const Icon(
+                Icons.image_not_supported_outlined,
+                size: 100,
+              )
+            : SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: location.locationImages.map((e) {
+                    return Padding(
+                      padding: const EdgeInsets.all(
+                        AppLayouts.defaultPadding / 3,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.goNamed(
+                            LocationMenuFullScreenSlider.routeName,
+                            pathParameters: {
+                              'locationId': id,
+                              'id': id,
+                            },
+                          );
+                        },
+                        child: Image.network(
+                          e,
+                          fit: BoxFit.fitWidth,
+                          width: 150,
+                          height: 150,
+                        ),
+                      ),
                     );
-                  },
-                  child: Image.network(
-                    e,
-                    fit: BoxFit.fitWidth,
-                    width: 150,
-                    height: 150,
-                  ),
+                  }).toList(),
                 ),
               );
-            }).toList(),
-          ),
-        );
       },
       error: (error, _) => Center(
         child: Text(error.toString()),

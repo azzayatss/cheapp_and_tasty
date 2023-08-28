@@ -30,10 +30,16 @@ class AboutLocationWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.network(
-                  location.locationCoverPhoto,
-                  fit: BoxFit.cover,
-                ),
+                if (location.locationCoverPhoto != '')
+                  Image.network(
+                    location.locationCoverPhoto,
+                    fit: BoxFit.cover,
+                  )
+                else
+                  const Icon(
+                    Icons.image_not_supported_outlined,
+                    size: 100,
+                  ),
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
