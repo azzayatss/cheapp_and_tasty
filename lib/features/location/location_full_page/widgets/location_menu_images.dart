@@ -26,7 +26,7 @@ class LocationMenuImages extends StatelessWidget {
               style: context.textTheme.headlineLarge,
             ),
             const Divider(),
-            MenuImageCarousel(
+            MenuImagesSmallSlider(
               id: id,
             ),
           ],

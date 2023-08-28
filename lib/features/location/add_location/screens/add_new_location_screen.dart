@@ -246,23 +246,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                 ),
                               )
                             else
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: menuPhotos.value.map((e) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(
-                                        AppLayouts.defaultPadding / 3,
-                                      ),
-                                      child: Image.file(
-                                        e!,
-                                        width: 150,
-                                        height: 150,
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              )
+                              ImagesSmallSlider(images: menuPhotos),
                           ],
                         ),
                         const SizedBox(height: AppLayouts.defaultPadding),
@@ -324,23 +308,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                 ),
                               )
                             else
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: locationPhotos.value.map((e) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(
-                                        AppLayouts.defaultPadding / 3,
-                                      ),
-                                      child: Image.file(
-                                        e!,
-                                        width: 150,
-                                        height: 150,
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              )
+                              ImagesSmallSlider(images: locationPhotos),
                           ],
                         ),
                         const Divider(),
@@ -373,7 +341,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                           },
                                           child:
                                               Text(context.tr.cancelCreating),
-                                        )
+                                        ),
                                       ],
                                     );
                                   },
@@ -424,6 +392,36 @@ class AddNewLocationScreen extends HookConsumerWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ImagesSmallSlider extends StatelessWidget {
+  const ImagesSmallSlider({
+    required this.images,
+    super.key,
+  });
+
+  final ValueNotifier<List<File?>> images;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: images.value.map((e) {
+          return Padding(
+            padding: const EdgeInsets.all(
+              AppLayouts.defaultPadding / 3,
+            ),
+            child: Image.file(
+              e!,
+              width: 150,
+              height: 150,
+            ),
+          );
+        }).toList(),
       ),
     );
   }

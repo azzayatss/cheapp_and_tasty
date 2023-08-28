@@ -1,13 +1,12 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MenuImageCarousel extends ConsumerWidget {
-  const MenuImageCarousel({
+class MenuImagesSmallSlider extends ConsumerWidget {
+  const MenuImagesSmallSlider({
     required this.id,
     super.key,
   });
@@ -21,48 +20,34 @@ class MenuImageCarousel extends ConsumerWidget {
       data: (data) {
         final location = data.firstWhere((element) => element.locationId == id);
 
-        return CarouselSlider.builder(
-          options: CarouselOptions(
-            height: 150,
-            aspectRatio: 2,
-            viewportFraction: 1,
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: location.locationMenuImages.map((e) {
+              return Padding(
+                padding: const EdgeInsets.all(
+                  AppLayouts.defaultPadding / 3,
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    context.goNamed(
+                      LocationMenuFullScreenSlider.routeName,
+                      pathParameters: {
+                        'locationId': id,
+                        'id': id,
+                      },
+                    );
+                  },
+                  child: Image.network(
+                    e,
+                    fit: BoxFit.fitWidth,
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
+              );
+            }).toList(),
           ),
-          itemCount: 2,
-          itemBuilder: (context, index, realIdx) {
-            final first = index * 2;
-            final second = first + 1;
-            return location.locationMenuImages.isEmpty
-                ? Center(
-                    child: Text(
-                      context.tr.thereAreNoPhotosYet,
-                      style: context.textTheme.labelMedium,
-                    ),
-                  )
-                : Row(
-                    children: [first, second].map((idx) {
-                      return Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            context.goNamed(
-                              LocationMenuFullScreenSlider.routeName,
-                              pathParameters: {
-                                'locationId': id,
-                                'id': id,
-                              },
-                            );
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Image.network(
-                              location.locationMenuImages[idx],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-          },
         );
       },
       error: (error, _) => Center(

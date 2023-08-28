@@ -26,7 +26,7 @@ class LocationImages extends StatelessWidget {
               style: context.textTheme.headlineLarge,
             ),
             const Divider(),
-            LocationImagesCarousel(
+            LocationImagesSmallSlider(
               id: id,
             ),
           ],
