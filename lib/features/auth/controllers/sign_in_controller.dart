@@ -57,7 +57,7 @@ class SignInController extends _$SignInController {
     }
   }
 
-  ///function for logging out from all entities
+  ///function for logging out from all auth providers
   Future<void> logOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();

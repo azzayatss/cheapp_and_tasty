@@ -51,7 +51,7 @@ class AuthGateScreen extends ConsumerWidget {
                             SignUpForm(),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

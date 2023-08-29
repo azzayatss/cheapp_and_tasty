@@ -44,7 +44,7 @@ class HomeScreen extends ConsumerWidget {
                       child: Column(),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
@@ -22,7 +23,7 @@ class LocationListingCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (item.locationCoverPhoto != '')
+            if (item.locationCoverPhoto.isNotEmpty)
               Image.network(
                 item.locationCoverPhoto,
                 height: 300,
@@ -31,10 +32,7 @@ class LocationListingCard extends StatelessWidget {
               )
             else
               const Center(
-                child: Icon(
-                  Icons.image_not_supported_outlined,
-                  size: 200,
-                ),
+                child: ImagePlaceHolder(),
               ),
             const SizedBox(
               height: AppLayouts.defaultPadding,

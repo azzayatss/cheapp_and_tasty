@@ -9,5 +9,6 @@ extension BuildContextX on BuildContext {
   /// Extension for quickly accessing app [TextTheme]
   TextTheme get textTheme => Theme.of(this).textTheme;
 
+  /// Extension for quickly accessing app [ColorScheme]
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 }

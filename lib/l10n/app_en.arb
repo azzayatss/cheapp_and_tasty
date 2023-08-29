@@ -46,6 +46,7 @@
   "navigationBarLabel2": "List",
   "navigationBarLabel3": "Settings",
   "noLocationsToDisplay": "No locations to display",
+  "okButtonLabel": "OK",
   "otherServicesLabel": "Choose available additional services:",
   "parkingLabel": "Own parking?",
   "passwordFormHint": "123456",

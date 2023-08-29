@@ -3,6 +3,8 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/chip_widget_about_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
@@ -30,16 +32,13 @@ class AboutLocationWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (location.locationCoverPhoto != '')
+                if (location.locationCoverPhoto.isNotEmpty)
                   Image.network(
                     location.locationCoverPhoto,
                     fit: BoxFit.cover,
                   )
                 else
-                  const Icon(
-                    Icons.image_not_supported_outlined,
-                    size: 100,
-                  ),
+                  const ImagePlaceHolder(),
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
@@ -109,39 +108,15 @@ class AboutLocationWidget extends ConsumerWidget {
                 else
                   Wrap(
                     spacing: AppLayouts.defaultPadding / 3,
-                    children: AdditionalServicesChips.values
-                        .map(
-                          (value) => Chip(
-                            backgroundColor: location.additionalServicesChips
-                                    .contains(value.name)
-                                ? context.colorScheme.primary
-                                : null,
-                            labelStyle: location.additionalServicesChips
-                                    .contains(value.name)
-                                ? TextStyle(
-                                    color: context.colorScheme.onPrimary,
-                                  )
-                                : null,
-                            label: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  value.icon,
-                                  color: location.additionalServicesChips
-                                          .contains(value.name)
-                                      ? context.colorScheme.onPrimary
-                                      : null,
-                                  size: 16,
-                                ),
-                                const SizedBox(
-                                  width: AppLayouts.defaultPadding / 2,
-                                ),
-                                Text(value.chipLabel(context.tr)),
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
+                    children: [
+                      for (var index = 0;
+                          index < AdditionalServicesChips.values.length;
+                          index++)
+                        ChipWidgetAboutScreen(
+                          locationEntity: location,
+                          index: index,
+                        ),
+                    ],
                   ),
               ],
             ),
