@@ -1,16 +1,29 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class SettingsUserCard extends StatelessWidget {
+class SettingsUserCard extends HookWidget {
   const SettingsUserCard({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final userName = useState<String>('');
+    final userEmail = useState<String>('');
+    final userPhotoUrl = useState<String>('');
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        userName.value = user.displayName ?? '';
+        userEmail.value = user.email ?? '';
+        userPhotoUrl.value = user.photoURL ?? '';
+      }
+    });
+
     return Card(
-      //todo andrii.zayats: change hardcoded data to real user data
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
         child: Row(
@@ -18,10 +31,12 @@ class SettingsUserCard extends StatelessWidget {
             Expanded(
               child: CircleAvatar(
                 radius: 35,
-                child: Image.network(
-                  'https://freepngimg.com/thumb/youtube/63841-profile-twitch-youtube-avatar-discord-free-download-image.png',
-                  fit: BoxFit.contain,
-                ),
+                child: userPhotoUrl.value.isNotEmpty
+                    ? Image.network(
+                        userPhotoUrl.value,
+                        fit: BoxFit.contain,
+                      )
+                    : const ImagePlaceHolder(),
               ),
             ),
             const SizedBox(
@@ -31,11 +46,15 @@ class SettingsUserCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Andrii Zayats',
+                  userName.value.isNotEmpty
+                      ? userName.value
+                      : context.tr.unknownUser,
                   style: context.textTheme.headlineSmall,
                 ),
                 Text(
-                  'andrew.zajats@gmail.com',
+                  userEmail.value.isNotEmpty
+                      ? userEmail.value
+                      : context.tr.unknownUser,
                   style: context.textTheme.bodyMedium,
                 ),
               ],
