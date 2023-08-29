@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +18,7 @@ Future<dynamic> showAlertForUser(
             onPressed: () {
               context.pop();
             },
-            child: const Text('OK'),
+            child: Text(context.tr.okButtonLabel),
           ),
         ],
       );

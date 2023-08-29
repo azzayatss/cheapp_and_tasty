@@ -10,6 +10,7 @@ class BottomNavigationWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final menuItem = useState(MenuItems.home);
+
     return BottomNavigationBar(
       currentIndex: menuItem.value.index,
       onTap: (index) {

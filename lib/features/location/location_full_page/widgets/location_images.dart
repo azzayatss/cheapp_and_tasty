@@ -1,6 +1,6 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_carousel.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_small_slider.dart';
 import 'package:flutter/material.dart';
 
 class LocationImages extends StatelessWidget {
@@ -26,7 +26,7 @@ class LocationImages extends StatelessWidget {
               style: context.textTheme.headlineLarge,
             ),
             const Divider(),
-            LocationImagesCarousel(
+            LocationImagesSmallSlider(
               id: id,
             ),
           ],

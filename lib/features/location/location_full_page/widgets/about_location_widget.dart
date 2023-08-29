@@ -2,11 +2,13 @@
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/chip_widget_about_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -30,10 +32,13 @@ class AboutLocationWidget extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.network(
-                  location.locationCoverPhoto,
-                  fit: BoxFit.cover,
-                ),
+                if (location.locationCoverPhoto.isNotEmpty)
+                  Image.network(
+                    location.locationCoverPhoto,
+                    fit: BoxFit.cover,
+                  )
+                else
+                  const ImagePlaceHolder(),
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
@@ -64,9 +69,6 @@ class AboutLocationWidget extends ConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                // Text(
-                //   location.locationReviews,
-                // ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -104,32 +106,17 @@ class AboutLocationWidget extends ConsumerWidget {
                     context.tr.emptyAdditionalServicesWarning,
                   )
                 else
-                  //todo azzayatss: fix the displaying of the chips whis was chozen in location creation.
                   Wrap(
                     spacing: AppLayouts.defaultPadding / 3,
-                    children: AdditionalServicesChips.values
-                        .map(
-                          (value) => Chip(
-                            backgroundColor: location.additionalServicesChips
-                                    .contains(value.name)
-                                ? Colors.green
-                                : null,
-                            label: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  value.icon,
-                                  size: 16,
-                                ),
-                                const SizedBox(
-                                  width: AppLayouts.defaultPadding / 2,
-                                ),
-                                Text(value.chipLabel(context.tr)),
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
+                    children: [
+                      for (var index = 0;
+                          index < AdditionalServicesChips.values.length;
+                          index++)
+                        ChipWidgetAboutScreen(
+                          locationEntity: location,
+                          index: index,
+                        ),
+                    ],
                   ),
               ],
             ),
