@@ -269,7 +269,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               locationId: const Uuid().v4(),
                               locationDescription:
                                   locationDescriptionController.text,
-                              //todo azzayats -> replace hardcoded values with add on map feature in future
+                              //TODO azzayats -> replace hardcoded values with add on map feature in future
                               locationLatitude: 0,
                               locationLongitude: 0,
                               locationAdress: locationAdressController.text,

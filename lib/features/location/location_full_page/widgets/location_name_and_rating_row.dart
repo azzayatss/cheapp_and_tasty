@@ -31,7 +31,7 @@ class LocationNameAndRatingRow extends StatelessWidget {
               style: context.textTheme.titleLarge,
             ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -7,6 +7,7 @@ linter:
     lines_longer_than_80_chars: false
     depend_on_referenced_packages: false
     public_member_api_docs: false
+    flutter_style_todos: false
 
 
 analyzer:

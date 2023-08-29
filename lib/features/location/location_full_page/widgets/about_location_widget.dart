@@ -1,4 +1,4 @@
-//todo azzayatss: add a new feature "suggest edits"
+//TODO azzayatss: add a new feature "suggest edits"
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
