@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+//TODO feature: add to each card distance to location from your current location.
 class LocationsListScreen extends ConsumerWidget {
   const LocationsListScreen({super.key});
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:flutter/material.dart';
 
 class PickedImagesSlider extends StatelessWidget {
@@ -16,18 +17,21 @@ class PickedImagesSlider extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: images.value.map((e) {
-          return Padding(
-            padding: const EdgeInsets.all(
-              AppLayouts.defaultPadding / 3,
+        children: [
+          for (var i = 0; i < images.value.length; i++)
+            Padding(
+              padding: const EdgeInsets.all(
+                AppLayouts.defaultPadding / 3,
+              ),
+              child: images.value[i] != null
+                  ? Image.file(
+                      images.value[i]!,
+                      width: 150,
+                      height: 150,
+                    )
+                  : const ImagePlaceHolder(),
             ),
-            child: Image.file(
-              e!,
-              width: 150,
-              height: 150,
-            ),
-          );
-        }).toList(),
+        ],
       ),
     );
   }
