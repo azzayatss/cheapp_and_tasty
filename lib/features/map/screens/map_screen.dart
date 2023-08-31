@@ -11,6 +11,7 @@ import 'dart:async';
 import 'dart:developer' as dev;
 
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -31,13 +32,14 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       Completer<GoogleMapController>();
   @override
   void initState() {
-    //TODO azzayats: unkoment line below to use real device location
+    //TODO azzayats: uncomment line below to use real device location
     // getLocation();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final list = ref.watch(locationListControllerProvider);
     final currentPosition = ref.watch(currentLocationControllerProvider);
     ref.listen(currentLocationControllerProvider, (previous, next) async {
       final controller = await _controller.future;
@@ -47,37 +49,44 @@ class _MapScreenState extends ConsumerState<MapScreen> {
         ),
       );
     });
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.tr.navigationBarLabel1),
-        ),
-        body: GoogleMap(
-          myLocationEnabled: true,
-          initialCameraPosition: CameraPosition(
-            target: currentPosition,
-            zoom: 13.5,
-          ),
-          onMapCreated: _controller.complete,
-          markers: {
-            Marker(
-              onTap: () => dev.log('tapped'),
-              markerId: const MarkerId('asdasdasdaqweqwe123123qweqwe412'),
-              position: const LatLng(
-                49.84890577036393,
-                24.030671653555967,
-              ),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueViolet,
-              ),
-              // infoWindow: InfoWindow(
-              //   title: 'Test pin',
-              //   snippet: 'below title text',
-              //   onTap: () => context.go(HomeScreen.route),
-              // ),
+
+    return list.when(
+      data: (data) {
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(context.tr.navigationBarLabel1),
             ),
-          },
-        ),
+            body: GoogleMap(
+              myLocationEnabled: true,
+              initialCameraPosition: CameraPosition(
+                target: currentPosition,
+                zoom: 13.5,
+              ),
+              onMapCreated: _controller.complete,
+              markers: {
+                for (var i = 0; i < data.length; i++)
+                  Marker(
+                    onTap: () => dev.log('tapped: ${data[i].locationName}'),
+                    markerId: MarkerId(data[i].locationId),
+                    position: LatLng(
+                      data[i].locationLatitude,
+                      data[i].locationLongitude,
+                    ),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueViolet,
+                    ),
+                  ),
+              },
+            ),
+          ),
+        );
+      },
+      error: (error, _) => Center(
+        child: Text(error.toString()),
+      ),
+      loading: () => const Center(
+        child: CircularProgressIndicator.adaptive(),
       ),
     );
   }
