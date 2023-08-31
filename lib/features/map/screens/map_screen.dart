@@ -31,7 +31,8 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       Completer<GoogleMapController>();
   @override
   void initState() {
-    getLocation();
+    //TODO azzayats: unkoment line below to use real device location
+    // getLocation();
     super.initState();
   }
 
@@ -52,6 +53,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           title: Text(context.tr.navigationBarLabel1),
         ),
         body: GoogleMap(
+          myLocationEnabled: true,
           initialCameraPosition: CameraPosition(
             target: currentPosition,
             zoom: 13.5,

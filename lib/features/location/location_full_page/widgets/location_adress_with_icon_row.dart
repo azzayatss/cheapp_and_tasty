@@ -18,8 +18,10 @@ class LocationAdressWithIconRow extends StatelessWidget {
         const SizedBox(
           width: AppLayouts.defaultPadding / 2,
         ),
-        Text(
-          location.locationAdress,
+        Expanded(
+          child: Text(
+            location.locationAdress,
+          ),
         ),
       ],
     );

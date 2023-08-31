@@ -28,12 +28,27 @@ class LocationsListScreen extends ConsumerWidget {
             body: Stack(
               children: [
                 if (list.isEmpty)
-                  Center(
-                    child: Text(
-                      context.tr.noLocationsToDisplay,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(
+                          context.tr.noLocationsToDisplay,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: AppLayouts.defaultPadding,
+                      ),
+                      IconButton(
+                        onPressed: () => ref.refresh(
+                          locationListControllerProvider,
+                        ),
+                        icon: const Icon(Icons.refresh),
+                      ),
+                    ],
                   )
                 else
+                  //TODO azzayats: this thing can be redone with streams so we will not need refreshing at all.
                   RefreshIndicator(
                     onRefresh: () =>
                         ref.refresh(locationListControllerProvider.future),
