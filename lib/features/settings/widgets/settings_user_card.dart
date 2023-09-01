@@ -1,6 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -36,7 +35,7 @@ class SettingsUserCard extends HookWidget {
                         userPhotoUrl.value,
                         fit: BoxFit.contain,
                       )
-                    : const ImagePlaceHolder(),
+                    : const CircularProgressIndicator.adaptive(),
               ),
             ),
             const SizedBox(

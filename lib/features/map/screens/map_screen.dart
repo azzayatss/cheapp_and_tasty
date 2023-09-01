@@ -1,8 +1,3 @@
-//TODO azzayats: 2 - display the user's location when the map screen is open
-//TODO azzayats: 3 - show map markers from db locations list
-//TODO azzayats: 4 - implement custom info widget with view details and go to location button
-//https://pub.dev/packages/custom_info_window/example
-//TODO azzayats: 5 -  add geoposition to locationEntity -> google maps adress picker + adress to LatLng converter
 //TODO azzayats: 6 - onboarding screens
 //TODO azzayats: 7 - refactor .checkPermission() .requestPermission() ti separate controller
 //TODO azzayats: 8 - test otakoyi package from Eugene

@@ -4,12 +4,14 @@ import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
+import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MapMarkerInfoWindowCard extends StatelessWidget {
+class MapMarkerInfoWindowCard extends ConsumerWidget {
   const MapMarkerInfoWindowCard({
     required this.location,
     super.key,
@@ -18,7 +20,9 @@ class MapMarkerInfoWindowCard extends StatelessWidget {
   final LocationEntity location;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentPosition = ref.watch(currentLocationControllerProvider);
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
@@ -118,7 +122,8 @@ class MapMarkerInfoWindowCard extends StatelessWidget {
                       TextButton.icon(
                         onPressed: () {
                           final url = Uri.tryParse(
-                              'https://www.google.com/maps/search/?api=1&query=47.5951518%2C-122.3316393&query_place_id=ChIJKxjxuaNqkFQR3CK6O1HNNqY');
+                            'https://www.google.com/maps/dir/?api=1&origin=${currentPosition.latitude}%2C${currentPosition.longitude}&destination=${location.locationLatitude}%2C${location.locationLongitude}',
+                          );
                           if (url == null) {
                             return;
                           }
@@ -131,8 +136,8 @@ class MapMarkerInfoWindowCard extends StatelessWidget {
                           Icons.drive_eta,
                           size: 17,
                         ),
-                        label: const Text(
-                          'Go now',
+                        label: Text(
+                          context.tr.goNow,
                         ),
                       ),
                       TextButton.icon(
@@ -146,8 +151,8 @@ class MapMarkerInfoWindowCard extends StatelessWidget {
                           Icons.info,
                           size: 17,
                         ),
-                        label: const Text(
-                          'View info',
+                        label: Text(
+                          context.tr.viewInfo,
                         ),
                       ),
                     ],

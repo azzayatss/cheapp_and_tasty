@@ -23,6 +23,7 @@
   "forgotPasswordDialogContent1": "Будь ласка, введіть email користувача, щоб скинути пароль.",
   "forgotPasswordDialogContent2": "Якщо користувач з такою адресою існує, ви отримаєте лист відновлення.",
   "forgotPasswordDialogContent3": "Після отримання листа про поновлення, будь ласка, увійдіть у додаток з новими обліковими даними.",
+  "goNow": "Вперед",
   "googleLogInHint": "Ви можете легко увійти в систему навіть без реєстрації за допомогою облікового запису Google: ",
   "lightTheme": "Світла",
   "locationAdressHint": "м.Львів, вул.Червоної Калини 72",
@@ -66,6 +67,7 @@
   "thereAreNoPhotosYet": "Поки немає фото :(",
   "unknownUser": "Невідомий користувач",
   "uploadPhotoLabel": "Завантажити фото",
+  "viewInfo": "Інформація",
   "wcLabel": "WC",
   "wifiLabel": "Wi-Fi"
 }
