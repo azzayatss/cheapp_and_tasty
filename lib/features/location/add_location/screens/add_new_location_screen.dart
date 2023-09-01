@@ -132,6 +132,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       ),
                       debounceTime: 200,
                       getPlaceDetailWithLatLng: (Prediction prediction) {
+                        
                         longitude.value = double.parse(prediction.lng ?? '0.0');
                         latitude.value = double.parse(prediction.lat ?? '0.0');
                         locationAdressController.text =
