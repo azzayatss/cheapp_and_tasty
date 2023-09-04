@@ -34,9 +34,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final picker = ImagePicker();
 
-    final currentUser = ref.read(signInControllerProvider);
-
-    // final test = useFocusNode()
+    final currentUser = ref.watch(signInControllerProvider);
 
     final locationNameController = useTextEditingController();
     final locationDescriptionController = useTextEditingController();

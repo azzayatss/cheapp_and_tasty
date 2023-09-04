@@ -21,7 +21,12 @@ class LocationFullScreen extends StatelessWidget {
       appBar: AppBar(),
       floatingActionButton: Consumer(
         builder: (context, ref, _) {
-          final currentPosition = ref.watch(currentLocationControllerProvider);
+          final currentPosition =
+              ref.watch(currentLocationControllerProvider).valueOrNull;
+
+          if (currentPosition == null) {
+            return const SizedBox.shrink();
+          }
           final list = ref.watch(locationListControllerProvider);
           return list.when(
             data: (data) {
@@ -35,7 +40,7 @@ class LocationFullScreen extends StatelessWidget {
                     locationLatitude: location.locationLatitude,
                     locationLongitude: location.locationLongitude,
                   );
-                  
+
                   if (url == null) {
                     return;
                   }

@@ -22,7 +22,12 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentPosition = ref.watch(currentLocationControllerProvider);
+    final currentPosition =
+        ref.watch(currentLocationControllerProvider).valueOrNull;
+
+    if (currentPosition == null) {
+      return const SizedBox.shrink();
+    }
 
     return Card(
       child: Padding(
