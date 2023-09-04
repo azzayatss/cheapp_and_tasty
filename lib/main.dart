@@ -17,5 +17,3 @@ void main() async {
   );
 }
 
-// google maps api key
-// AIzaSyCxUB2zKCIo0BZQXTRNdzEL6NRFhzBFfVM

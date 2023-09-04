@@ -1,4 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/about_location_widget.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_images.dart';
@@ -28,9 +29,13 @@ class LocationFullScreen extends StatelessWidget {
                   data.firstWhere((element) => element.locationId == id);
               return FloatingActionButton(
                 onPressed: () {
-                  final url = Uri.tryParse(
-                    'https://www.google.com/maps/dir/?api=1&origin=${currentPosition.latitude}%2C${currentPosition.longitude}&destination=${location.locationLatitude}%2C${location.locationLongitude}',
+                  final url = goToLocation(
+                    currentPositionLatitude: currentPosition.latitude,
+                    currentPositionLongitude: currentPosition.longitude,
+                    locationLatitude: location.locationLatitude,
+                    locationLongitude: location.locationLongitude,
                   );
+                  
                   if (url == null) {
                     return;
                   }

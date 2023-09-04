@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 import 'dart:io';
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/config/storage_pathways.dart';
 import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
@@ -34,6 +35,8 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final picker = ImagePicker();
 
     final currentUser = ref.read(signInControllerProvider);
+
+    // final test = useFocusNode()
 
     final locationNameController = useTextEditingController();
     final locationDescriptionController = useTextEditingController();
@@ -125,14 +128,13 @@ class AddNewLocationScreen extends HookConsumerWidget {
                     // with possibility to provide language parameter
                     GooglePlaceAutoCompleteTextField(
                       textEditingController: locationAdressController,
-                      googleAPIKey: 'AIzaSyCxUB2zKCIo0BZQXTRNdzEL6NRFhzBFfVM',
+                      googleAPIKey: AppConstants.googleMapsApiKey,
                       inputDecoration: InputDecoration(
                         hintText: context.tr.locationAdressHint,
                         labelText: context.tr.locationAdressLabel,
                       ),
                       debounceTime: 200,
                       getPlaceDetailWithLatLng: (Prediction prediction) {
-                        
                         longitude.value = double.parse(prediction.lng ?? '0.0');
                         latitude.value = double.parse(prediction.lat ?? '0.0');
                         locationAdressController.text =
