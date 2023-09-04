@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
+import 'package:cheapp_and_tasty/config/helpers/app_helpers.dart';
 import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
@@ -127,7 +127,7 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                     children: [
                       TextButton.icon(
                         onPressed: () {
-                          final url = goToLocation(
+                          final url = AppHelpers.goToLocation(
                             currentPositionLatitude: currentPosition.latitude,
                             currentPositionLongitude: currentPosition.longitude,
                             locationLatitude: location.locationLatitude,

@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
+import 'package:cheapp_and_tasty/config/helpers/app_helpers.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/about_location_widget.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_images.dart';
@@ -34,7 +34,7 @@ class LocationFullScreen extends StatelessWidget {
                   data.firstWhere((element) => element.locationId == id);
               return FloatingActionButton(
                 onPressed: () {
-                  final url = goToLocation(
+                  final url = AppHelpers.goToLocation(
                     currentPositionLatitude: currentPosition.latitude,
                     currentPositionLongitude: currentPosition.longitude,
                     locationLatitude: location.locationLatitude,
