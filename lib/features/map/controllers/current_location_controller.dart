@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,7 +15,7 @@ class CurrentLocationController extends _$CurrentLocationController {
     final position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.low,
     );
-    return const LatLng(49.8433782133177, 24.02686348783224);
+    return const LatLng(AppConstants.lvivLatitude, AppConstants.lvivLongitude);
     //TODO azzayats: uncommnet line below to work with real device location
     // return LatLng(position.latitude, position.longitude);
   }

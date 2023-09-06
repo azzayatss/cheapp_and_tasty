@@ -5,15 +5,19 @@ import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/im
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/location/locations_listing/widgets/distance_to_location_with_icon_row.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class LocationListingCard extends StatelessWidget {
   const LocationListingCard({
     required this.item,
+    this.currentPosition,
     super.key,
   });
 
   final LocationEntity item;
+  final LatLng? currentPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,10 @@ class LocationListingCard extends StatelessWidget {
               height: AppLayouts.defaultPadding / 2,
             ),
             LocationAdressWithIconRow(location: item),
+            const SizedBox(
+              height: AppLayouts.defaultPadding / 2,
+            ),
+            HowFarLocationWithIconRow(location: item, currentPosition: currentPosition,),
           ],
         ),
       ),
