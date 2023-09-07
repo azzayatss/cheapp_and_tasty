@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HowFarLocationWithIconRow extends HookConsumerWidget {
-  const HowFarLocationWithIconRow({
+class DistanceToLocationWidget extends HookConsumerWidget {
+  const DistanceToLocationWidget({
     required this.location,
     this.currentPosition,
     super.key,

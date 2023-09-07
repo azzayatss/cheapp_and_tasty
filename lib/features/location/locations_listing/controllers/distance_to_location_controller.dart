@@ -18,7 +18,6 @@ FutureOr<List<String>> distanceToLocation(
   );
 
   final destination = response.data as Map<String, dynamic>;
-  print(destination);
 
   final distanceToLocation = DistanceToLocationEntity.fromJson(
     //TODO azzayatss pattern matching?
@@ -29,6 +28,6 @@ FutureOr<List<String>> distanceToLocation(
   //     destination['rows'][0]['elements'][0]['duration']['text'].toString();
   return [
     distanceToLocation.distance.distance,
-    distanceToLocation.duration.timeToLocation
+    distanceToLocation.duration.timeToLocation,
   ];
 }

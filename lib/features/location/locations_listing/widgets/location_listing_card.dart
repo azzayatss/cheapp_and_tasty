@@ -58,7 +58,10 @@ class LocationListingCard extends StatelessWidget {
             const SizedBox(
               height: AppLayouts.defaultPadding / 2,
             ),
-            HowFarLocationWithIconRow(location: item, currentPosition: currentPosition,),
+            DistanceToLocationWidget(
+              location: item,
+              currentPosition: currentPosition,
+            ),
           ],
         ),
       ),
