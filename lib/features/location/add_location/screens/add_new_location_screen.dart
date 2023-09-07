@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 import 'dart:io';
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/config/storage_pathways.dart';
 import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
@@ -18,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -31,7 +34,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final picker = ImagePicker();
 
-    final currentUser = ref.read(signInControllerProvider);
+    final currentUser = ref.watch(signInControllerProvider);
 
     final locationNameController = useTextEditingController();
     final locationDescriptionController = useTextEditingController();
@@ -46,6 +49,8 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final locationPhotos = useState<List<File?>>([]);
     final coverPhotoUrl = useState<String>('');
     final coverPhoto = useState<File?>(null);
+    final latitude = useState<double>(0);
+    final longitude = useState<double>(0);
 
     return SafeArea(
       child: Scaffold(
@@ -116,12 +121,33 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
-                    TextFormField(
-                      controller: locationAdressController,
-                      decoration: InputDecoration(
+                    //as option autocomplete may be redone by using classic api:
+                    // https://developers.google.com/maps/documentation/places/web-service/autocomplete
+                    // with possibility to provide language parameter
+                    GooglePlaceAutoCompleteTextField(
+                      textEditingController: locationAdressController,
+                      googleAPIKey: AppConstants.googleMapsApiKey,
+                      inputDecoration: InputDecoration(
                         hintText: context.tr.locationAdressHint,
                         labelText: context.tr.locationAdressLabel,
                       ),
+                      debounceTime: 200,
+                      getPlaceDetailWithLatLng: (Prediction prediction) {
+                        longitude.value = double.parse(prediction.lng ?? '0.0');
+                        latitude.value = double.parse(prediction.lat ?? '0.0');
+                        locationAdressController.text =
+                            prediction.description ?? '';
+                      },
+                      itemClick: (Prediction prediction) {
+                        locationAdressController
+                          ..text = prediction.description ?? ''
+                          ..selection = TextSelection.fromPosition(
+                            TextPosition(
+                              offset: prediction.description?.length ?? 0,
+                            ),
+                          );
+                      },
+                      seperatedBuilder: const Divider(),
                     ),
                     const SizedBox(height: AppLayouts.defaultPadding),
                     TextFormField(
@@ -269,9 +295,8 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               locationId: const Uuid().v4(),
                               locationDescription:
                                   locationDescriptionController.text,
-                              //TODO azzayats -> replace hardcoded values with add on map feature in future
-                              locationLatitude: 0,
-                              locationLongitude: 0,
+                              locationLatitude: latitude.value,
+                              locationLongitude: longitude.value,
                               locationAdress: locationAdressController.text,
                               locationWorkingSchedule:
                                   locationScheduleController.text,

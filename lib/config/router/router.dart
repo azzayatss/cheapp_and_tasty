@@ -44,7 +44,7 @@ GoRouter router(RouterRef ref) {
           // same as in 1 sub-route
           GoRoute(
             path: MapScreen.route,
-            pageBuilder: (context, state) => const NoTransitionPage(
+            pageBuilder: (context, state) => NoTransitionPage(
               child: MapScreen(),
             ),
           ),

@@ -1,6 +1,8 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/map/widgets/map_marker_info_window_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,31 +23,42 @@ class HomeScreen extends ConsumerWidget {
             appBar: AppBar(
               title: Text(context.tr.navigationBarLabel0),
             ),
-            body: Column(
-              children: [
-                Row(
+            body: Padding(
+              padding: const EdgeInsets.all(AppLayouts.defaultPadding),
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-                      child: Card(
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.all(AppLayouts.defaultPadding),
-                          child: Column(
-                            children: [
-                              Text(context.tr.locationsNumber),
-                              Text('$locationsNumber'),
-                            ],
-                          ),
+                    Card(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.all(AppLayouts.defaultPadding),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              context.tr.locationsNumber,
+                              style: context.textTheme.titleLarge,
+                            ),
+                            Text(
+                              '$locationsNumber',
+                              style: context.textTheme.headlineMedium!
+                                  .copyWith(color: AppColors.appSeedColor),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Card(
-                      child: Column(),
+                    const SizedBox(
+                      height: AppLayouts.defaultPadding,
                     ),
+                    Text(
+                      '🎉 ${context.tr.lastAddedLocation}',
+                      style: context.textTheme.titleLarge,
+                    ),
+                    MapMarkerInfoWindowCard(location: data.last),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         );

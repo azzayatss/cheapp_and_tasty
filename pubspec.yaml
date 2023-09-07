@@ -58,6 +58,14 @@ dependencies:
   cloud_firestore: ^4.8.5
   image_picker: ^1.0.2
   firebase_storage: ^11.2.6
+  google_maps_flutter: ^2.4.1
+  geolocator: ^10.0.0
+  google_places_flutter: ^2.0.6
+  custom_info_window: ^1.0.1
+  clippy_flutter: ^2.0.0-nullsafety.1
+  url_launcher: ^6.1.14
+  http: ^1.1.0
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:
