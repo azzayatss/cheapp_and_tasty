@@ -1,5 +1,6 @@
 import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
+import 'package:cheapp_and_tasty/features/auth/widgets/reset_password_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/features/location/add_location/screens/add_new_location_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
@@ -104,6 +105,13 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: AuthGateScreen.route,
         builder: (context, state) => const AuthGateScreen(),
+        routes: [
+          GoRoute(
+            path: ResetPasswordScreen.route,
+            name: ResetPasswordScreen.routeName,
+            builder: (context, state) => const ResetPasswordScreen(),
+          ),
+        ],
       ),
     ],
     redirect: (context, state) {

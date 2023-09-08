@@ -1,7 +1,6 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
-import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_validator/form_validator.dart';
@@ -12,109 +11,134 @@ class SignUpForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showEmptyTermsAndConditionsWarning = useState(false);
     final formKey = useMemoized(GlobalKey<FormState>.new);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final obscureText = useState(true);
-    final termsAndConditions = useState(true);
+    final termsAndConditions = useState(false);
     final newsSubscription = useState(true);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: AppLayouts.spacer / 2,
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  hintText: context.tr.emailFormHint,
                 ),
-                Text(
-                  context.tr.signUpEmoji,
-                  style: const TextStyle(fontSize: AppLayouts.emojiSize),
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    hintText: context.tr.emailFormHint,
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: ValidationBuilder()
-                      .required()
-                      .email()
-                      .maxLength(50)
-                      .build(),
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  obscureText: obscureText.value,
-                  decoration: InputDecoration(
-                    hintText: context.tr.passwordFormHint,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscureText.value
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
-                      ),
-                      onPressed: () => obscureText.value = !obscureText.value,
+                keyboardType: TextInputType.emailAddress,
+                validator: ValidationBuilder()
+                    .required()
+                    .email()
+                    .maxLength(50)
+                    .build(),
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+              TextFormField(
+                controller: passwordController,
+                obscureText: obscureText.value,
+                decoration: InputDecoration(
+                  hintText: context.tr.passwordFormHint,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      obscureText.value
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
                     ),
+                    onPressed: () => obscureText.value = !obscureText.value,
                   ),
-                  keyboardType: TextInputType.visiblePassword,
-                  validator:
-                      ValidationBuilder().required().minLength(6).build(),
                 ),
-                Row(
-                  children: [
-                    Checkbox(
-                      value: termsAndConditions.value,
-                      onChanged: (_) =>
-                          termsAndConditions.value = !termsAndConditions.value,
-                    ),
-                    GestureDetector(
-                      child: Text(
-                        context.tr.termsAndConditionsCheckBoxText,
+                keyboardType: TextInputType.visiblePassword,
+                validator: ValidationBuilder().required().minLength(6).build(),
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding / 2,
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        side: showEmptyTermsAndConditionsWarning.value == true
+                            ? MaterialStateBorderSide.resolveWith(
+                                (states) => const BorderSide(color: Colors.red),
+                              )
+                            : null,
+                        value: termsAndConditions.value,
+                        onChanged: (_) {
+                          termsAndConditions.value = !termsAndConditions.value;
+
+                          if (showEmptyTermsAndConditionsWarning.value ==
+                              true) {
+                            showEmptyTermsAndConditionsWarning.value =
+                                !showEmptyTermsAndConditionsWarning.value;
+                          }
+                        },
                       ),
-                      onTap: () =>
-                          termsAndConditions.value = !termsAndConditions.value,
+                      GestureDetector(
+                        child: Text(
+                          context.tr.termsAndConditionsCheckBoxText,
+                        ),
+                        onTap: () => termsAndConditions.value =
+                            !termsAndConditions.value,
+                      ),
+                    ],
+                  ),
+                  if (showEmptyTermsAndConditionsWarning.value ==
+                      true) ...<Widget>[
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: AppLayouts.defaultPadding * 3,
+                        ),
+                        Expanded(
+                          child: Text(
+                            context.tr.emptyTermsAndConditionsWarning,
+                            style: context.textTheme.labelSmall!
+                                .copyWith(color: Colors.red),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      value: newsSubscription.value,
-                      onChanged: (_) =>
-                          newsSubscription.value = !newsSubscription.value,
+                ],
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: newsSubscription.value,
+                    onChanged: (_) =>
+                        newsSubscription.value = !newsSubscription.value,
+                  ),
+                  GestureDetector(
+                    child: Text(
+                      context.tr.receiveEmails,
                     ),
-                    GestureDetector(
-                      child: Text(
-                        context.tr.receiveEmails,
-                      ),
-                      onTap: () =>
-                          newsSubscription.value = !newsSubscription.value,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                Consumer(
-                  builder: (context, ref, child) {
-                    final signUpProcess = ref.watch(signInControllerProvider);
-                    return FilledButton(
-                      onPressed: signUpProcess.isLoading
-                          ? null
-                          : () {
-                              if (termsAndConditions.value == true) {
-                                if (formKey.currentState?.validate() != true) {
-                                  return;
-                                }
+                    onTap: () =>
+                        newsSubscription.value = !newsSubscription.value,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding / 2,
+              ),
+              Consumer(
+                builder: (context, ref, child) {
+                  final signUpProcess = ref.watch(signInControllerProvider);
+                  return FilledButton(
+                    onPressed: signUpProcess.isLoading
+                        ? null
+                        : () {
+                            if (termsAndConditions.value == true) {
+                              final valid =
+                                  formKey.currentState?.validate() ?? false;
+                              if (valid == true) {
                                 ref
                                     .read(signInControllerProvider.notifier)
                                     .signUp(
@@ -122,28 +146,20 @@ class SignUpForm extends HookWidget {
                                       passwordController.text,
                                       context,
                                     );
-                              } else {
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text(context.tr.requiredAction),
-                                    content: Text(
-                                      context.tr.emptyTermsAndConditionsWarning,
-                                    ),
-                                  ),
-                                );
                               }
-                            },
-                      child: Text(context.tr.signUp),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
-                const GoogleSignInCard(),
-              ],
-            ),
+                            } else {
+                              showEmptyTermsAndConditionsWarning.value =
+                                  !showEmptyTermsAndConditionsWarning.value;
+                            }
+                          },
+                    child: Text(context.tr.signUp),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: AppLayouts.defaultPadding,
+              ),
+            ],
           ),
         ),
       ),

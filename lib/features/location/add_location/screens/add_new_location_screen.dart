@@ -41,6 +41,11 @@ class AddNewLocationScreen extends HookConsumerWidget {
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
 
+    final showEmptyCoverPhotoAlert = useState(false);
+    final showEmptyMenuPhotosAlert = useState(false);
+    final showEmptyLocationPhotosAlert = useState(false);
+    final showEmptyAddresAlert = useState(false);
+
     final locationNameController = useTextEditingController();
     final locationDescriptionController = useTextEditingController();
     final locationAdressController = useTextEditingController();
@@ -77,6 +82,13 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         context.tr.coverPhotoLabel,
                         style: context.textTheme.bodyLarge,
                       ),
+                      if (showEmptyCoverPhotoAlert.value == true) ...[
+                        Text(
+                          context.tr.emptyCoverPhotoWarning,
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: Colors.red),
+                        ),
+                      ],
                       const SizedBox(height: AppLayouts.defaultPadding),
                       if (coverPhoto.value == null)
                         PickImageButton(
@@ -98,6 +110,10 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               coverPhotoUrl.value = downloadUrl;
                             } on FirebaseException catch (e) {
                               dev.log(e.message.toString());
+                            }
+                            if (showEmptyCoverPhotoAlert.value == true) {
+                              showEmptyCoverPhotoAlert.value =
+                                  !showEmptyCoverPhotoAlert.value;
                             }
                           },
                         )
@@ -136,11 +152,20 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       // https://developers.google.com/maps/documentation/places/web-service/autocomplete
                       // with possibility to provide language parameter
                       GooglePlaceAutoCompleteTextField(
+                        boxDecoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: context.colorScheme.outline,
+                            ),
+                          ),
+                        ),
                         textEditingController: locationAdressController,
                         googleAPIKey: AppConstants.googleMapsApiKey,
                         inputDecoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
                           hintText: context.tr.locationAdressHint,
                           labelText: context.tr.locationAdressLabel,
+                          border: InputBorder.none,
                         ),
                         debounceTime: 200,
                         getPlaceDetailWithLatLng: (Prediction prediction) {
@@ -162,6 +187,15 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         },
                         seperatedBuilder: const Divider(),
                       ),
+                      if (showEmptyAddresAlert.value == true &&
+                          locationAdressController.text.isEmpty) ...[
+                        Text(
+                          context.tr.emptyAddressWarning,
+                          style: context.textTheme.labelSmall?.copyWith(
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: AppLayouts.defaultPadding),
                       TextFormField(
                         controller: locationScheduleController,
@@ -222,6 +256,13 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         context.tr.addMenuPhotosLabel,
                         style: context.textTheme.bodyLarge,
                       ),
+                      if (showEmptyMenuPhotosAlert.value == true) ...[
+                        Text(
+                          context.tr.emptyLocationMenuPhotosWarning,
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: Colors.red),
+                        ),
+                      ],
                       const SizedBox(height: AppLayouts.defaultPadding),
                       if (menuPhotos.value.isEmpty)
                         PickImageButton(
@@ -256,6 +297,10 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                 dev.log(e.message.toString());
                               }
                             }
+                            if (showEmptyMenuPhotosAlert.value == true) {
+                              showEmptyMenuPhotosAlert.value =
+                                  !showEmptyMenuPhotosAlert.value;
+                            }
                           },
                         )
                       else
@@ -265,6 +310,13 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         context.tr.addLocationPhotosLabel,
                         style: context.textTheme.bodyLarge,
                       ),
+                      if (showEmptyLocationPhotosAlert.value == true) ...[
+                        Text(
+                          context.tr.emptyLocationPhotosWarning,
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(color: Colors.red),
+                        ),
+                      ],
                       const SizedBox(height: AppLayouts.defaultPadding),
                       if (locationPhotos.value.isEmpty)
                         PickImageButton(
@@ -296,6 +348,10 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                 dev.log(e.message.toString());
                               }
                             }
+                            if (showEmptyLocationPhotosAlert.value == true) {
+                              showEmptyLocationPhotosAlert.value =
+                                  !showEmptyLocationPhotosAlert.value;
+                            }
                           },
                         )
                       else
@@ -309,48 +365,28 @@ class AddNewLocationScreen extends HookConsumerWidget {
                           FormSaveButton(
                             onPressed: () {
                               if (coverPhotoUrl.value.isEmpty) {
-                                _dialogBuilder(
-                                  context: context,
-                                  title: context.tr.requiredAction,
-                                  content: context.tr.emptyCoverPhotoWarning,
-                                  onPressed: () => context.pop(),
-                                );
-                                return;
+                                showEmptyCoverPhotoAlert.value =
+                                    !showEmptyCoverPhotoAlert.value;
                               }
 
                               if (menuUrlList.value.isEmpty) {
-                                _dialogBuilder(
-                                  context: context,
-                                  title: context.tr.requiredAction,
-                                  content:
-                                      context.tr.emptyLocationMenuPhotosWarning,
-                                  onPressed: () => context.pop(),
-                                );
-                                return;
+                                showEmptyMenuPhotosAlert.value =
+                                    !showEmptyMenuPhotosAlert.value;
                               }
 
                               if (locationPhotosUrlList.value.isEmpty) {
-                                _dialogBuilder(
-                                  context: context,
-                                  title: context.tr.requiredAction,
-                                  content:
-                                      context.tr.emptyLocationPhotosWarning,
-                                  onPressed: () => context.pop(),
-                                );
-                                return;
+                                showEmptyLocationPhotosAlert.value =
+                                    !showEmptyLocationPhotosAlert.value;
                               }
 
                               if (locationAdressController.text.isEmpty) {
-                                _dialogBuilder(
-                                  context: context,
-                                  title: context.tr.requiredAction,
-                                  content: context.tr.emptyAddressWarning,
-                                  onPressed: () => context.pop(),
-                                );
-                                return;
+                                showEmptyAddresAlert.value =
+                                    !showEmptyAddresAlert.value;
                               }
 
-                              if (formKey.currentState?.validate() == true) {
+                              final valid =
+                                  formKey.currentState?.validate() ?? false;
+                              if (valid == true) {
                                 final newLocation = LocationEntity(
                                   locationName: locationNameController.text,
                                   locationId: const Uuid().v4(),
@@ -391,29 +427,6 @@ class AddNewLocationScreen extends HookConsumerWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Future<String?> _dialogBuilder({
-    required BuildContext context,
-    required String title,
-    required String content,
-    required void Function()? onPressed,
-  }) {
-    return showDialog<String?>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: [
-            FilledButton(
-              onPressed: onPressed,
-              child: Text(context.tr.gotIt),
-            ),
-          ],
-        );
-      },
     );
   }
 }
