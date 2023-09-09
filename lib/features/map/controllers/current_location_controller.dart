@@ -12,11 +12,11 @@ class CurrentLocationController extends _$CurrentLocationController {
   Future<LatLng> build() async {
     await Geolocator.checkPermission();
     await Geolocator.requestPermission();
-    final position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.low,
-    );
+    // final position = await Geolocator.getCurrentPosition(
+    //   desiredAccuracy: LocationAccuracy.low,
+    // );
     return const LatLng(AppConstants.lvivLatitude, AppConstants.lvivLongitude);
-    //TODO azzayats: uncommnet line below to work with real device location
+    //TODO azzayats: uncomment to work with real device location
     // return LatLng(position.latitude, position.longitude);
   }
 }

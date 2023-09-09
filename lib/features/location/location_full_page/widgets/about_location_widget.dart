@@ -6,9 +6,9 @@ import 'package:cheapp_and_tasty/features/location/enums/additional_services_chi
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/chip_widget_about_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_name_and_rating_row.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/map/widgets/rate_bar_displayment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -44,15 +44,23 @@ class AboutLocationWidget extends ConsumerWidget {
                 ),
                 Text(
                   context.tr.aboutLocation,
-                  style: context.textTheme.headlineLarge,
+                  style: context.textTheme.headlineSmall,
                 ),
                 const Divider(),
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                LocationNameAndRatingRow(location: location),
+                Text(
+                  location.locationName.toUpperCase(),
+                  style: context.textTheme.titleLarge,
+                ),
+                RateBarDisplaymentWidget(
+                  location: location,
+                  textStyle: context.textTheme.labelLarge,
+                  starSize: 20,
+                ),
                 const SizedBox(
-                  height: AppLayouts.defaultPadding,
+                  height: AppLayouts.defaultPadding / 2,
                 ),
                 Text(
                   location.locationDescription,

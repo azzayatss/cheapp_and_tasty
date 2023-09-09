@@ -1,7 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/add_location/screens/add_new_location_screen.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/widgets/location_listing_card.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-//TODO feature: add to each card distance to location from your current location.
 class LocationsListScreen extends ConsumerWidget {
   const LocationsListScreen({super.key});
 
@@ -75,7 +74,7 @@ class LocationsListScreen extends ConsumerWidget {
                                   context.goNamed(
                                     LocationFullScreen.routeName,
                                     pathParameters: {
-                                      'locationId': item.locationId
+                                      'locationId': item.locationId,
                                     },
                                   );
                                 },

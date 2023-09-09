@@ -13,5 +13,3 @@ class DistanceLocationEntity with _$DistanceLocationEntity {
   factory DistanceLocationEntity.fromJson(Map<String, dynamic> json) =>
       _$DistanceLocationEntityFromJson(json);
 }
-
-

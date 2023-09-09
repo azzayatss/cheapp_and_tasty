@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/config/storage_pathways.dart';
-import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
+import 'package:cheapp_and_tasty/features/location/add_location/widgets/add_rating_widget.dart';
 import 'package:cheapp_and_tasty/features/location/add_location/widgets/form_cancel_button.dart';
 import 'package:cheapp_and_tasty/features/location/add_location/widgets/form_save_button.dart';
 import 'package:cheapp_and_tasty/features/location/add_location/widgets/pick_image_button.dart';
@@ -17,7 +17,6 @@ import 'package:cheapp_and_tasty/features/location/widgets/additional_services_c
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
@@ -25,8 +24,6 @@ import 'package:google_places_flutter/model/prediction.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
-
-//TODO azzayatss: replace all showDialogs with snackbars
 
 class AddNewLocationScreen extends HookConsumerWidget {
   const AddNewLocationScreen({super.key});
@@ -37,7 +34,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final picker = ImagePicker();
 
-    final currentUser = ref.watch(signInControllerProvider);
+    final currentUser = ref.watch(signInControllerProvider).valueOrNull;
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
 
@@ -52,7 +49,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final locationScheduleController = useTextEditingController();
     final locationReviewController = useTextEditingController();
     final selectedServices = useRef(<String>[]);
-    final initialRate = useState<double>(3);
+    final locationRatesList = useState(<double>[]);
     final menuUrlList = useState<List<String>>([]);
     final menuPhotos = useState<List<File?>>([]);
     final locationPhotosUrlList = useState<List<String>>([]);
@@ -224,21 +221,12 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         style: context.textTheme.bodyLarge,
                       ),
                       const SizedBox(height: AppLayouts.defaultPadding),
-                      Align(
-                        child: RatingBar.builder(
-                          initialRating: initialRate.value,
-                          minRating: 1,
-                          allowHalfRating: true,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 4),
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: AppColors.starIconColor,
-                          ),
-                          onRatingUpdate: (rating) {
-                            initialRate.value = rating;
-                          },
-                        ),
+                      AddRatingWidget(
+                        onRatingUpdate: (rating) {
+                          locationRatesList.value.clear();
+                          locationRatesList.value.add(rating);
+                        },
+                        initialRating: 3,
                       ),
                       const SizedBox(height: AppLayouts.defaultPadding),
                       Text(
@@ -399,15 +387,16 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                       locationScheduleController.text,
                                   locationReviews:
                                       locationReviewController.text,
-                                  locationRate: initialRate.value,
                                   personWhoAddedLocation:
-                                      currentUser.value?.email ?? '',
+                                      currentUser?.email ?? '',
                                   dateTimeWhenLocationAdded: DateTime.now(),
                                   locationMenuImages: menuUrlList.value,
                                   locationImages: locationPhotosUrlList.value,
                                   additionalServicesChips:
                                       selectedServices.value,
                                   locationCoverPhoto: coverPhotoUrl.value,
+                                  locationRatesList: locationRatesList.value,
+                                  rateVotedUsers: [currentUser?.email ?? ''],
                                 );
 
                                 LocationRepository()

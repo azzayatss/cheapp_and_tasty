@@ -23,7 +23,7 @@ class LocationImages extends StatelessWidget {
           children: [
             Text(
               context.tr.locationPhoto,
-              style: context.textTheme.headlineLarge,
+              style: context.textTheme.headlineSmall,
             ),
             const Divider(),
             LocationImagesSmallSlider(

@@ -30,6 +30,28 @@ class LocationRepository {
 
     return locations;
   }
+
+  Future<void> updateLocationRate(
+    String locationId,
+    Map<Object, Object?> newRates,
+    Map<Object, Object?> newVotedPersons,
+  ) async {
+    final querySnapshot = await database
+        .collection('locations')
+        .where('locationId', isEqualTo: locationId)
+        .get();
+    final querySnapshotId = querySnapshot.docs.first.id;
+
+    await database
+        .collection('locations')
+        .doc(querySnapshotId)
+        .update(newRates);
+
+    await database
+        .collection('locations')
+        .doc(querySnapshotId)
+        .update(newVotedPersons);
+  }
 }
 
 @riverpod

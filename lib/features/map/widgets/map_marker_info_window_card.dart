@@ -1,13 +1,12 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/helpers/app_helpers.dart';
-import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
+import 'package:cheapp_and_tasty/features/map/widgets/rate_bar_displayment_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -55,32 +54,10 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                     location.locationName.toUpperCase(),
                     style: context.textTheme.labelMedium,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        '${location.locationRate}',
-                        style: context.textTheme.labelMedium,
-                      ),
-                      const SizedBox(
-                        width: AppLayouts.defaultPadding / 4,
-                      ),
-                      RatingBarIndicator(
-                        itemSize: 12,
-                        rating: location.locationRate,
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: AppColors.starIconColor,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: AppLayouts.defaultPadding / 4,
-                      ),
-                      Text(
-                        //TODO azzayats feature: replace harcoded data with real rates quantity
-                        '(234)',
-                        style: context.textTheme.labelMedium,
-                      ),
-                    ],
+                  RateBarDisplaymentWidget(
+                    location: location,
+                    textStyle: context.textTheme.labelMedium,
+                    starSize: 12,
                   ),
                   const SizedBox(
                     height: AppLayouts.defaultPadding / 2,

@@ -55,6 +55,7 @@ class HomeScreen extends ConsumerWidget {
                       '🎉 ${context.tr.lastAddedLocation}',
                       style: context.textTheme.titleLarge,
                     ),
+                    //TODO azzayas: bug - повертає не останній доданий а останній в списку
                     MapMarkerInfoWindowCard(location: data.last),
                   ],
                 ),

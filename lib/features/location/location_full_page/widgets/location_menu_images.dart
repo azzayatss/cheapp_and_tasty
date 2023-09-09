@@ -23,7 +23,7 @@ class LocationMenuImages extends StatelessWidget {
           children: [
             Text(
               context.tr.menuLabel,
-              style: context.textTheme.headlineLarge,
+              style: context.textTheme.headlineSmall,
             ),
             const Divider(),
             MenuImagesSmallSlider(

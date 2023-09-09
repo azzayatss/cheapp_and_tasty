@@ -3,7 +3,7 @@ import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/reset_password_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
 import 'package:cheapp_and_tasty/features/location/add_location/screens/add_new_location_screen.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
+import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_full_screen_slider.dart';
 import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_full_screen_slider.dart';
 import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
