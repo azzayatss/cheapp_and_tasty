@@ -8,7 +8,6 @@ import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_schedule_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
-import 'package:cheapp_and_tasty/features/map/widgets/rate_bar_displayment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -54,11 +53,6 @@ class AboutLocationWidget extends ConsumerWidget {
                   location.locationName.toUpperCase(),
                   style: context.textTheme.titleLarge,
                 ),
-                RateBarWidget(
-                  location: location,
-                  textStyle: context.textTheme.labelLarge,
-                  starSize: 20,
-                ),
                 const SizedBox(
                   height: AppLayouts.defaultPadding / 2,
                 ),
@@ -77,16 +71,16 @@ class AboutLocationWidget extends ConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                Row(
+                const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.reviews_outlined),
-                    const SizedBox(
+                    Icon(Icons.reviews_outlined),
+                    SizedBox(
                       width: AppLayouts.defaultPadding / 2,
                     ),
                     Expanded(
                       child: Text(
-                        location.locationReviews,
+                        'ВІДГУК',
                       ),
                     ),
                   ],

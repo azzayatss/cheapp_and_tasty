@@ -5,15 +5,17 @@ import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/config/storage_pathways.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
-import 'package:cheapp_and_tasty/features/reviews/widgets/add_rating_widget.dart';
 import 'package:cheapp_and_tasty/features/add_location/widgets/form_cancel_button.dart';
 import 'package:cheapp_and_tasty/features/add_location/widgets/form_save_button.dart';
 import 'package:cheapp_and_tasty/features/add_location/widgets/pick_image_button.dart';
 import 'package:cheapp_and_tasty/features/add_location/widgets/picked_images_slider.dart';
+import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location/repositories/locations_repository.dart';
 import 'package:cheapp_and_tasty/features/location/widgets/additional_services_chips.dart';
+import 'package:cheapp_and_tasty/features/reviews/entities/review_entity.dart';
+import 'package:cheapp_and_tasty/features/reviews/repositories/reviews_repository.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/review_widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -43,13 +45,14 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final showEmptyLocationPhotosAlert = useState(false);
     final showEmptyAddresAlert = useState(false);
 
+    final locationId = useState<String>('');
+    final locationRate = useState<double>(0);
+    final locationReviewCommentController = useTextEditingController();
     final locationNameController = useTextEditingController();
     final locationDescriptionController = useTextEditingController();
     final locationAdressController = useTextEditingController();
     final locationScheduleController = useTextEditingController();
-    final locationReviewController = useTextEditingController();
     final selectedServices = useRef(<String>[]);
-    final locationRatesList = useState(<double>[]);
     final menuUrlList = useState<List<String>>([]);
     final menuPhotos = useState<List<File?>>([]);
     final locationPhotosUrlList = useState<List<String>>([]);
@@ -206,28 +209,15 @@ class AddNewLocationScreen extends HookConsumerWidget {
                             .build(),
                       ),
                       const SizedBox(height: AppLayouts.defaultPadding),
-                      TextFormField(
-                        controller: locationReviewController,
-                        maxLines: 3,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          hintText: context.tr.locationReviewHint,
-                          labelText: context.tr.locationReviewLabel,
-                        ),
-                      ),
-                      const SizedBox(height: AppLayouts.defaultPadding),
-                      Text(
-                        context.tr.locationRateLabel,
-                        style: context.textTheme.bodyLarge,
-                      ),
-                      const SizedBox(height: AppLayouts.defaultPadding),
-                      AddRatingWidget(
-                        onRatingUpdate: (rating) {
-                          locationRatesList.value.clear();
-                          locationRatesList.value.add(rating);
+
+                      ReviewWidget(
+                        isInitial: true,
+                        initialController: locationReviewCommentController,
+                        initialOnRatingUpdate: (rating) {
+                          locationRate.value = rating;
                         },
-                        initialRating: 3,
                       ),
+
                       const SizedBox(height: AppLayouts.defaultPadding),
                       Text(
                         context.tr.otherServicesLabel,
@@ -375,9 +365,10 @@ class AddNewLocationScreen extends HookConsumerWidget {
                               final valid =
                                   formKey.currentState?.validate() ?? false;
                               if (valid == true) {
+                                locationId.value = const Uuid().v4();
                                 final newLocation = LocationEntity(
                                   locationName: locationNameController.text,
-                                  locationId: const Uuid().v4(),
+                                  locationId: locationId.value,
                                   locationDescription:
                                       locationDescriptionController.text,
                                   locationLatitude: latitude.value,
@@ -385,8 +376,6 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                   locationAdress: locationAdressController.text,
                                   locationWorkingSchedule:
                                       locationScheduleController.text,
-                                  locationReviews:
-                                      locationReviewController.text,
                                   personWhoAddedLocation:
                                       currentUser?.email ?? '',
                                   dateTimeWhenLocationAdded: DateTime.now(),
@@ -395,14 +384,32 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                   additionalServicesChips:
                                       selectedServices.value,
                                   locationCoverPhoto: coverPhotoUrl.value,
-                                  locationRatesList: locationRatesList.value,
-                                  rateVotedUsers: [currentUser?.email ?? ''],
+                                );
+
+                                final newReview = ReviewEntity(
+                                  user: currentUser?.email ?? '',
+                                  rate: locationRate.value,
+                                  comment: locationReviewCommentController.text,
+                                  creationDate: DateTime.now(),
                                 );
 
                                 LocationRepository()
                                     .addLocation(newLocation.toJson());
 
+                                ReviewsRepository().addReview(
+                                  newReview: newReview.toJson(),
+                                  locationId: locationId.value,
+                                );
+
                                 context.pop();
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Location added successfully, update screen to see it.',
+                                    ),
+                                  ),
+                                );
                               }
                             },
                           ),

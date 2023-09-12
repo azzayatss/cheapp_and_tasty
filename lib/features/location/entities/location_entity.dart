@@ -13,21 +13,14 @@ class LocationEntity with _$LocationEntity {
     required double locationLongitude,
     required String locationAdress,
     required String locationWorkingSchedule,
-    required String locationReviews,
     required String personWhoAddedLocation,
     required DateTime dateTimeWhenLocationAdded,
     required List<String> locationMenuImages,
     required List<String> locationImages,
     required List<String> additionalServicesChips,
     required String locationCoverPhoto,
-    required List<String>? rateVotedUsers,
-    List<double>? locationRatesList,
   }) = _LocationEntity;
 
   factory LocationEntity.fromJson(Map<String, dynamic> json) =>
       _$LocationEntityFromJson(json);
-
-
-
-  
 }

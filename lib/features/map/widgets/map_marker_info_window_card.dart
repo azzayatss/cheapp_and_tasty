@@ -5,7 +5,6 @@ import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart
 import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
-import 'package:cheapp_and_tasty/features/map/widgets/rate_bar_displayment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -53,11 +52,6 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                   Text(
                     location.locationName.toUpperCase(),
                     style: context.textTheme.labelMedium,
-                  ),
-                  RateBarWidget(
-                    location: location,
-                    textStyle: context.textTheme.labelMedium,
-                    starSize: 12,
                   ),
                   const SizedBox(
                     height: AppLayouts.defaultPadding / 2,

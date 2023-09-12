@@ -10,7 +10,7 @@ class LocationRepository {
   Future<DocumentReference<Map<String, dynamic>>> addLocation(
     Map<String, dynamic> locationData,
   ) async {
-    return database.collection('locations').add(locationData);
+    return  database.collection('locations').add(locationData);
   }
 
   // Future<LocationEntity> getLocationData() async {
