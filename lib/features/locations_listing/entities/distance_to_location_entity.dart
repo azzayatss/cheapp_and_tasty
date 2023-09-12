@@ -1,5 +1,5 @@
-import 'package:cheapp_and_tasty/features/location/locations_listing/entities/distance_location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/entities/duration_location_entity.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/entities/distance_location_entity.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/entities/duration_location_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'distance_to_location_entity.freezed.dart';

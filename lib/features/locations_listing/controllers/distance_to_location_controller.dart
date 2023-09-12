@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/entities/distance_to_location_entity.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/entities/distance_to_location_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

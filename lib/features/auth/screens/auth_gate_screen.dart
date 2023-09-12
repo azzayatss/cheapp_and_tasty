@@ -1,7 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
-import 'package:cheapp_and_tasty/features/auth/services/show_alert_for_user.dart';
+import 'package:cheapp_and_tasty/features/auth/services/show_snack_bar_for_user.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/sign_in_form.dart';
 import 'package:cheapp_and_tasty/features/auth/widgets/sign_up_form.dart';
@@ -21,7 +21,7 @@ class AuthGateScreen extends ConsumerWidget {
         orElse: () {},
         error: (e, _) {
           if (e is FirebaseAuthException) {
-            showAlertForUser(
+            showSnackBarForUser(
               context: context,
               errorTitle: e.code,
               errorMessage: e.message,

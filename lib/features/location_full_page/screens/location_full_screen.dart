@@ -1,10 +1,10 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/helpers/app_helpers.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/about_location_widget.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_images.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/rate_this_location_widget.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/about_location_widget.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_images.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_menu_images.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/rate_this_location_widget.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -2,7 +2,7 @@ import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/distance_to_location_controller.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/distance_to_location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

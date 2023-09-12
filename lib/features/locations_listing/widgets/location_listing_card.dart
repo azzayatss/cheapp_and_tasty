@@ -1,10 +1,10 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_adress_with_icon_row.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_schedule_with_icon_row.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/widgets/distance_to_location_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_adress_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_schedule_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/widgets/distance_to_location_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/map/widgets/rate_bar_displayment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -45,7 +45,7 @@ class LocationListingCard extends StatelessWidget {
               item.locationName.toUpperCase(),
               style: context.textTheme.titleLarge,
             ),
-            RateBarDisplaymentWidget(
+            RateBarWidget(
               location: item,
               textStyle: context.textTheme.labelLarge,
               starSize: 20,

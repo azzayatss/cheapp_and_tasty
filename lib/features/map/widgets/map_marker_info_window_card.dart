@@ -2,8 +2,8 @@ import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/helpers/app_helpers.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_screen.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
 import 'package:cheapp_and_tasty/features/map/widgets/rate_bar_displayment_widget.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                     location.locationName.toUpperCase(),
                     style: context.textTheme.labelMedium,
                   ),
-                  RateBarDisplaymentWidget(
+                  RateBarWidget(
                     location: location,
                     textStyle: context.textTheme.labelMedium,
                     starSize: 12,

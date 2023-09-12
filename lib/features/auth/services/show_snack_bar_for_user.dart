@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showAlertForUser({
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBarForUser({
   required BuildContext context,
   required String errorTitle,
   required String? errorMessage,

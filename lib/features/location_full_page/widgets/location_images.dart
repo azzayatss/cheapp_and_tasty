@@ -1,10 +1,10 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/menu_images_small_slider.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_images_small_slider.dart';
 import 'package:flutter/material.dart';
 
-class LocationMenuImages extends StatelessWidget {
-  const LocationMenuImages({
+class LocationImages extends StatelessWidget {
+  const LocationImages({
     required this.id,
     super.key,
   });
@@ -22,11 +22,11 @@ class LocationMenuImages extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              context.tr.menuLabel,
+              context.tr.locationPhoto,
               style: context.textTheme.headlineSmall,
             ),
             const Divider(),
-            MenuImagesSmallSlider(
+            LocationImagesSmallSlider(
               id: id,
             ),
           ],

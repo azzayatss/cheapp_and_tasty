@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
 import 'package:flutter/material.dart';
 
 class PickedImagesSlider extends StatelessWidget {

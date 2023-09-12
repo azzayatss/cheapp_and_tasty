@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RateBarDisplaymentWidget extends ConsumerWidget {
-  const RateBarDisplaymentWidget({
+class RateBarWidget extends ConsumerWidget {
+  const RateBarWidget({
     required this.location,
     required this.textStyle,
     required this.starSize,

@@ -26,4 +26,8 @@ class LocationEntity with _$LocationEntity {
 
   factory LocationEntity.fromJson(Map<String, dynamic> json) =>
       _$LocationEntityFromJson(json);
+
+
+
+  
 }
