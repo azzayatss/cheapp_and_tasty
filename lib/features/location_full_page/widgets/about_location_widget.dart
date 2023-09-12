@@ -71,23 +71,6 @@ class AboutLocationWidget extends ConsumerWidget {
                 const SizedBox(
                   height: AppLayouts.defaultPadding,
                 ),
-                const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.reviews_outlined),
-                    SizedBox(
-                      width: AppLayouts.defaultPadding / 2,
-                    ),
-                    Expanded(
-                      child: Text(
-                        'ВІДГУК',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: AppLayouts.defaultPadding,
-                ),
                 Row(
                   children: [
                     const Icon(Icons.person_2_outlined),

@@ -15,7 +15,7 @@ import 'package:cheapp_and_tasty/features/location/repositories/locations_reposi
 import 'package:cheapp_and_tasty/features/location/widgets/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/reviews/entities/review_entity.dart';
 import 'package:cheapp_and_tasty/features/reviews/repositories/reviews_repository.dart';
-import 'package:cheapp_and_tasty/features/reviews/widgets/review_widget.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/add_review_widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -210,7 +210,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                       ),
                       const SizedBox(height: AppLayouts.defaultPadding),
 
-                      ReviewWidget(
+                      AddReviewWidget(
                         isInitial: true,
                         initialController: locationReviewCommentController,
                         initialOnRatingUpdate: (rating) {

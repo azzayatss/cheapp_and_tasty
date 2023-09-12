@@ -2,8 +2,8 @@ import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class AddRatingWidget extends StatelessWidget {
-  const AddRatingWidget({
+class RatingBarWidget extends StatelessWidget {
+  const RatingBarWidget({
     required this.onRatingUpdate,
     required this.initialRating,
     super.key,

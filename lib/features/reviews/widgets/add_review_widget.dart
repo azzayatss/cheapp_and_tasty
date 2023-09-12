@@ -3,14 +3,14 @@ import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
 import 'package:cheapp_and_tasty/features/reviews/entities/review_entity.dart';
 import 'package:cheapp_and_tasty/features/reviews/repositories/reviews_repository.dart';
-import 'package:cheapp_and_tasty/features/reviews/widgets/add_rating_widget.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/rating_bar_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ReviewWidget extends HookConsumerWidget {
-  const ReviewWidget({
+class AddReviewWidget extends HookConsumerWidget {
+  const AddReviewWidget({
     required this.isInitial,
     this.initialOnRatingUpdate,
     this.initialController,
@@ -110,7 +110,7 @@ class ReviewBody extends StatelessWidget {
         const SizedBox(
           height: AppLayouts.defaultPadding,
         ),
-        AddRatingWidget(
+        RatingBarWidget(
           onRatingUpdate: isInitial
               ? initialOnRatingUpdate!
               : (rating) {
