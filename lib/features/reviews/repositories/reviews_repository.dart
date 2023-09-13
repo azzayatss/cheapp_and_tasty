@@ -7,7 +7,7 @@ part 'reviews_repository.g.dart';
 class ReviewsRepository {
   final database = FirebaseFirestore.instance;
 
-  Future<DocumentReference<Map<String, dynamic>>> addReview({
+  Future<DocumentReference<Map<String, dynamic>>> addInitialReview({
     required Map<String, dynamic> newReview,
     required String locationId,
   }) async {
@@ -22,6 +22,37 @@ class ReviewsRepository {
         .doc(querySnapshotId)
         .collection('reviews')
         .add(newReview);
+  }
+
+  Future<void> addExistingReview({
+    required Map<String, dynamic> newReview,
+    required String locationId,
+    required String user,
+  }) async {
+    final querySnapshot = await database
+        .collection('locations')
+        .where('locationId', isEqualTo: locationId)
+        .get();
+    final querySnapshotId = querySnapshot.docs.first.id;
+
+    final reviewsSnapshot = await database
+        .collection('locations')
+        .doc(querySnapshotId)
+        .collection('reviews')
+        .where('user', isEqualTo: user)
+        .get();
+
+    if (reviewsSnapshot.docs.isNotEmpty) {
+      final duplicatedReviewId = reviewsSnapshot.docs.first.id;
+      await database
+          .collection('locations')
+          .doc(querySnapshotId)
+          .collection('reviews')
+          .doc(duplicatedReviewId)
+          .set(newReview);
+    } else {
+      await addInitialReview(newReview: newReview, locationId: locationId);
+    }
   }
 
   Future<List<ReviewEntity>> getLocationReviews({

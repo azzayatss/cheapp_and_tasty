@@ -151,9 +151,10 @@ class ReviewBody extends StatelessWidget {
                   creationDate: DateTime.now(),
                 );
 
-                ReviewsRepository().addReview(
+                ReviewsRepository().addExistingReview(
                   newReview: newReview.toJson(),
                   locationId: locationId!,
+                  user: user?.email ?? '',
                 );
 
                 ScaffoldMessenger.of(context).showSnackBar(

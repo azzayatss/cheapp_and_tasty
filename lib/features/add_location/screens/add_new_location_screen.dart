@@ -409,7 +409,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                 LocationRepository()
                                     .addLocation(newLocation.toJson());
 
-                                ReviewsRepository().addReview(
+                                ReviewsRepository().addInitialReview(
                                   newReview: newReview.toJson(),
                                   locationId: locationId.value,
                                 );
