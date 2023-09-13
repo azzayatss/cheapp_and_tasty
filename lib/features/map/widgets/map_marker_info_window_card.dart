@@ -5,6 +5,7 @@ import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart
 import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/average_rating_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -46,12 +47,14 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
             const VerticalDivider(),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     location.locationName.toUpperCase(),
-                    style: context.textTheme.labelMedium,
+                    style: context.textTheme.labelLarge,
+                  ),
+                  AverageRatingBar(
+                    locationId: location.locationId,
                   ),
                   const SizedBox(
                     height: AppLayouts.defaultPadding / 2,
@@ -74,7 +77,7 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: AppLayouts.defaultPadding / 3,
+                    height: AppLayouts.defaultPadding / 2,
                   ),
                   Row(
                     children: [
@@ -92,6 +95,9 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: AppLayouts.defaultPadding / 2,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

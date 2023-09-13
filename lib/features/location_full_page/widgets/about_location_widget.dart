@@ -8,6 +8,7 @@ import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_schedule_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/average_rating_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -53,8 +54,11 @@ class AboutLocationWidget extends ConsumerWidget {
                   location.locationName.toUpperCase(),
                   style: context.textTheme.titleLarge,
                 ),
+                AverageRatingBar(
+                  locationId: location.locationId,
+                ),
                 const SizedBox(
-                  height: AppLayouts.defaultPadding / 2,
+                  height: AppLayouts.defaultPadding,
                 ),
                 Text(
                   location.locationDescription,

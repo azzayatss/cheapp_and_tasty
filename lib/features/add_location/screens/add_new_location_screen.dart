@@ -45,6 +45,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
     final showEmptyLocationPhotosAlert = useState(false);
     final showEmptyAddresAlert = useState(false);
 
+    final wasTouched = useState<bool>(false);
     final locationId = useState<String>('');
     final locationRate = useState<double>(0);
     final locationReviewCommentController = useTextEditingController();
@@ -215,6 +216,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                         initialController: locationReviewCommentController,
                         initialOnRatingUpdate: (rating) {
                           locationRate.value = rating;
+                          wasTouched.value = true;
                         },
                       ),
 
@@ -362,9 +364,20 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                     !showEmptyAddresAlert.value;
                               }
 
+                              if (wasTouched.value == false) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Рейтинг є обовязковим для заповнення.',
+                                    ),
+                                  ),
+                                );
+                              }
+
                               final valid =
                                   formKey.currentState?.validate() ?? false;
-                              if (valid == true) {
+
+                              if (valid == true && wasTouched.value == true) {
                                 locationId.value = const Uuid().v4();
                                 final newLocation = LocationEntity(
                                   locationName: locationNameController.text,
@@ -404,9 +417,9 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                 context.pop();
 
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
                                     content: Text(
-                                      'Location added successfully, update screen to see it.',
+                                      context.tr.locationAdded,
                                     ),
                                   ),
                                 );

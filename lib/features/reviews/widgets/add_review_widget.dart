@@ -7,6 +7,7 @@ import 'package:cheapp_and_tasty/features/reviews/widgets/rating_bar_widget.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddReviewWidget extends HookConsumerWidget {
@@ -26,7 +27,7 @@ class AddReviewWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(signInControllerProvider);
-    final rate = useState(isInitial ? 3.0 : 0.0);
+    final rate = useState<double>(0);
     final controller = useTextEditingController();
 
     return user.when(
@@ -131,6 +132,10 @@ class ReviewBody extends StatelessWidget {
                 ? context.tr.locationReviewLabel
                 : context.tr.leaveYourFeedback,
           ),
+          validator: ValidationBuilder()
+              .required(context.tr.requiredField)
+              .minLength(6)
+              .build(),
         ),
         if (!isInitial) ...[
           const SizedBox(

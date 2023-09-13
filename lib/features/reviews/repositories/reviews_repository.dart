@@ -32,16 +32,45 @@ class ReviewsRepository {
         .where('locationId', isEqualTo: locationId)
         .get();
 
-       final querySnapshotId = querySnapshot.docs.first.id;
-       
-       final reviewsSnapshot = await database
-        .collection('locations').doc(querySnapshotId).collection('reviews').get();
+    final querySnapshotId = querySnapshot.docs.first.id;
 
-        final reviews =
-        reviewsSnapshot.docs.map((e) => ReviewEntity.fromJson(e.data())).toList();
+    final reviewsSnapshot = await database
+        .collection('locations')
+        .doc(querySnapshotId)
+        .collection('reviews')
+        .get();
+
+    final reviews = reviewsSnapshot.docs
+        .map((e) => ReviewEntity.fromJson(e.data()))
+        .toList();
 
     return reviews;
+  }
 
+  Future<List<double>> getAverageLocationRating({
+    required String locationId,
+  }) async {
+    final reviews = await getLocationReviews(locationId: locationId);
+
+    final rates = <double>[];
+
+    for (var i = 0; i < reviews.length; i++) {
+      rates.add(reviews[i].rate);
+    }
+
+    final ratesSum = rates.fold<double>(
+      0,
+      (previousValue, element) => previousValue + element,
+    );
+    final ratesLength = rates.length;
+    final averageRate = ratesSum / ratesLength;
+
+    final list = <double>[];
+
+    list.add(averageRate);
+    list.add(ratesLength.toDouble());
+
+    return list;
   }
 }
 

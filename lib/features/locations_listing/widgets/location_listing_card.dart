@@ -5,6 +5,7 @@ import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_adress_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_schedule_with_icon_row.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/widgets/distance_to_location_with_icon_row.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/average_rating_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -44,6 +45,7 @@ class LocationListingCard extends StatelessWidget {
               item.locationName.toUpperCase(),
               style: context.textTheme.titleLarge,
             ),
+            AverageRatingBar(locationId: item.locationId),
             const Divider(),
             Text(
               item.locationDescription,
