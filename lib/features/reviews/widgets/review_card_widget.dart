@@ -9,7 +9,6 @@ class ReviewCardWidget extends StatelessWidget {
     required this.user,
     required this.rate,
     required this.comment,
-    this.isFullScreen,
     super.key,
   });
 
@@ -17,7 +16,6 @@ class ReviewCardWidget extends StatelessWidget {
   final String user;
   final String rate;
   final String comment;
-  final bool? isFullScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class ReviewCardWidget extends StatelessWidget {
           AppLayouts.defaultPadding,
         ),
         child: SizedBox(
-          width: isFullScreen ?? false ? null : 225,
+          width: 225,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

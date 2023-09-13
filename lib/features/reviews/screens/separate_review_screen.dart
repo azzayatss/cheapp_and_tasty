@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
-import 'package:cheapp_and_tasty/features/reviews/widgets/review_card_widget.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/full_screen_review_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -30,12 +30,11 @@ class SeparateReviewScreen extends ConsumerWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-          child: ReviewCardWidget(
+          child: FullScreenReviewCardWidget(
             creationDate: creationDate,
             user: user,
             rate: rate,
             comment: comment,
-            isFullScreen: true,
           ),
         ),
       ),
