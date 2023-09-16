@@ -22,7 +22,7 @@ class AverageRatingBar extends ConsumerWidget {
         return Row(
           children: [
             Text(
-              '${rate[0]}',
+              rate[0].toStringAsFixed(1),
               style: context.textTheme.labelSmall,
             ),
             const SizedBox(
