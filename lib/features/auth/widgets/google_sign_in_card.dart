@@ -20,7 +20,7 @@ class GoogleSignInCard extends ConsumerWidget {
               context.tr.googleLogInHint,
             ),
             const SizedBox(
-              height: AppLayouts.defaultPadding,
+              height: AppLayouts.defaultPadding / 2,
             ),
             SignInButton(
               Buttons.GoogleDark,

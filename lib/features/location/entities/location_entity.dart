@@ -13,8 +13,6 @@ class LocationEntity with _$LocationEntity {
     required double locationLongitude,
     required String locationAdress,
     required String locationWorkingSchedule,
-    required String locationReviews,
-    required double locationRate,
     required String personWhoAddedLocation,
     required DateTime dateTimeWhenLocationAdded,
     required List<String> locationMenuImages,

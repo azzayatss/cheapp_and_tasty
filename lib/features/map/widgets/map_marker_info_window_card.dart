@@ -1,13 +1,12 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/helpers/app_helpers.dart';
-import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/image_place_holder.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
+import 'package:cheapp_and_tasty/features/reviews/widgets/average_rating_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -48,39 +47,14 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
             const VerticalDivider(),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     location.locationName.toUpperCase(),
-                    style: context.textTheme.labelMedium,
+                    style: context.textTheme.labelLarge,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        '${location.locationRate}',
-                        style: context.textTheme.labelMedium,
-                      ),
-                      const SizedBox(
-                        width: AppLayouts.defaultPadding / 4,
-                      ),
-                      RatingBarIndicator(
-                        itemSize: 12,
-                        rating: location.locationRate,
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: AppColors.starIconColor,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: AppLayouts.defaultPadding / 4,
-                      ),
-                      Text(
-                        //TODO azzayats feature: replace harcoded data with real rates quantity
-                        '(234)',
-                        style: context.textTheme.labelMedium,
-                      ),
-                    ],
+                  AverageRatingBar(
+                    locationId: location.locationId,
                   ),
                   const SizedBox(
                     height: AppLayouts.defaultPadding / 2,
@@ -103,7 +77,7 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: AppLayouts.defaultPadding / 3,
+                    height: AppLayouts.defaultPadding / 2,
                   ),
                   Row(
                     children: [
@@ -121,6 +95,9 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: AppLayouts.defaultPadding / 2,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

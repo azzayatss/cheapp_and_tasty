@@ -10,9 +10,6 @@ class AppTheme {
       ),
       colorSchemeSeed: AppColors.appSeedColor,
       useMaterial3: true,
-      inputDecorationTheme: const InputDecorationTheme(
-        filled: true,
-      ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedIconTheme: IconThemeData(
           color: Colors.indigoAccent,
@@ -31,9 +28,6 @@ class AppTheme {
       ),
       colorSchemeSeed: AppColors.appSeedColor,
       useMaterial3: true,
-      inputDecorationTheme: const InputDecorationTheme(
-        filled: true,
-      ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedIconTheme: IconThemeData(
           color: Colors.indigoAccent,

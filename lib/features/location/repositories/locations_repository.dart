@@ -10,7 +10,7 @@ class LocationRepository {
   Future<DocumentReference<Map<String, dynamic>>> addLocation(
     Map<String, dynamic> locationData,
   ) async {
-    return database.collection('locations').add(locationData);
+    return  database.collection('locations').add(locationData);
   }
 
   // Future<LocationEntity> getLocationData() async {
@@ -29,6 +29,28 @@ class LocationRepository {
         snapshot.docs.map((e) => LocationEntity.fromJson(e.data())).toList();
 
     return locations;
+  }
+
+  Future<void> updateLocationRate(
+    String locationId,
+    Map<Object, Object?> newRates,
+    Map<Object, Object?> newVotedPersons,
+  ) async {
+    final querySnapshot = await database
+        .collection('locations')
+        .where('locationId', isEqualTo: locationId)
+        .get();
+    final querySnapshotId = querySnapshot.docs.first.id;
+
+    await database
+        .collection('locations')
+        .doc(querySnapshotId)
+        .update(newRates);
+
+    await database
+        .collection('locations')
+        .doc(querySnapshotId)
+        .update(newVotedPersons);
   }
 }
 

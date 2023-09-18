@@ -1,13 +1,15 @@
+import 'package:cheapp_and_tasty/features/add_location/screens/add_new_location_screen.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/is_logged_in_controller.dart';
 import 'package:cheapp_and_tasty/features/auth/screens/auth_gate_screen.dart';
+import 'package:cheapp_and_tasty/features/auth/widgets/reset_password_screen.dart';
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
-import 'package:cheapp_and_tasty/features/location/add_location/screens/add_new_location_screen.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/screeens/location_full_page_screen.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_images_full_screen_slider.dart';
-import 'package:cheapp_and_tasty/features/location/location_full_page/widgets/location_menu_full_screen_slider.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/screens/locations_listing_screen.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_images_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_menu_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/screens/locations_listing_screen.dart';
 import 'package:cheapp_and_tasty/features/main_scaffold/screens/main_scaffold_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
+import 'package:cheapp_and_tasty/features/reviews/screens/separate_review_screen.dart';
 import 'package:cheapp_and_tasty/features/settings/screens/app_theme_mode_screen.dart';
 import 'package:cheapp_and_tasty/features/settings/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +83,16 @@ GoRouter router(RouterRef ref) {
                       id: state.pathParameters['idImages']!,
                     ),
                   ),
+                  GoRoute(
+                    path: SeparateReviewScreen.route,
+                    name: SeparateReviewScreen.routeName,
+                    builder: (context, state) => SeparateReviewScreen(
+                      creationDate: state.pathParameters['creationDate']!,
+                      user: state.pathParameters['user']!,
+                      rate: state.pathParameters['rate']!,
+                      comment: state.pathParameters['comment']!,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -104,6 +116,13 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: AuthGateScreen.route,
         builder: (context, state) => const AuthGateScreen(),
+        routes: [
+          GoRoute(
+            path: ResetPasswordScreen.route,
+            name: ResetPasswordScreen.routeName,
+            builder: (context, state) => const ResetPasswordScreen(),
+          ),
+        ],
       ),
     ],
     redirect: (context, state) {

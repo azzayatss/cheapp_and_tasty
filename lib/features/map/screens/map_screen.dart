@@ -3,7 +3,7 @@
 
 import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
 import 'package:cheapp_and_tasty/features/map/hooks/map_controller_hook.dart';
 import 'package:cheapp_and_tasty/features/map/widgets/map_marker_info_window_card.dart';

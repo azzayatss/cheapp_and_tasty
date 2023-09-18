@@ -12,15 +12,6 @@ class SignInController extends _$SignInController {
     return FirebaseAuth.instance.currentUser;
   }
 
-  //TODO azzayats: винести це в окремий провайдер (булка якщо саксес і тд).
-  Future<void> resetPassword(String email, BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
-    }
-  }
-
   Future<void> signInWithEmail(
     String email,
     String password,
@@ -88,6 +79,24 @@ class SignInController extends _$SignInController {
       );
 
       state = AsyncValue.data(result.user);
+    } on FirebaseAuthException catch (e) {
+      state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
+    }
+  }
+}
+
+@riverpod
+class ResetPassword extends _$ResetPassword {
+  @override
+  FutureOr<bool> build() {
+    return false;
+  }
+
+  Future<void> resetPassword(String email) async {
+    state = const AsyncLoading();
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      state = const AsyncData(true);
     } on FirebaseAuthException catch (e) {
       state = AsyncValue.error(e, e.stackTrace ?? StackTrace.current);
     }

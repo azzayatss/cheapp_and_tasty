@@ -1,9 +1,9 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.dart';
-import 'package:cheapp_and_tasty/features/auth/widgets/google_sign_in_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SignUpForm extends HookWidget {
@@ -11,33 +11,31 @@ class SignUpForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showEmptyTermsAndConditionsWarning = useState(false);
+    final formKey = useMemoized(GlobalKey<FormState>.new);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final obscureText = useState(true);
-    final termsAndConditions = useState(true);
+    final termsAndConditions = useState(false);
     final newsSubscription = useState(true);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(AppLayouts.defaultPadding),
-        child: SingleChildScrollView(
+        child: Form(
+          key: formKey,
           child: Column(
             children: [
-              const SizedBox(
-                height: AppLayouts.spacer / 2,
-              ),
-              Text(
-                context.tr.signUpEmoji,
-                style: const TextStyle(fontSize: AppLayouts.emojiSize),
-              ),
-              const SizedBox(
-                height: AppLayouts.defaultPadding,
-              ),
               TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
                   hintText: context.tr.emailFormHint,
                 ),
                 keyboardType: TextInputType.emailAddress,
+                validator: ValidationBuilder()
+                    .required()
+                    .email()
+                    .maxLength(50)
+                    .build(),
               ),
               const SizedBox(
                 height: AppLayouts.defaultPadding,
@@ -57,21 +55,58 @@ class SignUpForm extends HookWidget {
                   ),
                 ),
                 keyboardType: TextInputType.visiblePassword,
+                validator: ValidationBuilder().required().minLength(6).build(),
               ),
-              Row(
+              const SizedBox(
+                height: AppLayouts.defaultPadding / 2,
+              ),
+              Column(
                 children: [
-                  Checkbox(
-                    value: termsAndConditions.value,
-                    onChanged: (_) =>
-                        termsAndConditions.value = !termsAndConditions.value,
+                  Row(
+                    children: [
+                      Checkbox(
+                        side: showEmptyTermsAndConditionsWarning.value == true
+                            ? MaterialStateBorderSide.resolveWith(
+                                (states) => const BorderSide(color: Colors.red),
+                              )
+                            : null,
+                        value: termsAndConditions.value,
+                        onChanged: (_) {
+                          termsAndConditions.value = !termsAndConditions.value;
+
+                          if (showEmptyTermsAndConditionsWarning.value ==
+                              true) {
+                            showEmptyTermsAndConditionsWarning.value =
+                                !showEmptyTermsAndConditionsWarning.value;
+                          }
+                        },
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          context.tr.termsAndConditionsCheckBoxText,
+                        ),
+                        onTap: () => termsAndConditions.value =
+                            !termsAndConditions.value,
+                      ),
+                    ],
                   ),
-                  GestureDetector(
-                    child: Text(
-                      context.tr.termsAndConditionsCheckBoxText,
+                  if (showEmptyTermsAndConditionsWarning.value ==
+                      true) ...<Widget>[
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: AppLayouts.defaultPadding * 3,
+                        ),
+                        Expanded(
+                          child: Text(
+                            context.tr.emptyTermsAndConditionsWarning,
+                            style: context.textTheme.labelSmall!
+                                .copyWith(color: Colors.red),
+                          ),
+                        ),
+                      ],
                     ),
-                    onTap: () =>
-                        termsAndConditions.value = !termsAndConditions.value,
-                  ),
+                  ],
                 ],
               ),
               Row(
@@ -91,7 +126,7 @@ class SignUpForm extends HookWidget {
                 ],
               ),
               const SizedBox(
-                height: AppLayouts.defaultPadding,
+                height: AppLayouts.defaultPadding / 2,
               ),
               Consumer(
                 builder: (context, ref, child) {
@@ -100,11 +135,22 @@ class SignUpForm extends HookWidget {
                     onPressed: signUpProcess.isLoading
                         ? null
                         : () {
-                            ref.read(signInControllerProvider.notifier).signUp(
-                                  emailController.text,
-                                  passwordController.text,
-                                  context,
-                                );
+                            if (termsAndConditions.value == true) {
+                              final valid =
+                                  formKey.currentState?.validate() ?? false;
+                              if (valid == true) {
+                                ref
+                                    .read(signInControllerProvider.notifier)
+                                    .signUp(
+                                      emailController.text,
+                                      passwordController.text,
+                                      context,
+                                    );
+                              }
+                            } else {
+                              showEmptyTermsAndConditionsWarning.value =
+                                  !showEmptyTermsAndConditionsWarning.value;
+                            }
                           },
                     child: Text(context.tr.signUp),
                   );
@@ -113,7 +159,6 @@ class SignUpForm extends HookWidget {
               const SizedBox(
                 height: AppLayouts.defaultPadding,
               ),
-              const GoogleSignInCard(),
             ],
           ),
         ),

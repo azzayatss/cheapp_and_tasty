@@ -1,7 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/config/theme/app_colors.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/location/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/map/widgets/map_marker_info_window_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -55,6 +55,7 @@ class HomeScreen extends ConsumerWidget {
                       '🎉 ${context.tr.lastAddedLocation}',
                       style: context.textTheme.titleLarge,
                     ),
+                    //TODO azzayas: bug - повертає не останній доданий а останній в списку
                     MapMarkerInfoWindowCard(location: data.last),
                   ],
                 ),
