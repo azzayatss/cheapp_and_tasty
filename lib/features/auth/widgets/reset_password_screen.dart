@@ -4,7 +4,6 @@ import 'package:cheapp_and_tasty/features/auth/controllers/sign_in_controller.da
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ResetPasswordScreen extends HookConsumerWidget {
@@ -22,28 +21,20 @@ class ResetPasswordScreen extends HookConsumerWidget {
     ref.listen(
       resetPasswordProvider,
       (previous, next) {
-        switch (next) {
-          case AsyncError():
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(next.error.toString()),
-              ),
-            );
-            return;
-
-          case AsyncData():
-            if (next.valueOrNull case final completed?) {
-              if (completed) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('email was sent'),
-                  ),
-                );
-                context.pop();
-              }
-              return;
-            }
+        if (next.isLoading) {
+          return;
         }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              switch (next) {
+                AsyncData() when next.valueOrNull ?? false => 'email was sent',
+                AsyncError() => next.error.toString(),
+                _ => '',
+              },
+            ),
+          ),
+        );
       },
     );
     return Scaffold(
