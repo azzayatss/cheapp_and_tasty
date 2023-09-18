@@ -1,7 +1,6 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/add_location/screens/add_new_location_screen.dart';
-import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/widgets/additional_services_filter_bar.dart';
@@ -21,16 +20,17 @@ class LocationsListScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loadMap = ref.watch(loadMapRefProvider);
     final searchController = useTextEditingController();
-    final searchRequest = useState<List<LocationEntity>>([]);
+    // final filteredList = useState<List<LocationEntity>>([]);
 
     return loadMap.when(
       data: (data) {
         final currentPosition =
             ref.watch(currentLocationControllerProvider).valueOrNull;
-        final list = ref.watch(locationListControllerProvider);
+        final allLocationsList = ref.watch(locationListControllerProvider);
 
-        return list.when(
+        return allLocationsList.when(
           data: (list) {
+            final filteredList = ref.watch(filteredLocationsListProvider);
             return SafeArea(
               child: Scaffold(
                 appBar: AppBar(
@@ -85,7 +85,7 @@ class LocationsListScreen extends HookConsumerWidget {
                                                 const Icon(Icons.search),
                                           ),
                                           onChanged: (value) {
-                                            searchRequest.value = list
+                                            final searchRequest = list
                                                 .where(
                                                   (location) => location
                                                       .locationName
@@ -95,6 +95,13 @@ class LocationsListScreen extends HookConsumerWidget {
                                                       ),
                                                 )
                                                 .toList();
+
+                                            ref
+                                                .read(
+                                                  filteredLocationsListProvider
+                                                      .notifier,
+                                                )
+                                                .search(searchRequest);
                                           },
                                         ),
                                       ),
@@ -107,19 +114,21 @@ class LocationsListScreen extends HookConsumerWidget {
                                   const SizedBox(
                                     height: AppLayouts.defaultPadding,
                                   ),
-                                  const AdditionalServicesFilterBar(),
+                                  AdditionalServicesFilterBar(
+                                    allLocationsList: list,
+                                  ),
                                 ],
                               ),
                             ),
                             Flexible(
                               child: ListView.builder(
-                                itemCount: searchRequest.value.isEmpty
+                                itemCount: filteredList.isEmpty
                                     ? list.length
-                                    : searchRequest.value.length,
+                                    : filteredList.length,
                                 itemBuilder: (context, index) {
-                                  final item = searchRequest.value.isEmpty
+                                  final item = filteredList.isEmpty
                                       ? list[index]
-                                      : searchRequest.value[index];
+                                      : filteredList[index];
                                   return Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                       AppLayouts.defaultPadding,

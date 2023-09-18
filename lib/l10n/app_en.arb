@@ -70,6 +70,7 @@
   "reviews": "Reviews:",
   "save": "Save",
   "search": "Search",
+  "searchCriteriaDoesNotMeetAnyLocation": "There are no locations that meet the search criteria.",
   "signIn": "Sign In",
   "signInEmoji": "🔐",
   "signUp": "Sign Up",
