@@ -2,9 +2,9 @@ import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/add_location/screens/add_new_location_screen.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
-import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/widgets/additional_services_filter_bar.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/widgets/location_listing_card.dart';
 import 'package:cheapp_and_tasty/features/map/controllers/current_location_controller.dart';
 import 'package:flutter/material.dart';
@@ -176,54 +176,6 @@ class LocationsListScreen extends HookConsumerWidget {
       ),
       loading: () => const Center(
         child: CircularProgressIndicator.adaptive(),
-      ),
-    );
-  }
-}
-
-class AdditionalServicesFilterBar extends StatefulWidget {
-  const AdditionalServicesFilterBar({
-    super.key,
-  });
-
-  @override
-  State<AdditionalServicesFilterBar> createState() =>
-      _AdditionalServicesFilterBarState();
-}
-
-class _AdditionalServicesFilterBarState
-    extends State<AdditionalServicesFilterBar> {
-  final generedList =
-      List.generate(AdditionalServicesChips.values.length, (index) => false);
-
-  @override
-  Widget build(BuildContext context) {
-    final chipIsSelected = generedList;
-
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: AdditionalServicesChips.values.length,
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppLayouts.defaultPadding / 8,
-          ),
-          child: FilterChip(
-            avatar: chipIsSelected[index]
-                ? null
-                : Icon(AdditionalServicesChips.values[index].icon),
-            selected: chipIsSelected[index],
-            label: Text(
-              AdditionalServicesChips.values[index].name,
-            ),
-            onSelected: (selected) {
-              setState(() {
-                chipIsSelected[index] = !chipIsSelected[index];
-              });
-            },
-          ),
-        ),
       ),
     );
   }
