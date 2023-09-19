@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/features/home/screens/home_screen.dart';
-import 'package:cheapp_and_tasty/features/locations_listing/screens/locations_listing_screen.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/screens/listing_screen.dart';
 import 'package:cheapp_and_tasty/features/map/screens/map_screen.dart';
 import 'package:cheapp_and_tasty/features/settings/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ enum MenuItems {
   list(
     activeIcon: Icon(Icons.list),
     icon: Icon(Icons.list_outlined),
-    route: LocationsListScreen.route,
+    route: ListingScreen.route,
   ),
   settings(
     activeIcon: Icon(Icons.settings),

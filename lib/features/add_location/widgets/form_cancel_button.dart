@@ -1,5 +1,5 @@
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
-import 'package:cheapp_and_tasty/features/locations_listing/screens/locations_listing_screen.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/screens/listing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -31,7 +31,7 @@ class FormCancelButton extends StatelessWidget {
                   onPressed: () {
                     context
                       ..pop()
-                      ..go(LocationsListScreen.route);
+                      ..go(ListingScreen.route);
                   },
                   child: Text(context.tr.cancelCreating),
                 ),
