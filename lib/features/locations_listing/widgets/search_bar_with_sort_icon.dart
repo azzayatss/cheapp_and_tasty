@@ -12,6 +12,7 @@ class SearchBarWithSortIcon extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchController = useTextEditingController();
+    final lengthCheck = useState('');
     return Row(
       children: [
         Expanded(
@@ -23,7 +24,15 @@ class SearchBarWithSortIcon extends HookConsumerWidget {
               prefixIcon: const Icon(Icons.search),
             ),
             onChanged: (value) {
-              ref.read(searchBarStateControllerProvider.notifier).update(value);
+              if (value.length < 3) {
+                lengthCheck.value = '';
+              } else {
+                lengthCheck.value = value;
+              }
+
+              ref
+                  .read(searchBarStateControllerProvider.notifier)
+                  .update(lengthCheck.value);
             },
           ),
         ),
