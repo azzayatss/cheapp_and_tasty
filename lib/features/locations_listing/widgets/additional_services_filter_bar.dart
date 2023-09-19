@@ -1,6 +1,7 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/enums/additional_services_chips.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,8 @@ class AdditionalServicesFilterBar extends HookConsumerWidget {
     final selectedChips = useState<Map<AdditionalServicesChips, bool>>({
       for (final i in AdditionalServicesChips.values) i: false,
     });
+
+    final selectedChipsList = useState(<String>[]);
 
     return SizedBox(
       height: 40,
@@ -37,6 +40,14 @@ class AdditionalServicesFilterBar extends HookConsumerWidget {
               onSelected: (selected) {
                 selectedChips.value =
                     Map.from(selectedChips.value..[chip] = selected);
+
+                selectedChipsList.value = selectedChips.value.entries
+                    .where((element) => element.value == true)
+                    .map((e) => e.key.name)
+                    .toList();
+                ref
+                    .read(filterChipsControllerProvider.notifier)
+                    .update(selectedChipsList.value);
               },
             ),
           );

@@ -22,6 +22,12 @@ class SearchBarWithSortIcon extends HookConsumerWidget {
               labelText: context.tr.search,
               hintText: context.tr.search,
               prefixIcon: const Icon(Icons.search),
+              suffixIcon: lengthCheck.value == ''
+                  ? null
+                  : IconButton(
+                      onPressed: searchController.clear,
+                      icon: const Icon(Icons.clear),
+                    ),
             ),
             onChanged: (value) {
               if (value.length < 3) {

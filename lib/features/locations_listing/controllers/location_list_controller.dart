@@ -25,47 +25,36 @@ class SearchBarStateController extends _$SearchBarStateController {
 }
 
 @riverpod
+class FilterChipsController extends _$FilterChipsController {
+  @override
+  List<String> build() {
+    return [];
+  }
+
+  void update(List<String> selectedChipsList) {
+    state = [...selectedChipsList];
+  }
+}
+
+@riverpod
 class FilteredLocationsList extends _$FilteredLocationsList {
   @override
-  Future<List<LocationEntity>> build(String searchRequest) async {
+  Future<List<LocationEntity>> build(
+    String searchRequest,
+    List<String> selectedChips,
+  ) async {
     final locations = await ref.watch(locationListControllerProvider.future);
 
     return locations
         .where(
-          (element) => element.locationName
-              .toLowerCase()
-              .contains(searchRequest.toLowerCase()),
+          (element) =>
+              element.locationName
+                  .toLowerCase()
+                  .contains(searchRequest.toLowerCase()) &&
+              selectedChips.every(
+                (service) => element.additionalServicesChips.contains(service),
+              ),
         )
         .toList();
   }
-
-  // void filter(
-  //   List<bool> chipsStateList,
-  //   List<LocationEntity> allLocationsList,
-  //   BuildContext context,
-  // ) {
-  //   final selectedChips = <String>[];
-  //   for (var i = 0; i < chipsStateList.length; i++) {
-  //     if (chipsStateList[i] == true) {
-  //       selectedChips.add(AdditionalServicesChips.values[i].name);
-  //     }
-  //   }
-
-  //   final filteredList = allLocationsList.where((element) {
-  //     return selectedChips.every(
-  //       (service) => element.additionalServicesChips.contains(service),
-  //     );
-  //   }).toList();
-  //   if (filteredList.isNotEmpty) {
-  //     state = [...filteredList];
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(
-  //           context.tr.searchCriteriaDoesNotMeetAnyLocation,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
 }

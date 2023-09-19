@@ -13,11 +13,12 @@ class ListingBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedChips = ref.watch(filterChipsControllerProvider);
     final searchRequest = ref.watch(searchBarStateControllerProvider);
     final currentPosition =
         ref.watch(currentLocationControllerProvider).valueOrNull;
     final filteredList =
-        ref.watch(filteredLocationsListProvider(searchRequest));
+        ref.watch(filteredLocationsListProvider(searchRequest, selectedChips));
 
     return filteredList.when(
       data: (list) {
