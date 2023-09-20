@@ -397,6 +397,7 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                   additionalServicesChips:
                                       selectedServices.value,
                                   locationCoverPhoto: coverPhotoUrl.value,
+                                  averageRate: locationRate.value,
                                 );
 
                                 final newReview = ReviewEntity(
@@ -413,6 +414,9 @@ class AddNewLocationScreen extends HookConsumerWidget {
                                   newReview: newReview.toJson(),
                                   locationId: locationId.value,
                                 );
+
+                                LocationRepository().updateLocationRate(
+                                    locationId.value, locationRate.value);
 
                                 context.pop();
 

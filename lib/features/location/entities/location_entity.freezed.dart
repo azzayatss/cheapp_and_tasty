@@ -34,6 +34,7 @@ mixin _$LocationEntity {
   List<String> get additionalServicesChips =>
       throw _privateConstructorUsedError;
   String get locationCoverPhoto => throw _privateConstructorUsedError;
+  double? get averageRate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +61,8 @@ abstract class $LocationEntityCopyWith<$Res> {
       List<String> locationMenuImages,
       List<String> locationImages,
       List<String> additionalServicesChips,
-      String locationCoverPhoto});
+      String locationCoverPhoto,
+      double? averageRate});
 }
 
 /// @nodoc
@@ -89,6 +91,7 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
     Object? locationImages = null,
     Object? additionalServicesChips = null,
     Object? locationCoverPhoto = null,
+    Object? averageRate = freezed,
   }) {
     return _then(_value.copyWith(
       locationName: null == locationName
@@ -143,6 +146,10 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
           ? _value.locationCoverPhoto
           : locationCoverPhoto // ignore: cast_nullable_to_non_nullable
               as String,
+      averageRate: freezed == averageRate
+          ? _value.averageRate
+          : averageRate // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -168,7 +175,8 @@ abstract class _$$_LocationEntityCopyWith<$Res>
       List<String> locationMenuImages,
       List<String> locationImages,
       List<String> additionalServicesChips,
-      String locationCoverPhoto});
+      String locationCoverPhoto,
+      double? averageRate});
 }
 
 /// @nodoc
@@ -195,6 +203,7 @@ class __$$_LocationEntityCopyWithImpl<$Res>
     Object? locationImages = null,
     Object? additionalServicesChips = null,
     Object? locationCoverPhoto = null,
+    Object? averageRate = freezed,
   }) {
     return _then(_$_LocationEntity(
       locationName: null == locationName
@@ -249,6 +258,10 @@ class __$$_LocationEntityCopyWithImpl<$Res>
           ? _value.locationCoverPhoto
           : locationCoverPhoto // ignore: cast_nullable_to_non_nullable
               as String,
+      averageRate: freezed == averageRate
+          ? _value.averageRate
+          : averageRate // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -269,7 +282,8 @@ class _$_LocationEntity implements _LocationEntity {
       required final List<String> locationMenuImages,
       required final List<String> locationImages,
       required final List<String> additionalServicesChips,
-      required this.locationCoverPhoto})
+      required this.locationCoverPhoto,
+      this.averageRate})
       : _locationMenuImages = locationMenuImages,
         _locationImages = locationImages,
         _additionalServicesChips = additionalServicesChips;
@@ -323,10 +337,12 @@ class _$_LocationEntity implements _LocationEntity {
 
   @override
   final String locationCoverPhoto;
+  @override
+  final double? averageRate;
 
   @override
   String toString() {
-    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, locationMenuImages: $locationMenuImages, locationImages: $locationImages, additionalServicesChips: $additionalServicesChips, locationCoverPhoto: $locationCoverPhoto)';
+    return 'LocationEntity(locationName: $locationName, locationId: $locationId, locationDescription: $locationDescription, locationLatitude: $locationLatitude, locationLongitude: $locationLongitude, locationAdress: $locationAdress, locationWorkingSchedule: $locationWorkingSchedule, personWhoAddedLocation: $personWhoAddedLocation, dateTimeWhenLocationAdded: $dateTimeWhenLocationAdded, locationMenuImages: $locationMenuImages, locationImages: $locationImages, additionalServicesChips: $additionalServicesChips, locationCoverPhoto: $locationCoverPhoto, averageRate: $averageRate)';
   }
 
   @override
@@ -361,7 +377,9 @@ class _$_LocationEntity implements _LocationEntity {
             const DeepCollectionEquality().equals(
                 other._additionalServicesChips, _additionalServicesChips) &&
             (identical(other.locationCoverPhoto, locationCoverPhoto) ||
-                other.locationCoverPhoto == locationCoverPhoto));
+                other.locationCoverPhoto == locationCoverPhoto) &&
+            (identical(other.averageRate, averageRate) ||
+                other.averageRate == averageRate));
   }
 
   @JsonKey(ignore: true)
@@ -380,7 +398,8 @@ class _$_LocationEntity implements _LocationEntity {
       const DeepCollectionEquality().hash(_locationMenuImages),
       const DeepCollectionEquality().hash(_locationImages),
       const DeepCollectionEquality().hash(_additionalServicesChips),
-      locationCoverPhoto);
+      locationCoverPhoto,
+      averageRate);
 
   @JsonKey(ignore: true)
   @override
@@ -410,7 +429,8 @@ abstract class _LocationEntity implements LocationEntity {
       required final List<String> locationMenuImages,
       required final List<String> locationImages,
       required final List<String> additionalServicesChips,
-      required final String locationCoverPhoto}) = _$_LocationEntity;
+      required final String locationCoverPhoto,
+      final double? averageRate}) = _$_LocationEntity;
 
   factory _LocationEntity.fromJson(Map<String, dynamic> json) =
       _$_LocationEntity.fromJson;
@@ -441,6 +461,8 @@ abstract class _LocationEntity implements LocationEntity {
   List<String> get additionalServicesChips;
   @override
   String get locationCoverPhoto;
+  @override
+  double? get averageRate;
   @override
   @JsonKey(ignore: true)
   _$$_LocationEntityCopyWith<_$_LocationEntity> get copyWith =>

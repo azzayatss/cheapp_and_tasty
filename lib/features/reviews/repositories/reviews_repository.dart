@@ -1,3 +1,4 @@
+import 'package:cheapp_and_tasty/features/location/repositories/locations_repository.dart';
 import 'package:cheapp_and_tasty/features/reviews/entities/review_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -50,8 +51,15 @@ class ReviewsRepository {
           .collection('reviews')
           .doc(duplicatedReviewId)
           .set(newReview);
+
+      final newAverage = await getAverageLocationRating(locationId: locationId);
+
+      await LocationRepository().updateLocationRate(locationId, newAverage[0]);
     } else {
       await addInitialReview(newReview: newReview, locationId: locationId);
+      final newAverage = await getAverageLocationRating(locationId: locationId);
+
+      await LocationRepository().updateLocationRate(locationId, newAverage[0]);
     }
   }
 

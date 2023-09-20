@@ -1,5 +1,6 @@
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/enums/sort_options.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -46,16 +47,59 @@ class SearchBarWithSortIcon extends HookConsumerWidget {
   }
 }
 
-class SortButton extends StatefulWidget {
-  const SortButton({
-    super.key,
-  });
+// class SortButton extends StatefulWidget {
+//   const SortButton({
+//     super.key,
+//   });
+
+//   @override
+//   State<SortButton> createState() => _SortButtonState();
+// }
+
+// class _SortButtonState extends State<SortButton> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: DropdownButtonHideUnderline(
+//         child: DropdownButton2(
+//           customButton: const Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: [
+//               Icon(Icons.sort),
+//               Text('Sort by:'),
+//             ],
+//           ),
+//           items: SortOptions.values
+//               .map(
+//                 (e) => DropdownMenuItem(
+//                   value: e,
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Icon(e.icon),
+//                       Text(e.label),
+//                     ],
+//                   ),
+//                 ),
+//               )
+//               .toList(),
+//           onChanged: (value) {
+//             ref.read(sortedValueProvider.notifier).update(value);
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class SortButton extends ConsumerStatefulWidget {
+  const SortButton({super.key});
 
   @override
-  State<SortButton> createState() => _SortButtonState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SortButtonState();
 }
 
-class _SortButtonState extends State<SortButton> {
+class _SortButtonState extends ConsumerState<SortButton> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -71,9 +115,9 @@ class _SortButtonState extends State<SortButton> {
           items: SortOptions.values
               .map(
                 (e) => DropdownMenuItem(
-                  value: e.name,
+                  value: e,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Icon(e.icon),
                       Text(e.label),
@@ -83,29 +127,12 @@ class _SortButtonState extends State<SortButton> {
               )
               .toList(),
           onChanged: (value) {
-            //!
+            ref
+                .read(sortedValueProvider.notifier)
+                .update(value ?? SortOptions.unsorted);
           },
         ),
       ),
     );
   }
-}
-
-enum SortOptions {
-  byRate(
-    icon: Icons.star,
-    label: 'Highest rated',
-  ),
-  byDistance(
-    icon: Icons.directions_outlined,
-    label: 'Сlosest to you',
-  );
-
-  const SortOptions({
-    required this.icon,
-    required this.label,
-  });
-
-  final IconData icon;
-  final String label;
 }

@@ -1,5 +1,7 @@
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location/repositories/locations_repository.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/enums/sort_options.dart';
+// import 'package:cheapp_and_tasty/features/locations_listing/enums/sort_options.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'location_list_controller.g.dart';
@@ -56,5 +58,17 @@ class FilteredLocationsList extends _$FilteredLocationsList {
               ),
         )
         .toList();
+  }
+}
+
+@riverpod
+class SortedValue extends _$SortedValue {
+  @override
+  SortOptions build() {
+    return SortOptions.unsorted;
+  }
+
+  void update(SortOptions sortBy) {
+    state = sortBy;
   }
 }
