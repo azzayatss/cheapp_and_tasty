@@ -11,4 +11,7 @@ extension BuildContextX on BuildContext {
 
   /// Extension for quickly accessing app [ColorScheme]
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
+  /// Extension for quickly accessing app [Brightness]
+  Brightness get brightness => Theme.of(this).brightness;
 }

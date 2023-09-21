@@ -28,6 +28,7 @@ class SignInForm extends HookWidget {
               TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
+                  label: Text(context.tr.login),
                   hintText: context.tr.emailFormHint,
                 ),
                 keyboardType: TextInputType.emailAddress,
@@ -44,6 +45,7 @@ class SignInForm extends HookWidget {
                 controller: passwordController,
                 obscureText: obscureText.value,
                 decoration: InputDecoration(
+                  label: Text(context.tr.password),
                   hintText: context.tr.passwordFormHint,
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -90,9 +92,6 @@ class SignInForm extends HookWidget {
                     },
                   );
                 },
-              ),
-              const SizedBox(
-                height: AppLayouts.defaultPadding * 2,
               ),
             ],
           ),

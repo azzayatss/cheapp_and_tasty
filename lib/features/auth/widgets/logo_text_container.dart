@@ -12,7 +12,7 @@ class LogoTextContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 5,
-          color: Theme.of(context).brightness == Brightness.dark
+          color: context.brightness == Brightness.dark
               ? Colors.white
               : Colors.black,
         ),
