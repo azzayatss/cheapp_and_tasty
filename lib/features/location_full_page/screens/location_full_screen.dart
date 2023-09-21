@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 class LocationFullScreen extends StatelessWidget {
   const LocationFullScreen({required this.id, super.key});
   final String id;
-  static const route = 'location-full-page/:locationId';
+  static const route = 'location-full-page';
   static const routeName = 'locationfullpage';
 
   @override

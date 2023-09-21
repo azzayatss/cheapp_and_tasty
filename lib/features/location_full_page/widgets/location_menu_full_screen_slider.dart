@@ -8,7 +8,7 @@ class LocationMenuFullScreenSlider extends ConsumerWidget {
     required this.id,
     super.key,
   });
-  static const route = 'menu-full-screen-slider/:id';
+  static const route = 'menu-full-screen-slider';
   static const routeName = 'menuFullScreenSlider';
   final String id;
 

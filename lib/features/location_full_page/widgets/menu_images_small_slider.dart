@@ -36,7 +36,7 @@ class MenuImagesSmallSlider extends ConsumerWidget {
                     onTap: () {
                       context.goNamed(
                         LocationMenuFullScreenSlider.routeName,
-                        pathParameters: {
+                        queryParameters: {
                           'locationId': id,
                           'id': id,
                         },

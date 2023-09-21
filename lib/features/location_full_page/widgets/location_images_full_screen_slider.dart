@@ -8,7 +8,7 @@ class LocationImagesFullScreenSlider extends ConsumerWidget {
     required this.id,
     super.key,
   });
-  static const route = 'location-images-full-screen-slider/:idImages';
+  static const route = 'location-images-full-screen-slider';
   static const routeName = 'locationImagesFullScreenSlider';
   final String id;
 

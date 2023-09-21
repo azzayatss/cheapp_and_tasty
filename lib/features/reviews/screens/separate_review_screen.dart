@@ -17,8 +17,7 @@ class SeparateReviewScreen extends ConsumerWidget {
   final String rate;
   final String comment;
 
-  static const route =
-      'separate-review-screen/:user/:rate/:comment/:creationDate';
+  static const route = 'separate-review-screen';
   static const routeName = 'separateReviewScreen';
 
   @override

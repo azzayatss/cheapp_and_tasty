@@ -66,31 +66,31 @@ GoRouter router(RouterRef ref) {
                 path: LocationFullScreen.route,
                 name: LocationFullScreen.routeName,
                 builder: (context, state) => LocationFullScreen(
-                  id: state.pathParameters['locationId']!,
+                  id: state.queryParameters['locationId']!,
                 ),
                 routes: [
                   GoRoute(
                     path: LocationMenuFullScreenSlider.route,
                     name: LocationMenuFullScreenSlider.routeName,
                     builder: (context, state) => LocationMenuFullScreenSlider(
-                      id: state.pathParameters['id']!,
+                      id: state.queryParameters['id']!,
                     ),
                   ),
                   GoRoute(
                     path: LocationImagesFullScreenSlider.route,
                     name: LocationImagesFullScreenSlider.routeName,
                     builder: (context, state) => LocationImagesFullScreenSlider(
-                      id: state.pathParameters['idImages']!,
+                      id: state.queryParameters['id']!,
                     ),
                   ),
                   GoRoute(
                     path: SeparateReviewScreen.route,
                     name: SeparateReviewScreen.routeName,
                     builder: (context, state) => SeparateReviewScreen(
-                      creationDate: state.pathParameters['creationDate']!,
-                      user: state.pathParameters['user']!,
-                      rate: state.pathParameters['rate']!,
-                      comment: state.pathParameters['comment']!,
+                      creationDate: state.queryParameters['creationDate']!,
+                      user: state.queryParameters['user']!,
+                      rate: state.queryParameters['rate']!,
+                      comment: state.queryParameters['comment']!,
                     ),
                   ),
                 ],

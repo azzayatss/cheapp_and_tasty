@@ -49,7 +49,7 @@ class SeeReviewsWidget extends ConsumerWidget {
                             return GestureDetector(
                               onTap: () => context.pushNamed(
                                 SeparateReviewScreen.routeName,
-                                pathParameters: {
+                                queryParameters: {
                                   'locationId': locationId,
                                   'creationDate': formatedDate,
                                   'user': data[index].user,

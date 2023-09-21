@@ -173,7 +173,7 @@ class ListingBody extends HookConsumerWidget {
                             onTap: () {
                               context.goNamed(
                                 LocationFullScreen.routeName,
-                                pathParameters: {
+                                queryParameters: {
                                   'locationId': item.locationId,
                                 },
                               );

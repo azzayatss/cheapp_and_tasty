@@ -1,6 +1,6 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/widgets/image_place_holder.dart';
-import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_menu_full_screen_slider.dart';
+import 'package:cheapp_and_tasty/features/location_full_page/widgets/location_images_full_screen_slider.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,8 +35,8 @@ class LocationImagesSmallSlider extends ConsumerWidget {
                   child: GestureDetector(
                     onTap: () {
                       context.goNamed(
-                        LocationMenuFullScreenSlider.routeName,
-                        pathParameters: {
+                        LocationImagesFullScreenSlider.routeName,
+                        queryParameters: {
                           'locationId': id,
                           'id': id,
                         },

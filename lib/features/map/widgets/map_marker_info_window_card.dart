@@ -130,7 +130,9 @@ class MapMarkerInfoWindowCard extends ConsumerWidget {
                         onPressed: () {
                           context.pushNamed(
                             LocationFullScreen.routeName,
-                            pathParameters: {'locationId': location.locationId},
+                            queryParameters: {
+                              'locationId': location.locationId,
+                            },
                           );
                         },
                         icon: const Icon(
