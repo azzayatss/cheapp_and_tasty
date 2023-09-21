@@ -1,7 +1,9 @@
 import 'package:cheapp_and_tasty/config/app_layouts.dart';
+import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/distance_to_location_controller.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/enums/sort_options.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/widgets/location_listing_card.dart';
@@ -17,10 +19,14 @@ class ListingBody extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final finalList = useState<List<LocationEntity>>([]);
+
     final selectedChips = ref.watch(filterChipsControllerProvider);
+
     final searchRequest = ref.watch(searchBarStateControllerProvider);
+
     final currentPosition =
         ref.watch(currentLocationControllerProvider).valueOrNull;
+
     final filteredList =
         ref.watch(filteredLocationsListProvider(searchRequest, selectedChips));
 
@@ -35,15 +41,53 @@ class ListingBody extends HookConsumerWidget {
         if (sort == SortOptions.byRate) {
           finalList.value = list
             ..sort(
-              (a, b) => (b.averageRate ?? 0.0).compareTo(a.averageRate ?? 0.0),
+              (a, b) => b.averageRate.compareTo(a.averageRate),
             );
         }
 
         if (sort == SortOptions.byDistance) {
-          finalList.value = list
+          final listWithDistances =
+              <({double distanceToLocation, LocationEntity location})>[];
+          for (var i = 0; i < list.length; i++) {
+            final location = list[i];
+
+            final distanceAndDuration = ref
+                .watch(
+                  distanceToLocationProvider(
+                    currentPositionLatitude:
+                        currentPosition?.latitude ?? AppConstants.lvivLatitude,
+                    currentPositionLongitude: currentPosition?.longitude ??
+                        AppConstants.lvivLongitude,
+                    locationLatitude: location.locationLatitude,
+                    locationLongitude: location.locationLongitude,
+                  ),
+                )
+                .valueOrNull;
+
+            final cleanedString =
+                distanceAndDuration?[0].replaceAll(RegExp(r'[a-zA-Z\s]'), '');
+
+            final distanceInkm = double.tryParse(cleanedString ?? '0.0');
+
+            final locationAndDistanceRecord =
+                (location: location, distanceToLocation: distanceInkm!);
+
+            listWithDistances.add(locationAndDistanceRecord);
+          }
+
+          final sortedListWithDistances = listWithDistances
             ..sort(
-              (a, b) => (a.averageRate ?? 0.0).compareTo(b.averageRate ?? 0.0),
+              (a, b) => a.distanceToLocation.compareTo(b.distanceToLocation),
             );
+
+          final sortedList = <LocationEntity>[];
+
+          for (var i = 0; i < sortedListWithDistances.length; i++) {
+            final location = sortedListWithDistances[i].location;
+            sortedList.add(location);
+          }
+
+          finalList.value = sortedList;
         }
 
         return RefreshIndicator(

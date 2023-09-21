@@ -1,6 +1,6 @@
 class AppConstants {
-  // static const googleMapsApiKey = 'AIzaSyCxUB2zKCIo0BZQXTRNdzEL6NRFhzBFfVM';
-  static const googleMapsApiKey = '';
+  static const googleMapsApiKey = 'AIzaSyCxUB2zKCIo0BZQXTRNdzEL6NRFhzBFfVM';
+  // static const googleMapsApiKey = '';
   static const defaultLatitude = 49.84890577036393;
   static const defaultLongitude = 24.030671653555967;
   static const mapZoomLevel = 13.5;

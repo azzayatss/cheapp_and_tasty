@@ -34,7 +34,7 @@ mixin _$LocationEntity {
   List<String> get additionalServicesChips =>
       throw _privateConstructorUsedError;
   String get locationCoverPhoto => throw _privateConstructorUsedError;
-  double? get averageRate => throw _privateConstructorUsedError;
+  double get averageRate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +62,7 @@ abstract class $LocationEntityCopyWith<$Res> {
       List<String> locationImages,
       List<String> additionalServicesChips,
       String locationCoverPhoto,
-      double? averageRate});
+      double averageRate});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
     Object? locationImages = null,
     Object? additionalServicesChips = null,
     Object? locationCoverPhoto = null,
-    Object? averageRate = freezed,
+    Object? averageRate = null,
   }) {
     return _then(_value.copyWith(
       locationName: null == locationName
@@ -146,10 +146,10 @@ class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
           ? _value.locationCoverPhoto
           : locationCoverPhoto // ignore: cast_nullable_to_non_nullable
               as String,
-      averageRate: freezed == averageRate
+      averageRate: null == averageRate
           ? _value.averageRate
           : averageRate // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
     ) as $Val);
   }
 }
@@ -176,7 +176,7 @@ abstract class _$$_LocationEntityCopyWith<$Res>
       List<String> locationImages,
       List<String> additionalServicesChips,
       String locationCoverPhoto,
-      double? averageRate});
+      double averageRate});
 }
 
 /// @nodoc
@@ -203,7 +203,7 @@ class __$$_LocationEntityCopyWithImpl<$Res>
     Object? locationImages = null,
     Object? additionalServicesChips = null,
     Object? locationCoverPhoto = null,
-    Object? averageRate = freezed,
+    Object? averageRate = null,
   }) {
     return _then(_$_LocationEntity(
       locationName: null == locationName
@@ -258,10 +258,10 @@ class __$$_LocationEntityCopyWithImpl<$Res>
           ? _value.locationCoverPhoto
           : locationCoverPhoto // ignore: cast_nullable_to_non_nullable
               as String,
-      averageRate: freezed == averageRate
+      averageRate: null == averageRate
           ? _value.averageRate
           : averageRate // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
     ));
   }
 }
@@ -283,7 +283,7 @@ class _$_LocationEntity implements _LocationEntity {
       required final List<String> locationImages,
       required final List<String> additionalServicesChips,
       required this.locationCoverPhoto,
-      this.averageRate})
+      required this.averageRate})
       : _locationMenuImages = locationMenuImages,
         _locationImages = locationImages,
         _additionalServicesChips = additionalServicesChips;
@@ -338,7 +338,7 @@ class _$_LocationEntity implements _LocationEntity {
   @override
   final String locationCoverPhoto;
   @override
-  final double? averageRate;
+  final double averageRate;
 
   @override
   String toString() {
@@ -430,7 +430,7 @@ abstract class _LocationEntity implements LocationEntity {
       required final List<String> locationImages,
       required final List<String> additionalServicesChips,
       required final String locationCoverPhoto,
-      final double? averageRate}) = _$_LocationEntity;
+      required final double averageRate}) = _$_LocationEntity;
 
   factory _LocationEntity.fromJson(Map<String, dynamic> json) =
       _$_LocationEntity.fromJson;
@@ -462,7 +462,7 @@ abstract class _LocationEntity implements LocationEntity {
   @override
   String get locationCoverPhoto;
   @override
-  double? get averageRate;
+  double get averageRate;
   @override
   @JsonKey(ignore: true)
   _$$_LocationEntityCopyWith<_$_LocationEntity> get copyWith =>

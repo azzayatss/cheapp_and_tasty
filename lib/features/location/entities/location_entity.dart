@@ -19,7 +19,7 @@ class LocationEntity with _$LocationEntity {
     required List<String> locationImages,
     required List<String> additionalServicesChips,
     required String locationCoverPhoto,
-    double? averageRate,
+    required double averageRate,
   }) = _LocationEntity;
 
   factory LocationEntity.fromJson(Map<String, dynamic> json) =>
