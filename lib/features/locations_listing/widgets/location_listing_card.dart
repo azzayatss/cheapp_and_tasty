@@ -63,8 +63,9 @@ class LocationListingCard extends StatelessWidget {
               height: AppLayouts.defaultPadding / 2,
             ),
             DistanceToLocationWidget(
-              location: item,
-              currentPosition: currentPosition,
+              locationId: item.locationId,
+              // location: item,
+              // currentPosition: currentPosition,
             ),
           ],
         ),

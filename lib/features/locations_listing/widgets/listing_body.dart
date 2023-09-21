@@ -3,7 +3,7 @@ import 'package:cheapp_and_tasty/config/constants/app_constants.dart';
 import 'package:cheapp_and_tasty/extensions/build_context_extension.dart';
 import 'package:cheapp_and_tasty/features/location/entities/location_entity.dart';
 import 'package:cheapp_and_tasty/features/location_full_page/screens/location_full_screen.dart';
-import 'package:cheapp_and_tasty/features/locations_listing/controllers/distance_to_location_controller.dart';
+import 'package:cheapp_and_tasty/features/locations_listing/controllers/get_distance_to_location_controller.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/controllers/location_list_controller.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/enums/sort_options.dart';
 import 'package:cheapp_and_tasty/features/locations_listing/widgets/location_listing_card.dart';
@@ -34,6 +34,16 @@ class ListingBody extends HookConsumerWidget {
 
     return filteredList.when(
       data: (list) {
+        final distancesList = ref.watch(
+          getLocationWithDistanceRecordListProvider(
+            currentPositionLatitude:
+                currentPosition?.latitude ?? AppConstants.lvivLatitude,
+            currentPositionLongitude:
+                currentPosition?.longitude ?? AppConstants.lvivLongitude,
+            locations: list,
+          ),
+        );
+
         if (sort == SortOptions.unsorted) {
           finalList.value = list;
         }
@@ -46,48 +56,77 @@ class ListingBody extends HookConsumerWidget {
         }
 
         if (sort == SortOptions.byDistance) {
-          final listWithDistances =
-              <({double distanceToLocation, LocationEntity location})>[];
-          for (var i = 0; i < list.length; i++) {
-            final location = list[i];
+          distancesList.when(
+            data: (data) {
+              final sortedListWithDistances = data
+                ..sort(
+                  (a, b) => (a.distanceToLocation ?? 0.0)
+                      .compareTo(b.distanceToLocation ?? 0.0),
+                );
 
-            final distanceAndDuration = ref
-                .watch(
-                  distanceToLocationProvider(
-                    currentPositionLatitude:
-                        currentPosition?.latitude ?? AppConstants.lvivLatitude,
-                    currentPositionLongitude: currentPosition?.longitude ??
-                        AppConstants.lvivLongitude,
-                    locationLatitude: location.locationLatitude,
-                    locationLongitude: location.locationLongitude,
-                  ),
-                )
-                .valueOrNull;
+              final sortedList = <LocationEntity>[];
 
-            final cleanedString =
-                distanceAndDuration?[0].replaceAll(RegExp(r'[a-zA-Z\s]'), '');
+              for (var i = 0; i < sortedListWithDistances.length; i++) {
+                final location = sortedListWithDistances[i].location;
+                sortedList.add(location);
+              }
 
-            final distanceInkm = double.tryParse(cleanedString ?? '0.0');
+              finalList.value = sortedList;
+            },
+            error: (error, _) => Center(
+              child: Text(error.toString()),
+            ),
+            loading: () => const Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
 
-            final locationAndDistanceRecord =
-                (location: location, distanceToLocation: distanceInkm!);
+          // final listWithDistances =
+          //     <({double distanceToLocation, LocationEntity location})>[];
+          // for (var i = 0; i < list.length; i++) {
+          //   final location = list[i];
 
-            listWithDistances.add(locationAndDistanceRecord);
-          }
+          //   final distanceAndDuration = ref
+          //       .watch(
+          //         distanceToLocationProvider(
+          //           currentPositionLatitude:
+          //               currentPosition?.latitude ?? AppConstants.lvivLatitude,
+          //           currentPositionLongitude: currentPosition?.longitude ??
+          //               AppConstants.lvivLongitude,
+          //           locationLatitude: location.locationLatitude,
+          //           locationLongitude: location.locationLongitude,
+          //         ),
+          //       )
+          //       .valueOrNull;
 
-          final sortedListWithDistances = listWithDistances
-            ..sort(
-              (a, b) => a.distanceToLocation.compareTo(b.distanceToLocation),
-            );
+          //   final cleanedString =
+          //       distanceAndDuration?[0].replaceAll(RegExp(r'[a-zA-Z\s]'), '');
 
-          final sortedList = <LocationEntity>[];
+          //   final distanceInkm = double.tryParse(cleanedString ?? '0.0');
 
-          for (var i = 0; i < sortedListWithDistances.length; i++) {
-            final location = sortedListWithDistances[i].location;
-            sortedList.add(location);
-          }
+          //   final locationAndDistanceRecord =
+          //       (location: location, distanceToLocation: distanceInkm!);
 
-          finalList.value = sortedList;
+          //   listWithDistances.add(locationAndDistanceRecord);
+          // }
+
+          // ref
+          //     .read(locationsAndDistancesListProvider.notifier)
+          //     .update(listWithDistances);
+
+          // final sortedListWithDistances = listWithDistances
+          //   ..sort(
+          //     (a, b) => a.distanceToLocation.compareTo(b.distanceToLocation),
+          //   );
+
+          // final sortedList = <LocationEntity>[];
+
+          // for (var i = 0; i < sortedListWithDistances.length; i++) {
+          //   final location = sortedListWithDistances[i].location;
+          //   sortedList.add(location);
+          // }
+
+          // finalList.value = sortedList;
         }
 
         return RefreshIndicator(
